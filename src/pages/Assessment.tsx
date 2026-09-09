@@ -820,4 +820,4 @@ export function LegacyAssessment() {
   );
 }
 
-export default LegacyAssessment;
+export default Assessment;
