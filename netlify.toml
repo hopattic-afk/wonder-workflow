@@ -3,6 +3,14 @@
   publish = "dist"
 [build.environment]
   NODE_VERSION = "24"
+[context.production.environment]
+  WW_CRM_SYNC_ENABLED = "true"
+  WW_CRM_FIRST_ASSESSMENT_FIELD_ID = "DVSkC38kqSDaATaoxUZ9"
+  WW_CRM_LATEST_ASSESSMENT_FIELD_ID = "C18h3CIbr4s073Ocx4PN"
+  WW_CRM_FIELDS_VERIFIED = "true"
+  WW_CRM_ASSESSMENT_TAG_ENABLED = "false"
+  WW_CRM_TAG_WORKFLOWS_REVIEWED = "false"
+  WW_PUBLIC_RESEARCH_ENABLED = "false"
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
