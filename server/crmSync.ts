@@ -213,8 +213,8 @@ export const AI_PIPELINE_STAGES = [
   "d0e503d8-9e68-4895-b7cb-364948fa681b", // Connected
   "22a9118c-d20a-44d2-9449-029ed12eccbc", // Qualified
   "191c3f67-ea61-4f73-ad3b-6f36caff0eb4", // Consultation Completed
-  "da8bebad-0b38-4271-9123-6f36caff0eb4", // Proposal Sent
-  "f5ee376a-081d-4e36-a5bc-8863aaf9c3d4", // Decision Pending
+  "da8bebad-0b38-4271-9123-30ea687b3b8b", // Proposal Sent
+  "9314d3a5-19de-4ba8-b7b1-c99175736485", // Decision Pending
 ] as const;
 export const ASSESSMENT_SUBMITTED_STAGE_ID = AI_PIPELINE_STAGES[0];
 export const CONSULTATION_BOOKED_STAGE_ID = AI_PIPELINE_STAGES[3];
