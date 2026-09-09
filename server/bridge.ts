@@ -659,7 +659,8 @@ export function createBridge(deps: BridgeDependencies) {
     });
   }
   async function booking(req: Request): Promise<Response> {
-    const secret = req.headers.get("x-ww-webhook-secret") ??\n      req.headers.get("x-mccann-webhook-secret") ?? "";
+    const secret = req.headers.get("x-ww-webhook-secret") ??
+      req.headers.get("x-mccann-webhook-secret") ?? "";
     if (secret.length > 512 || !safeEqual(secret, config!.webhookSecret))
       throw new HttpError(401, "Webhook authentication required.");
     let eventInput: z.infer<typeof webhookSchema>;
