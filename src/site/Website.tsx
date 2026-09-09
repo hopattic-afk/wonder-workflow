@@ -7,6 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { captureCampaign, publicHref } from "./campaign";
+import { AssessmentCaseStudy, GuidePage, GuidesIndex, ServiceDirectory, ServicePage, guides, searchPages, services, structuredData } from "./SearchContent";
 import "./website.css";
 
 function Link(props: ComponentProps<typeof RouterLink>) {
@@ -58,6 +59,7 @@ export const pages: Record<string, [string, string]> = {
     "Contact Wonder & Workflow",
     "Contact Wonder&Workflow LLC about AI operations, workflow services, or your information.",
   ],
+  ...searchPages,
 };
 const canonicalPaths: Record<string, string> = {
   "/ai-operations": "/services",
@@ -630,6 +632,7 @@ function Services() {
           it is not an unlimited retainer.
         </p>
       </CopySection>
+      <ServiceDirectory />
       <section className="ww-section ww-faq">
         <div className="ww-section-heading">
           <Eyebrow>Questions, answered</Eyebrow>
@@ -1042,6 +1045,15 @@ export default function Website() {
       document.head.appendChild(canonical);
     }
     canonical.href = `https://wonderworkflow.com${canonicalPath}`;
+    document.querySelector("#ww-structured-data")?.remove();
+    const schema = structuredData(canonicalPath);
+    if (schema) {
+      const script = document.createElement("script");
+      script.id = "ww-structured-data";
+      script.type = "application/ld+json";
+      script.textContent = JSON.stringify(schema).replaceAll("<", "\\u003c");
+      document.head.appendChild(script);
+    }
     window.scrollTo({ top: 0, behavior: "instant" });
     if (!initial.current) main.current?.focus({ preventScroll: true });
     initial.current = false;
@@ -1078,6 +1090,7 @@ export default function Website() {
           aria-label="Main navigation"
         >
           <NavLink to="/services">Services</NavLink>
+          <NavLink to="/guides">Guides</NavLink>
           <NavLink to="/how-we-work">How We Work</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/start">Get started</NavLink>
@@ -1090,6 +1103,10 @@ export default function Website() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="services" element={<Services />} />
+          {services.map(service => <Route key={service.slug} path={`services/${service.slug}`} element={<ServicePage service={service} />} />)}
+          <Route path="guides" element={<GuidesIndex />} />
+          {guides.map(guide => <Route key={guide.slug} path={`guides/${guide.slug}`} element={<GuidePage guide={guide} />} />)}
+          <Route path="case-studies/operations-assessment" element={<AssessmentCaseStudy />} />
           <Route path="ai-operations" element={<Services />} />
           <Route path="how-we-work" element={<Process />} />
           <Route path="about" element={<About />} />
@@ -1111,6 +1128,8 @@ export default function Website() {
         </div>
         <nav className="ww-footer-links" aria-label="Footer navigation">
           <Link to="/services">Services</Link>
+          <Link to="/guides">Guides</Link>
+          <Link to="/case-studies/operations-assessment">Implementation study</Link>
           <Link to="/how-we-work">How We Work</Link>
           <Link to="/about">About</Link>
           <Link to="/privacy">Privacy</Link>
