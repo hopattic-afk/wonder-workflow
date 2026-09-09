@@ -830,6 +830,7 @@ export function createBridge(deps: BridgeDependencies) {
         assessment_ready: ready,
         booking_ready: ready,
         inbox_ready: ready,
+        crm_sync_ready: Boolean(ready && deps.crmSync),
         public_research_available: Boolean(ready && deps.research),
       });
     }
