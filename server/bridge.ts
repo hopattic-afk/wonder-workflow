@@ -76,7 +76,7 @@ class HttpError extends Error {
     super(message);
   }
 }
-const cookieName = "__Host-mccann-inbox";
+const cookieName = "__Host-ww-inbox";
 const TTL = 8 * 60 * 60 * 1000;
 const REMEMBERED_TTL = 30 * 24 * 60 * 60 * 1000;
 const webhookSchema = z.strictObject({
@@ -659,7 +659,7 @@ export function createBridge(deps: BridgeDependencies) {
     });
   }
   async function booking(req: Request): Promise<Response> {
-    const secret = req.headers.get("x-mccann-webhook-secret") ?? "";
+    const secret = req.headers.get("x-ww-webhook-secret") ??\n      req.headers.get("x-mccann-webhook-secret") ?? "";
     if (secret.length > 512 || !safeEqual(secret, config!.webhookSecret))
       throw new HttpError(401, "Webhook authentication required.");
     let eventInput: z.infer<typeof webhookSchema>;
