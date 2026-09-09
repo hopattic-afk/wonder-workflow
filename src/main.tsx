@@ -3,7 +3,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./styles/app.css";
 const App = lazy(() => import("./App"));
-const Assessment = lazy(() => import("./pages/Assessment"));
+const Assessment = lazy(() =>
+  import("./pages/Assessment").then((module) => ({
+    default: module.LegacyAssessment,
+  })),
+);
 const Website = lazy(() => import("./site/Website"));
 function SiteOrWorkspace() {
   const { pathname } = useLocation();
