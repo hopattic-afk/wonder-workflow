@@ -8,9 +8,9 @@ import {
 } from "./intakeSchema";
 
 export const ASSESSMENT_BOOKING_URL =
-  "https://api.leadconnectorhq.com/widget/bookings/mccann-automation-discovery";
-export const ASSESSMENT_SOURCE = "McCann AI Operations Assessment";
-export const ASSESSMENT_SOURCE_ID = "mccann-ai-operations-assessment";
+  "https://api.leadconnectorhq.com/widget/booking/tFmtpPmm23VC7ygrKxvK";
+export const ASSESSMENT_SOURCE = "Wonder & Workflow Operations Assessment";
+export const ASSESSMENT_SOURCE_ID = "wonder-workflow-operations-assessment";
 
 export const ORIGINAL_ASSESSMENT_QUESTIONS = [
   {
@@ -187,7 +187,7 @@ export function readAssessmentAttribution(
   return { first_touch: { ...touch }, last_touch: { ...touch } };
 }
 
-export const ASSESSMENT_VERSION = "mccann-ai-operations-v2-21";
+export const ASSESSMENT_VERSION = "wonder-workflow-operations-v1-21";
 export const LEGACY_ASSESSMENT_VERSION = "reconstructed-draft-1";
 export const MAX_ASSESSMENT_BYTES = 64_000;
 export const QUESTIONS = [
