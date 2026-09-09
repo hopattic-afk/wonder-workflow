@@ -17,16 +17,19 @@ export interface BridgeConfig {
 }
 export type Environment = (key: string) => string | undefined;
 export function readConfig(env: Environment): BridgeConfig | null {
-  if (env("MCCANN_BRIDGE_ENABLED") !== "true") return null;
-  const aliasOrigin = env("MCCANN_APP_ALIAS_ORIGIN");
-  const brandOrigin = env("MCCANN_APP_BRAND_ORIGIN");
+  const setting = (primary: string, legacy: string) =>
+    env(primary) ?? env(legacy);
+  if (setting("WW_BRIDGE_ENABLED", "MCCANN_BRIDGE_ENABLED") !== "true")
+    return null;
+  const aliasOrigin = setting("WW_APP_ALIAS_ORIGIN", "MCCANN_APP_ALIAS_ORIGIN");
+  const brandOrigin = setting("WW_APP_BRAND_ORIGIN", "MCCANN_APP_BRAND_ORIGIN");
   const config = {
-    origin: env("MCCANN_APP_ORIGIN") ?? "",
+    origin: setting("WW_APP_ORIGIN", "MCCANN_APP_ORIGIN") ?? "",
     ...(aliasOrigin !== undefined ? { aliasOrigin } : {}),
     ...(brandOrigin !== undefined ? { brandOrigin } : {}),
-    inboxKey: env("MCCANN_INBOX_ACCESS_KEY") ?? "",
-    sessionSecret: env("MCCANN_SESSION_SECRET") ?? "",
-    webhookSecret: env("MCCANN_BOOKING_WEBHOOK_SECRET") ?? "",
+    inboxKey: setting("WW_INBOX_ACCESS_KEY", "MCCANN_INBOX_ACCESS_KEY") ?? "",
+    sessionSecret: setting("WW_SESSION_SECRET", "MCCANN_SESSION_SECRET") ?? "",
+    webhookSecret: setting("WW_BOOKING_WEBHOOK_SECRET", "MCCANN_BOOKING_WEBHOOK_SECRET") ?? "",
     ghlToken: env("GHL_PRIVATE_INTEGRATION_TOKEN") ?? "",
     locationId: env("GHL_LOCATION_ID") ?? "",
     calendarId: env("GHL_CALENDAR_ID") ?? "",
@@ -70,7 +73,7 @@ export function readConfig(env: Environment): BridgeConfig | null {
     new Intl.DateTimeFormat("en", { timeZone: config.timezone });
     return {
       ...config,
-      ...(env("MCCANN_PUBLIC_RESEARCH_ENABLED") === "true"
+      ...(setting("WW_PUBLIC_RESEARCH_ENABLED", "MCCANN_PUBLIC_RESEARCH_ENABLED") === "true"
         ? { publicResearch: true }
         : {}),
     };
