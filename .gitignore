@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.npm-cache/
+output/
+test-results/
+playwright-report/
+output/playwright/
+*.tsbuildinfo
+.env*
+!.env.example
+.netlify/

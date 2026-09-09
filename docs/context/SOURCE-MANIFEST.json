@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "sourceProject": {
+    "name": "AI Automation Business",
+    "id": "g-p-6a997e8031788191ae06a86a7ac62070",
+    "mirrorPath": "C:\\Users\\12505\\.codex\\.chatgpt-projects\\g-p-6a997e8031788191ae06a86a7ac62070"
+  },
+  "copiedAtUtc": "2026-09-05T22:14:08.7144603Z",
+  "operation": "Non-destructive byte-identical copy of explicitly selected latest social-v2 assets",
+  "publicationStatus": "Local draft assets only; not published or sent",
+  "notes": [
+    "Original files preserved unchanged.",
+    "Only the latest three PNGs, captions.md and README.md were selected. Superseded artwork, logs and transcripts were not copied.",
+    "The copied README is unchanged source documentation. Its prompts.md reference points to the original source folder; prompts.md was intentionally not copied.",
+    "Historical inspection/review claims inside the copied README describe the source delivery, not new publication or review approval."
+  ],
+  "files": [
+    {
+      "originalPath": "C:\\Users\\12505\\.codex\\.chatgpt-projects\\g-p-6a997e8031788191ae06a86a7ac62070\\output\\social-v2\\01-build-capacity.png",
+      "destinationPath": "docs/context/assets/social-v2/01-build-capacity.png",
+      "bytes": 1097432,
+      "sha256": "1a0c4d74ed6fc1d04c11c6f2b8e99c0222e6854a6960471868733075b342b61b",
+      "verifiedIdentical": true
+    },
+    {
+      "originalPath": "C:\\Users\\12505\\.codex\\.chatgpt-projects\\g-p-6a997e8031788191ae06a86a7ac62070\\output\\social-v2\\02-workflow-diagnostic.png",
+      "destinationPath": "docs/context/assets/social-v2/02-workflow-diagnostic.png",
+      "bytes": 1438733,
+      "sha256": "52af48888de0870aa6c68ccad93dbb314a860cc5d49e111f1166be194b8e9c9c",
+      "verifiedIdentical": true
+    },
+    {
+      "originalPath": "C:\\Users\\12505\\.codex\\.chatgpt-projects\\g-p-6a997e8031788191ae06a86a7ac62070\\output\\social-v2\\03-audit-cta.png",
+      "destinationPath": "docs/context/assets/social-v2/03-audit-cta.png",
+      "bytes": 1183400,
+      "sha256": "d3b84aef8dd315fcfc22c8dd2c597abc6eb19b9d24334b7f205b2a6b123e6ae7",
+      "verifiedIdentical": true
+    },
+    {
+      "originalPath": "C:\\Users\\12505\\.codex\\.chatgpt-projects\\g-p-6a997e8031788191ae06a86a7ac62070\\output\\social-v2\\captions.md",
+      "destinationPath": "docs/context/assets/social-v2/captions.md",
+      "bytes": 2967,
+      "sha256": "b66d8a40b5c39bb671dedc5b288525514fddbc28a62e6bc5603cfb3f1132208a",
+      "verifiedIdentical": true
+    },
+    {
+      "originalPath": "C:\\Users\\12505\\.codex\\.chatgpt-projects\\g-p-6a997e8031788191ae06a86a7ac62070\\output\\social-v2\\README.md",
+      "destinationPath": "docs/context/assets/social-v2/README.md",
+      "bytes": 2381,
+      "sha256": "3c5d2af9cd8493c93736641ff66cf7267b3fbdc2c2acc97192cb3405c599d484",
+      "verifiedIdentical": true
+    }
+  ]
+}

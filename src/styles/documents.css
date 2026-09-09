@@ -1,0 +1,342 @@
+.documents-page {
+  min-width: 0;
+}
+.document-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1.5rem 0 0.5rem;
+}
+.document-toolbar .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.document-feedback {
+  min-height: 1.4em;
+  color: var(--gold, #c29a60);
+  font-size: 0.9rem;
+}
+.document-options {
+  margin: 1.25rem 0;
+  display: grid;
+  gap: 0.85rem;
+}
+.document-options label,
+.document-check {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.document-options input,
+.document-check input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--gold, #c29a60);
+  flex-shrink: 0;
+}
+.document-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.document-fields-grid .field {
+  margin: 0;
+}
+.document-fields-grid textarea {
+  resize: vertical;
+}
+.document-fields-grid .length-warning {
+  color: #e8cb77;
+}
+.proposal-editors {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.document-editor-section h2 {
+  font-size: 1.08rem;
+  margin: 0 0 1.2rem;
+}
+.document-editor-section .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.document-editor-section .field,
+.document-fields-grid .field {
+  min-width: 0;
+}
+.document-editor-section textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+.document-editor-section input,
+.document-editor-section textarea,
+.document-editor-section select,
+.document-fields-grid textarea {
+  max-width: 100%;
+}
+.document-row-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.deliverable-row {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 0.75rem;
+}
+.deliverable-row .document-check {
+  align-self: center;
+  font-size: 0.85rem;
+}
+.milestone-row {
+  display: grid;
+  grid-template-columns: 1fr 150px 1.3fr auto;
+  gap: 0.75rem;
+  align-items: end;
+  border-bottom: 1px solid #383225;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+.document-preview-heading {
+  margin: 2.5rem 0 1.25rem;
+}
+.document-preview-heading h2 {
+  margin: 0.3rem 0;
+}
+.document-preview {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 2px;
+  display: grid;
+  gap: 24px;
+}
+.print-page {
+  box-sizing: border-box;
+  width: 7.2in;
+  height: 9.7in;
+  padding: 0.2in 0.12in;
+  background: white;
+  color: #161616;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 9pt;
+  line-height: 1.35;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  overflow-wrap: anywhere;
+  box-shadow: 0 8px 26px #0003;
+}
+.paper-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.11in;
+  border-bottom: 2px solid var(--document-gold);
+  gap: 12px;
+  font-size: 8pt;
+}
+.paper-header > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.paper-header strong,
+.paper-header span {
+  display: block;
+}
+.paper-header strong {
+  font-size: 10pt;
+}
+.paper-logo {
+  max-width: 0.9in;
+  max-height: 0.4in;
+  object-fit: contain;
+}
+.paper-title {
+  margin: 0.15in 0 0.09in;
+}
+.paper-title h1 {
+  font-size: 18pt;
+  line-height: 1.15;
+  letter-spacing: -0.4px;
+  color: #161616;
+  margin: 0 0 5px;
+}
+.paper-title p {
+  margin: 0;
+  font-size: 10pt;
+}
+.paper-title .paper-client {
+  margin-top: 7px;
+  font-size: 9pt;
+  font-weight: 600;
+}
+.paper-context {
+  font-size: 8pt;
+  color: #444;
+  margin: 0 0 0.08in;
+}
+.paper-sections {
+  display: grid;
+  gap: 0.09in;
+}
+.paper-section {
+  break-inside: avoid;
+  min-width: 0;
+}
+.paper-section h2 {
+  color: #675219;
+  font-size: 10pt;
+  line-height: 1.25;
+  margin: 0 0 0.035in;
+}
+.paper-section > p {
+  white-space: pre-wrap;
+  margin: 0;
+}
+.paper-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.13in;
+  margin-top: 0.075in;
+  font-size: 7.8pt;
+}
+.paper-flow > div {
+  border: 1px solid #d1c6aa;
+  background: #faf8f2;
+  padding: 0.065in;
+  position: relative;
+}
+.paper-flow strong {
+  display: block;
+  font-size: 7.5pt;
+}
+.paper-flow p {
+  margin: 0.035in 0 0;
+}
+.paper-flow span {
+  position: absolute;
+  right: -0.12in;
+  top: 40%;
+  font-size: 10pt;
+}
+.paper-footer {
+  margin-top: auto;
+  padding-top: 0.1in;
+  font-size: 7pt;
+  line-height: 1.25;
+  color: #444;
+}
+.paper-footer > p:first-child {
+  border-top: 1px solid #cbbd92;
+  padding-top: 0.07in;
+}
+.paper-footer p {
+  margin: 0 0 0.04in;
+}
+.paper-footer > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.proposal-paper {
+  font-size: 10pt;
+}
+.proposal-paper .paper-sections {
+  gap: 0.17in;
+}
+.proposal-paper .paper-section h2 {
+  font-size: 11pt;
+}
+.proposal-paper .paper-title {
+  margin-bottom: 0.2in;
+}
+@media (max-width: 850px) {
+  .document-fields-grid,
+  .document-editor-section .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .milestone-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .deliverable-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .deliverable-row .document-check {
+    grid-column: 1 / -1;
+  }
+  .document-preview {
+    overflow-x: clip;
+  }
+}
+@page {
+  size: Letter;
+  margin: 0.65in;
+}
+@media print {
+  html,
+  body,
+  #root {
+    background: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .document-preview,
+  .document-preview * {
+    visibility: visible;
+  }
+  .document-editor {
+    display: none !important;
+  }
+  .document-preview {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    overflow: visible;
+  }
+  .print-page {
+    zoom: 1 !important;
+    width: 7.2in !important;
+    height: 9.7in;
+    min-height: 0;
+    padding: 0.2in 0.12in;
+    margin: 0;
+    box-shadow: none;
+    break-after: page;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .print-page:last-child {
+    break-after: auto;
+  }
+  .recommendation-paper {
+    height: 9.7in !important;
+  }
+  .proposal-paper {
+    height: auto;
+    min-height: 9.65in;
+  }
+  .paper-flow {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .paper-flow span {
+    display: block;
+  }
+  .paper-footer {
+    break-inside: avoid;
+  }
+}

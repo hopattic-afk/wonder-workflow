@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /workspace
+Disallow: /audit/
+Disallow: /settings
+Disallow: /meetings
+Disallow: /api/
+Sitemap: https://wonderworkflow.com/sitemap.xml

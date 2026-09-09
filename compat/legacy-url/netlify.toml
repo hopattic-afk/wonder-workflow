@@ -1,0 +1,17 @@
+[build]
+publish = "."
+
+# Keep the existing GHL booking webhook working after the public site rename.
+[[redirects]]
+from = "/api/booking"
+to = "https://ai-operations-assessment.netlify.app/api/booking"
+status = 200
+force = true
+
+# Preserve old-origin browser storage and operator bookmarks. The neutral URL is
+# the only address used in public materials.
+[[redirects]]
+from = "/*"
+to = "https://ai-operations-assessment.netlify.app/:splat"
+status = 200
+force = true

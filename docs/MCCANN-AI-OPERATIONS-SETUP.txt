@@ -1,0 +1,44 @@
+McCann AI Operations - activated handoff, September 5, 2026
+
+Assessment: https://ai-operations-assessment.netlify.app/assessment/
+Prepared meetings: https://ai-operations-assessment.netlify.app/meetings
+Netlify: https://app.netlify.com/projects/ai-operations-assessment/overview
+Workflow: https://app.gohighlevel.com/v2/location/LcP7OqCtZlq6wPjejmzC/automation/workflow/85336ddd-7e7a-43f1-bcd5-20b4630c7821
+
+Open your audits
+1. In the Netlify project above: Project configuration -> Environment variables
+   -> MCCANN_INBOX_ACCESS_KEY -> reveal/copy the production value privately.
+2. Open Prepared meetings above. Paste into Meeting inbox access key.
+3. Choose Connect meetings, then Open audit. Never send the key in Slack.
+Meetings import on opening/sign-in or manual refresh, not background polling.
+Notes/documents remain browser-local; use Settings & backup to export them.
+
+Verified live
+Deploy 6a9ca684ee8155e734a96249 ready 2026-09-05T23:33:04.694Z.
+43 files, 521675 bytes. Stage SHA-256:
+cc47ff8d23b9864fe5360aea6bec95c0bbe3b7c192cf6f4d53a685cadfc8b363
+All ten settings matched readback including four keys; bridge/research enabled.
+Approved Free-plan production standard variables are admin/build-readable.
+Premium webhook approved up to US$0.01/execution, no higher. Research bounded.
+
+Live assessment saved 21/21. Initial provider-envelope HTTP 400 was corrected.
+Replay returned 200 created, assessment_matched true. Actual GHL UI reschedule
+September 7 09:00 -> 09:30 MDT triggered workflow Executed at 17:35 MDT.
+One inbox packet retained same IDs, seven scored answers plus context (31
+entries), 21/max21, Boise timezone and CRM phone fallback. Actual cancellation
+arrived automatically; duplicate replay returned 200 duplicate, same packet.
+Test appointment cancelled to release slot; TEST-marked contact/data retained.
+Login 200, Secure/HttpOnly/SameSite=Strict cookie; logout revoked access (401).
+
+Evidence limits
+Hosted unauthenticated meetings UI checked; hosted authenticated audit UI was
+not tested. Separate local E2E passed 7/7 in 43.4s with fake CRM/real handler,
+audit prefill, preserved manual notes, replay, backups and accessibility.
+Adapter fix passed 47 focused tests, server TypeScript, build and Sentinel.
+Prior 231 + 7 baseline and focused runs are not additive unique-test counts.
+Research enabled but test website blank: actual public fetch not proven.
+No automatic retry configured; bounded manual replay verified.
+
+Earlier Slack ZIP F0C0PGX87BJ is historical. Intended updated filename:
+mccann-ai-operations-implementation-2026-09-05-activated.zip (not yet sent).
+No secret values included. See ACTIVATION-RECORD-2026-09-05.md for evidence.

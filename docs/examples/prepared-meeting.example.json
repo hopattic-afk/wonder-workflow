@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "locationId": "LcP7OqCtZlq6wPjejmzC",
+  "calendarId": "8BGlICdRRqD8ujhu0BfU",
+  "appointmentId": "example-appointment-001",
+  "contactId": "example-contact-001",
+  "updatedAt": "2026-09-05T17:00:00Z",
+  "startsAt": "2026-09-10T14:00:00-06:00",
+  "timezone": "America/Edmonton",
+  "bookingStatus": "confirmed",
+  "contact": {
+    "business": "Example Business — Fictional Test",
+    "name": "Alex Example",
+    "email": "alex@example.com",
+    "website": "https://example.com"
+  },
+  "assessment": {
+    "sourceId": "example-assessment",
+    "submissionId": "example-submission-001",
+    "version": "fictional-integration-fixture-1",
+    "submittedAt": "2026-09-05T16:50:00Z",
+    "answers": [
+      {
+        "id": "example-goal",
+        "question": "Example question: what would you like to improve?",
+        "value": "Reduce the time spent copying weekly reports."
+      },
+      {
+        "id": "example-tools",
+        "question": "Example question: what tools are involved?",
+        "value": "Spreadsheets and email; exact products need confirming."
+      }
+    ]
+  },
+  "mappedFields": {
+    "worksheet.reason": "Reduce the time spent copying weekly reports."
+  },
+  "research": {
+    "facts": [
+      {
+        "text": "Fictional source note for testing layout only; this is not completed business research.",
+        "sourceUrl": "https://example.com",
+        "sourceTitle": "Example source — test only",
+        "accessedAt": "2026-09-05T17:00:00Z"
+      }
+    ],
+    "suggestedQuestions": [
+      "Can you walk through the last weekly report you prepared?",
+      "Who checks the report before it is used?"
+    ]
+  }
+}
