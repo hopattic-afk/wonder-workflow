@@ -849,10 +849,11 @@ function Start() {
         </div>
         <div>
           <span className="ww-step-label">2 / Complimentary · 30 minutes</span>
-          <h2>Request a Workflow Fit Review</h2>
+          <h2>Book a Workflow Fit Review</h2>
           <p>
-            Email us your result to arrange a time to talk. Together,
-            we’ll choose one workflow to improve and provide a concise next-step note.
+            After your assessment is saved, choose a time in the embedded
+            calendar. Together, we’ll review the result, choose one workflow to
+            improve, and identify a practical next step.
           </p>
           <p>
             A deeper diagnostic or implementation is optional and receives a
@@ -877,13 +878,12 @@ function Privacy() {
         <h2>Information you provide</h2>
         <p>
           The public operations assessment calculates a score in your browser.
-          Its answers remain in page memory and are not submitted to us. Closing
-          or reloading the page clears them. If you email us, we receive the
-          details you choose to share so we can respond to your request. We may also
-          receive appointment details and information you choose to share about
-          a business workflow. Do not submit passwords, access keys, regulated
-          records, or unnecessary personal information through the public
-          assessment.
+          When you submit it, we receive your answers, score, name, email,
+          company, team size, industry, and operational priority. You may also
+          provide optional business details. If you book a Workflow Fit Review,
+          we receive the appointment details and any optional booking note. Do
+          not submit passwords, access keys, regulated records, or unnecessary
+          personal information through the assessment or booking form.
         </p>
         <h2>How we use it</h2>
         <p>
@@ -894,17 +894,18 @@ function Privacy() {
         </p>
         <h2>Service providers and appointment booking</h2>
         <p>
-          Netlify hosts this website. We use email and may use HighLevel to
-          manage inquiries and consultations. If we provide a separate booking
-          or opt-in form, review its disclosures before submitting. The public
-          assessment does not automatically send your answers to HighLevel.
+          Netlify hosts this website and processes assessment submissions
+          through a protected server function. HighLevel stores the related
+          contact, assessment, and appointment information and provides the
+          embedded booking calendar. We also use email to provide confirmations,
+          reminders, and requested follow-up.
         </p>
         <h2>Website storage and campaign information</h2>
         <p>
           Campaign labels in a link, such as its source or campaign name, are
-          retained in this tab’s session storage as you browse. The public
-          assessment does not transmit those labels to us. The website carries campaign
-          parameters, not dedicated contact-form fields. Do not include personal
+          retained in this tab’s session storage as you browse and are submitted
+          with the assessment for attribution. The website carries campaign
+          parameters, not dedicated visible form fields. Do not include personal
           information in campaign links. Closing the browser tab ends that
           session storage. The opening animation is remembered in page memory while you browse;
           reloading the page resets it. Choosing full animation saves that choice
@@ -918,7 +919,7 @@ function Privacy() {
           marketing or SMS opt-in.
         </p>
         <h2>Optional text messages</h2>
-        <p>This website currently uses email for inquiries and does not collect SMS consent. Any future text-message enrollment requires a separate opt-in process that explains what information is collected and how it will be used.</p>
+        <p>This website currently uses email for assessment and appointment communications and does not collect SMS consent. Any future text-message enrollment requires a separate opt-in process that explains what information is collected and how it will be used.</p>
         <p>If you separately choose to receive text messages, Wonder&Workflow LLC uses your number for appointment reminders and follow-up you request. Providing a number or using this website alone does not give permission to send text messages. SMS consent is optional and is not a condition of purchasing services.</p>
         <p>We do not disclose mobile numbers to other businesses or affiliates for promotional or marketing use. Service providers may handle information to support our services, such as customer assistance. Text-message opt-in records and consent are excluded from other sharing and are not provided to third parties for their own use.</p>
         <p>Reply STOP to end text messages or HELP for assistance. You can also email operations@wonderworkflow.com. See the <Link to="/terms">SMS terms</Link> for message frequency, charges, and support.</p>
