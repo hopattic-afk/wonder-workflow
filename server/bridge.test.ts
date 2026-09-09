@@ -576,7 +576,7 @@ describe("durable assessment capture and CRM identity", () => {
       contact_saved: true,
       submission_id: "submission-test",
       booking_url:
-        "https://api.leadconnectorhq.com/widget/bookings/mccann-automation-discovery",
+        "https://api.leadconnectorhq.com/widget/booking/tFmtpPmm23VC7ygrKxvK",
     });
     expect(
       h.store.writes.some((k) => k.startsWith("contact-submissions/")),
