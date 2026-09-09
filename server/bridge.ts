@@ -40,6 +40,13 @@ export interface BridgeDependencies {
   random?: () => string;
   crmSync?: (input: { contactId: string; submissionId: string }, signal: AbortSignal) =>
     Promise<import("./crmSync").SyncResult>;
+  crmReadiness?: {
+    syncEnabled: boolean;
+    fieldsVerified: boolean;
+    firstFieldPresent: boolean;
+    latestFieldPresent: boolean;
+    tagConfigurationSafe: boolean;
+  };
   research?: (website: string) => Promise<{
     facts: NonNullable<IntakePacket["research"]>["facts"];
     unavailable?: string;
@@ -831,6 +838,7 @@ export function createBridge(deps: BridgeDependencies) {
         booking_ready: ready,
         inbox_ready: ready,
         crm_sync_ready: Boolean(ready && deps.crmSync),
+        ...(deps.crmReadiness ? { crm_sync_checks: deps.crmReadiness } : {}),
         public_research_available: Boolean(ready && deps.research),
       });
     }
