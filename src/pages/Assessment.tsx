@@ -222,7 +222,7 @@ export function Assessment() {
   );
 }
 
-// Retained for a separately approved integration migration; no public route renders this component.
+// Public assessment flow: validates and saves server-side before showing the booking calendar.
 export function LegacyAssessment() {
   useEffect(() => {
     document.title = "AI Operations Assessment | Wonder & Workflow";
@@ -820,4 +820,4 @@ export function LegacyAssessment() {
   );
 }
 
-export default Assessment;
+export default LegacyAssessment;
