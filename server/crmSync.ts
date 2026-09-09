@@ -204,13 +204,20 @@ export class AssessmentCrmSync {
   }
 }
 
-export const AI_PIPELINE_ID = "81BVnkr0QMiJikb0qL7q";
+export const AI_PIPELINE_ID = "lTUUUTxg3y1fTIwHp3lA";
 export const AI_PIPELINE_STAGES = [
-  "aeae6ef8-4306-4a33-a25a-9aa4f0237545", "681993d9-de5d-45d7-96bb-ace8e8fe8d3a",
-  "2137509a-c0d2-4367-bad0-3d44a9e18dbe", "2bdbfbc1-1915-4b0d-ad76-f84c340eaf30",
-  "558476c8-41c8-486b-8b04-25c4b5178506", "2847ee4c-bcff-4645-86fb-1eef8e1b91e5",
-  "cbb6fb85-e097-4bf0-9d8c-72b1842d6ffe", "f5ee376a-081d-4e36-a5bc-8863aaf9c3d4",
+  "4877cbd0-eea6-4d1b-b506-94a7adbf1f32", // Assessment Submitted
+  "0e2dddc3-f159-4dba-8cb3-ac394865e275", // New Lead
+  "191264d2-eeab-4d88-b3b5-3ec9053a17eb", // Contact Attempted
+  "a2378593-a32e-4919-ba3e-aa1e4eb4a777", // Consultation Booked
+  "d0e503d8-9e68-4895-b7cb-364948fa681b", // Connected
+  "22a9118c-d20a-44d2-9449-029ed12eccbc", // Qualified
+  "191c3f67-ea61-4f73-ad3b-6f36caff0eb4", // Consultation Completed
+  "da8bebad-0b38-4271-9123-30ea687b3b8b", // Proposal Sent
+  "9314d3a5-19de-4ba8-b7b1-c99175736485", // Decision Pending
 ] as const;
+export const ASSESSMENT_SUBMITTED_STAGE_ID = AI_PIPELINE_STAGES[0];
+export const CONSULTATION_BOOKED_STAGE_ID = AI_PIPELINE_STAGES[3];
 const opportunitySchema = z.object({
   id: identity, contactId: identity, locationId: identity, pipelineId: identity,
   pipelineStageId: identity, status: z.enum(["open", "won", "lost", "abandoned"]),
@@ -236,7 +243,7 @@ export function assessOpportunitySync(input: {
     return fail("opportunity_scope_mismatch");
   if (parsed.data.length > 1) return fail("multiple_opportunities_require_review");
   const op = parsed.data[0];
-  const desired = input.stage === "consultation_booked" ? 2 : 0;
+  const desired = input.stage === "consultation_booked" ? 3 : 0;
   if (!op) return { ...fail("atomic_creation_not_verified"), desiredStageId: AI_PIPELINE_STAGES[desired] };
   if (op.status !== "open") return { action: "preserve", reason: "closed_opportunity" };
   const rank = AI_PIPELINE_STAGES.findIndex((id) => id === op.pipelineStageId);

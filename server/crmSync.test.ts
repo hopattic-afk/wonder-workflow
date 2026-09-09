@@ -230,12 +230,12 @@ describe("opportunity policy with no unsafe API writes", () => {
   it("preserves won/lost/abandoned and every same or advanced stage", () => {
     for (const status of ["won", "lost", "abandoned"] as const)
       expect(decide([{ ...op, status }])).toEqual({ action: "preserve", reason: "closed_opportunity" });
-    for (const pipelineStageId of AI_PIPELINE_STAGES.slice(2))
+    for (const pipelineStageId of AI_PIPELINE_STAGES.slice(3))
       expect(decide([{ ...op, pipelineStageId }]).action).toBe("preserve");
   });
   it("never performs a race-prone stage advancement or assumes unknown stage order", () => {
     expect(decide([op])).toEqual({ action: "review_required",
-      reason: "conditional_stage_update_not_verified", desiredStageId: AI_PIPELINE_STAGES[2] });
+      reason: "conditional_stage_update_not_verified", desiredStageId: AI_PIPELINE_STAGES[3] });
     expect(decide([{ ...op, pipelineStageId: "unknown" }]).reason).toBe("unknown_stage");
     expect(assessOpportunitySync({ contactId: op.contactId, stage: "assessment_received",
       opportunities: [op], complete: true }).action).toBe("preserve");
