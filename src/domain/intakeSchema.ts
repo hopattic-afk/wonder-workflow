@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { ASSESSMENT_SCORE_MAX } from "./constants";
 
-export const INTAKE_LOCATION_ID = "LcP7OqCtZlq6wPjejmzC";
-export const INTAKE_CALENDAR_ID = "8BGlICdRRqD8ujhu0BfU";
+export const INTAKE_LOCATION_ID = "sNxq4o3kG3iH5yoQ71Oq";
+export const INTAKE_CALENDAR_ID = "tFmtpPmm23VC7ygrKxvK";
 export const MAX_INTAKE_BYTES = 512_000;
 
 const text = z.string().max(12000);
