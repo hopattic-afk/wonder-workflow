@@ -89,13 +89,15 @@ The pipeline has 13 total stages. Existing extra stages were preserved because d
 
 ## Workflows
 
-These exist but contain no triggers or actions:
+1. `WW | Assessment Submitted — CRM` — empty draft shell; not working.
+2. `WW | Workflow Fit Review — Confirmation & Reminders` — draft trigger limited to the Workflow Fit Review calendar, followed by:
+   - branded confirmation email;
+   - wait until 24 hours before the appointment, then branded reminder email;
+   - wait until 2 hours before the appointment, then branded reminder email;
+   - late bookings exit at a missed reminder boundary instead of receiving an out-of-sequence reminder.
+3. `WW | Workflow Fit Review — Status Handling` — draft cancelled-status trigger limited to the Workflow Fit Review calendar; removes the contact from the confirmation/reminder workflow.
 
-1. `WW | Assessment Submitted — CRM`
-2. `WW | Workflow Fit Review — Confirmation & Reminders`
-3. `WW | Workflow Fit Review — Status Handling`
-
-They are **drafts, not working automations**. They must not be published until the server-to-CRM sync, booking webhook, email sender, cancellation/reschedule behavior, and duplicate handling pass a controlled end-to-end test. SMS actions must remain absent until compliant consent and messaging registration are approved and functioning.
+The workflows are **drafts, not live automations**. Reschedule and no-show opportunity updates remain unfinished. They must not be published until the server-to-CRM sync, booking webhook, sender identity, cancellation/reschedule behavior, and duplicate handling pass a controlled end-to-end test. SMS actions are absent and must remain absent until compliant consent and messaging registration are approved and functioning.
 
 ## Website integration prepared on GitHub
 
@@ -147,7 +149,7 @@ No registration was submitted, no SMS workflow was enabled, and no delivery was 
 
 - Explicit permission to remove phone and both inherited consent components from the draft booking form.
 - Approval to create or update the scoped GHL private-integration token and Netlify environment variables.
-- The approved sending email/from-name for confirmations and reminders.
+- Verification that the configured sender, Wonder & Workflow <operations@wonderworkflow.com>, is authenticated for email delivery.
 - Approval to deploy the website branch.
 - Approval to publish workflows and submit one controlled test assessment/booking.
 - If SMS is wanted: the sending-number choice, Brand/Campaign registration information, separate optional consent wording, approval to incur registration/phone/message charges, and approval to test delivery.
