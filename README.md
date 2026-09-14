@@ -114,3 +114,5 @@ At meeting-inbox sign-in, choose **Remember this device for 30 days** on your ow
 
 
 Client-facing assessment: https://ai-operations-assessment.netlify.app/assessment/ . Use the same neutral Netlify origin for browser-local audit notes; see docs/BRANDED-URL.md.
+
+Phase B deploy unlock
