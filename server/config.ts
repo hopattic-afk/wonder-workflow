@@ -16,6 +16,22 @@ export interface BridgeConfig {
   publicResearch?: boolean;
 }
 export type Environment = (key: string) => string | undefined;
+
+/** Safe-off fallbacks only. CRM sync, field verification, and field IDs come from env. */
+const SAFE_OFF_WHEN_UNSET: Record<string, string> = {
+  WW_CRM_ASSESSMENT_TAG_ENABLED: "false",
+  WW_CRM_TAG_WORKFLOWS_REVIEWED: "false",
+  WW_PUBLIC_RESEARCH_ENABLED: "false",
+};
+
+/**
+ * Hosted Netlify function env: live values win. Unset research/tag flags stay off.
+ * Never force WW_CRM_SYNC_ENABLED, WW_CRM_FIELDS_VERIFIED, or CRM field IDs.
+ */
+export function hostedBridgeEnv(get: Environment): Environment {
+  return (key) => get(key) ?? SAFE_OFF_WHEN_UNSET[key];
+}
+
 export function readConfig(env: Environment): BridgeConfig | null {
   const setting = (primary: string, legacy: string) =>
     env(primary) ?? env(legacy);
