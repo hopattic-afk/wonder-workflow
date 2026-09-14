@@ -711,6 +711,16 @@
 .ww-start-simple .ww-button {
   margin: 5px 0 18px;
 }
+.ww-start-simple .ww-text-link {
+  margin: 0 0 18px;
+}
+.ww-prose a.ww-button {
+  color: #fff;
+  text-decoration: none;
+}
+.ww-prose a.ww-button:hover {
+  color: #fff;
+}
 .ww-prose {
   max-width: 890px;
   padding: 20px 5% 70px;

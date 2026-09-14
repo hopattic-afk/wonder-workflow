@@ -65,6 +65,8 @@ const canonicalPaths: Record<string, string> = {
   "/ai-operations": "/services",
   "/book": "/start",
 };
+export const FIT_REVIEW_MAILTO =
+  "mailto:operations@wonderworkflow.com?subject=Workflow%20Fit%20Review%20request&body=Hi%20Ian%2C%0A%0AI%20completed%20the%20operations%20assessment.%0AScore%3A%20%0ATier%3A%20%0AOne%20workflow%20to%20discuss%3A%20%0A%0AThanks.";
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
@@ -81,9 +83,11 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 function Invitation({
   title = "Find where work slows down.",
   copy = "Complete the short assessment, then request a complimentary 30-minute Workflow Fit Review.",
+  showFitReviewEmail = false,
 }: {
   title?: string;
   copy?: string;
+  showFitReviewEmail?: boolean;
 }) {
   return (
     <section className="ww-invitation">
@@ -94,6 +98,11 @@ function Invitation({
         <Link className="ww-button" to="/assessment">
           Assess your operations <Arrow />
         </Link>
+        {showFitReviewEmail ? (
+          <a className="ww-text-link" href={FIT_REVIEW_MAILTO}>
+            Request a Fit Review by email <Arrow />
+          </a>
+        ) : null}
         <Link className="ww-text-link" to="/how-we-work">
           How the process works <Arrow />
         </Link>
@@ -439,6 +448,7 @@ function Home() {
       <Invitation
         title="Find where your operations could improve."
         copy="Assess your operations in about two minutes. Then request a complimentary 30-minute Workflow Fit Review to discuss your results and choose one workflow to improve."
+        showFitReviewEmail
       />
     </div>
   );
@@ -852,12 +862,19 @@ function Start() {
         </div>
         <div>
           <span className="ww-step-label">2 / Complimentary · 30 minutes</span>
-          <h2>Book a Workflow Fit Review</h2>
+          <h2>Request a Workflow Fit Review</h2>
           <p>
-            After your assessment is saved, choose a time in the embedded
-            calendar. Together, we’ll review the result, choose one workflow to
-            improve, and identify a practical next step.
+            After you finish the assessment, email operations@wonderworkflow.com
+            to request a complimentary 30-minute Workflow Fit Review. Include
+            your score (and tier if shown) and one workflow you’d like to
+            improve. Ian reads this inbox.
           </p>
+          <a className="ww-button" href={FIT_REVIEW_MAILTO}>
+            Email to request Fit Review <Arrow />
+          </a>
+          <Link className="ww-text-link" to="/contact">
+            Contact <Arrow />
+          </Link>
           <p>
             A deeper diagnostic or implementation is optional and receives a
             separate written scope.
@@ -981,6 +998,13 @@ function Contact() {
       <PageHero number="07" label="Contact" title="Let's talk about" accent="your operations."
         copy="Contact Wonder & Workflow about a workflow, a project, or an existing inquiry." />
       <section className="ww-prose">
+        <h2>Request a Workflow Fit Review</h2>
+        <p>
+          <a className="ww-button" href={FIT_REVIEW_MAILTO}>
+            Email operations@wonderworkflow.com
+          </a>
+        </p>
+        <p>No contact form is required. Ian monitors this address.</p>
         <h2>Wonder&Workflow LLC</h2>
         <p>Wonder & Workflow is the public name of Wonder&Workflow LLC. We help service businesses understand, improve, and maintain practical business workflows.</p>
         <p>Email <a href="mailto:operations@wonderworkflow.com">operations@wonderworkflow.com</a>. Please leave out passwords and confidential client information; we can arrange an appropriate way to discuss sensitive details.</p>

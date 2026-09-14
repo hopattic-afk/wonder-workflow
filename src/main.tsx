@@ -5,7 +5,7 @@ import "./styles/app.css";
 const App = lazy(() => import("./App"));
 const Assessment = lazy(() =>
   import("./pages/Assessment").then((module) => ({
-    default: module.LegacyAssessment,
+    default: module.Assessment,
   })),
 );
 const Website = lazy(() => import("./site/Website"));

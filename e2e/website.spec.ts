@@ -34,11 +34,34 @@ test("public pages remain readable and accessible on desktop and mobile", async 
         .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
         .analyze();
       expect(result.violations, `${path} at ${width}px`).toEqual([]);
-      if (path === "/")
+      if (path === "/") {
+        await expect(
+          page.getByRole("link", { name: /Request a Fit Review by email/ }),
+        ).toHaveAttribute(
+          "href",
+          "mailto:operations@wonderworkflow.com?subject=Workflow%20Fit%20Review%20request&body=Hi%20Ian%2C%0A%0AI%20completed%20the%20operations%20assessment.%0AScore%3A%20%0ATier%3A%20%0AOne%20workflow%20to%20discuss%3A%20%0A%0AThanks.",
+        );
         await page.screenshot({
           path: `output/wonder-workflow/qa/home-${width}.png`,
           fullPage: true,
         });
+      }
+      if (path === "/start" || path === "/book") {
+        await expect(
+          page.getByRole("heading", { name: "Request a Workflow Fit Review" }),
+        ).toBeVisible();
+        await expect(page.getByText(/embedded calendar|assessment is saved/i)).toHaveCount(
+          0,
+        );
+      }
+      if (path === "/contact") {
+        await expect(
+          page.getByRole("heading", { name: "Request a Workflow Fit Review" }),
+        ).toBeVisible();
+        await expect(
+          page.locator('footer a[href="mailto:operations@wonderworkflow.com"]'),
+        ).toHaveText("operations@wonderworkflow.com");
+      }
     }
   }
 });
