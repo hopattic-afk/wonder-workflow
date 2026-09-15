@@ -584,7 +584,7 @@ describe("retained legacy assessment save boundary (not publicly routed)", () =>
     );
     expect(
       screen.getByTitle(
-        "Book your complimentary 30-minute Workflow Fit Review",
+        "Book your complimentary 30-minute Operations Fit Review",
       ),
     ).toHaveAttribute("src", ASSESSMENT_BOOKING_URL);
   });
