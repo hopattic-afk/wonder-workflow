@@ -5,10 +5,11 @@ import Website, { pages } from "../src/site/Website";
 import { structuredData } from "../src/site/SearchContent";
 
 import { LegacyAssessment } from "../src/pages/Assessment";
+import { ASSESSMENT_META } from "../src/site/publicOffer";
 
 export function renderPublicPages() {
   return Object.entries(pages).map(([path, metadata]) => ({
     path, metadata, schema: structuredData(path),
     html: renderToString(<MemoryRouter initialEntries={[path]}><Website /></MemoryRouter>),
-  })).concat([{ path: "/assessment", metadata: ["Operations Assessment", "Assess your operations in about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review."], html: renderToString(<LegacyAssessment />) }]);
+  })).concat([{ path: "/assessment", metadata: ["Operations Assessment", ASSESSMENT_META], html: renderToString(<LegacyAssessment />) }]);
 }

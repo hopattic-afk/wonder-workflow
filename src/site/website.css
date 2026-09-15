@@ -437,6 +437,54 @@
 .ww-invitation .ww-text-link {
   font-size: 16px;
 }
+.ww-who-for p,
+.ww-agnostic p,
+.ww-ladder > p {
+  max-width: 760px;
+}
+.ww-who-for p + p {
+  margin-top: 16px;
+}
+.ww-exclude {
+  color: var(--ww-ink);
+  font-weight: 600;
+}
+.ww-ladder-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.ww-ladder-list li {
+  border-top: 1px solid #cbc6d6;
+  padding-top: 22px;
+}
+.ww-ladder-list h3 {
+  margin-bottom: 12px;
+}
+.ww-proof-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 46px;
+}
+.ww-proof-grid article {
+  border-top: 1px solid #cbc6d6;
+  padding-top: 22px;
+}
+.ww-proof-grid h3 {
+  margin-bottom: 14px;
+}
+.ww-proof-grid p {
+  margin-bottom: 18px;
+}
+.ww-site .ww-cta-ladder {
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 520px;
+  color: var(--ww-muted);
+}
 .ww-launch-intro {
   position: fixed;
   inset: 0;
@@ -822,6 +870,10 @@
   .ww-problem-list {
     gap: 28px;
   }
+  .ww-ladder-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
   .ww-intro {
     grid-template-columns: 190px 1fr;
     gap: 5%;
@@ -892,7 +944,9 @@
     padding-top: 60px;
     padding-bottom: 60px;
   }
-  .ww-problem-list {
+  .ww-problem-list,
+  .ww-ladder-list,
+  .ww-proof-grid {
     grid-template-columns: 1fr;
     gap: 32px;
   }

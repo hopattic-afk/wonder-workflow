@@ -40,11 +40,11 @@ describe("P0 public funnel and machine files", () => {
     expect(html).not.toContain("\u2014");
   });
 
-  it("home title and eyebrow lead with ops outcomes", () => {
-    expect(pages["/"][0]).toBe("Ops workflows that save time");
+  it("home title and eyebrow lead with owner-facing ops outcomes", () => {
+    expect(pages["/"][0]).toBe("When work still falls on you");
     const source = readFileSync(join(process.cwd(), "src/site/Website.tsx"), "utf8");
     expect(source).toContain(
-      "Ops help for service, retail and hospitality owners",
+      "Ops help for 1-50 person field and service shops",
     );
     expect(source).not.toContain("AI operations for service businesses");
     expect(pages["/"][0] + pages["/"][1]).not.toContain("\u2014");
@@ -54,11 +54,11 @@ describe("P0 public funnel and machine files", () => {
     for (const path of ["/start", "/book"]) {
       const { unmount } = renderPath(path);
       expect(
-        screen.getByRole("heading", { name: "Book a Workflow Fit Review" }),
+        screen.getByRole("heading", { name: "Book an Operations Fit Review" }),
       ).toBeVisible();
       expect(screen.getByText(/contact details and save/i)).toBeVisible();
       expect(
-        screen.getByText(/Fit Review calendar appears on the same page/i),
+        screen.getByText(/Operations Fit Review calendar appears on the same page/i),
       ).toBeVisible();
       const assess = screen.getAllByRole("link", {
         name: /Assess your operations/i,
@@ -89,7 +89,7 @@ describe("P0 public funnel and machine files", () => {
       screen.getAllByRole("link", { name: /Assess your operations/i })[0],
     ).toHaveAttribute("href", "/assessment");
     expect(
-      screen.getByRole("link", { name: /Request a Workflow Fit Review/i }),
+      screen.getByRole("link", { name: /Request an Operations Fit Review/i }),
     ).toHaveAttribute("href", "/assessment");
     expect(
       screen
@@ -105,7 +105,7 @@ describe("P0 public funnel and machine files", () => {
   it("client /pricing does not keep a homepage canonical", () => {
     renderPath("/pricing");
     expect(document.title).toBe(
-      "Workflow Diagnostic and AI Operations Services | Wonder & Workflow",
+      "Operations Fit Review, diagnostic, and implementation | Wonder & Workflow",
     );
     expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute(
       "href",
@@ -124,7 +124,7 @@ describe("P0 public funnel and machine files", () => {
     );
     expect(llms).toBe(wellKnown);
     expect(llms).toContain("Wonder & Workflow");
-    expect(llms).toMatch(/service, retail, and hospitality/i);
+    expect(llms).toMatch(/field and service shops/i);
     expect(llms).toContain("https://wonderworkflow.com/assessment");
     expect(llms).toContain("operations@wonderworkflow.com");
     expect(llms).toMatch(/not a marketing agency/i);

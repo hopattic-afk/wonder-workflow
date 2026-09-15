@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
+  ASSESSMENT_META,
+  BOOKING_IFRAME_TITLE,
+  FIT_REVIEW_NAME,
+  ONE_PATH_COPY,
+} from "../site/publicOffer";
+import {
   ASSESSMENT_BOOKING_URL,
   ASSESSMENT_PHONE_HINT,
   validAssessmentPhone,
@@ -42,7 +48,7 @@ export function Assessment() {
       document.head.appendChild(description);
     }
     description.content =
-      "Assess your operations in about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review.";
+      ASSESSMENT_META;
     let canonical = document.querySelector<HTMLLinkElement>(
       'link[rel="canonical"]',
     );
@@ -226,7 +232,7 @@ export function LegacyAssessment() {
       .querySelector('meta[name="description"]')
       ?.setAttribute(
         "content",
-        "Assess your operations in about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review.",
+        ASSESSMENT_META,
       );
     let canonical = document.querySelector<HTMLLinkElement>(
       'link[rel="canonical"]',
@@ -490,7 +496,7 @@ export function LegacyAssessment() {
         setSaved(true);
         setResult({ submission, saved: true });
         setStatus(
-          "Your request was saved. Choose your complimentary 30-minute Workflow Fit Review when you are ready.",
+          `Your request was saved. Choose your complimentary ${FIT_REVIEW_NAME} when you are ready.`,
         );
       } finally {
         clearTimeout(timeout);
@@ -682,16 +688,15 @@ export function LegacyAssessment() {
                 </label>
               </fieldset>
               <p className="assessment-privacy">
-                Your contact details and answers help us prepare for your
-                Workflow Fit Review. This form does not sign you up for
+                Your contact details and answers help us prepare for your{" "}
+                {FIT_REVIEW_NAME}. This form does not sign you up for
                 marketing or SMS. Please leave out passwords, client details and
                 other sensitive information.
               </p>
               <p className="assessment-small">
                 Your score is indicative, based on your answers. It is not a
                 validated diagnosis or an estimate of savings. During the
-                complimentary 30-minute Workflow Fit Review, we review one
-                workflow and a practical next step.
+                complimentary {FIT_REVIEW_NAME}, we {ONE_PATH_COPY.toLowerCase()}
               </p>
               <button
                 className="assessment-button"
@@ -742,7 +747,7 @@ export function LegacyAssessment() {
             </p>
             <p>
               Your assessment is saved. Choose a time below to discuss your
-              results and identify one workflow to improve.
+              results. {ONE_PATH_COPY}
             </p>
             <p className="assessment-small">
               This score is based on your answers. We’ll explore what it means
@@ -754,7 +759,7 @@ export function LegacyAssessment() {
             >
               <p className="assessment-eyebrow">Your next step</p>
               <h2 id="assessment-booking-title">
-                Book your Workflow Fit Review
+                Book your {FIT_REVIEW_NAME}
               </h2>
               <p>Complimentary · 30 minutes</p>
               <p className="assessment-small">
@@ -765,7 +770,7 @@ export function LegacyAssessment() {
                 key={calendarKey}
                 className="assessment-calendar"
                 src={ASSESSMENT_BOOKING_URL}
-                title="Book your complimentary 30-minute Workflow Fit Review"
+                title={BOOKING_IFRAME_TITLE}
                 referrerPolicy="no-referrer"
               />
               <p className="assessment-small">
@@ -805,11 +810,11 @@ export function LegacyAssessment() {
         </a>
         <a
           href="/start"
-          aria-label="Workflow Fit Review (opens in a new tab)"
+          aria-label="Operations Fit Review (opens in a new tab)"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Workflow Fit Review
+          {FIT_REVIEW_NAME}
         </a>
       </footer>
     </div>

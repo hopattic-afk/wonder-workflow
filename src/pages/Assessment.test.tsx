@@ -58,7 +58,7 @@ describe("public browser-only assessment", () => {
       expect(request).not.toHaveBeenCalled();
       expect(
         screen.queryByText(
-          /assessment is saved|preview|book your Workflow Fit Review/i,
+          /assessment is saved|preview|book your Operations Fit Review/i,
         ),
       ).not.toBeInTheDocument();
     },

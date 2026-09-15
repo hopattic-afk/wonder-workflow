@@ -82,7 +82,7 @@ test("start, book, and contact send Fit Review traffic to the assessment", async
   for (const path of ["/start", "/book"]) {
     await page.goto(path);
     await expect(
-      page.getByRole("heading", { name: "Book a Workflow Fit Review" }),
+      page.getByRole("heading", { name: "Book an Operations Fit Review" }),
     ).toBeVisible();
     await expect(
       page.locator(".ww-start-simple").getByRole("link", {
@@ -100,7 +100,7 @@ test("start, book, and contact send Fit Review traffic to the assessment", async
     page.getByRole("heading", { name: "Assess your operations" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Request a Workflow Fit Review" }),
+    page.getByRole("link", { name: "Request an Operations Fit Review" }),
   ).toHaveAttribute("href", /\/assessment$/);
   await page.getByRole("navigation", { name: "Main navigation" })
     .getByRole("link", { name: "Assess your operations" })

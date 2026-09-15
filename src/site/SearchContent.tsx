@@ -1,5 +1,6 @@
 import { Link as RouterLink } from "react-router-dom";
 import { publicHref } from "./campaign";
+import { FIT_REVIEW_NAME, LADDER_NOTE, ONE_PATH_COPY } from "./publicOffer";
 
 type Service = {
   slug: string;
@@ -34,7 +35,7 @@ export const services: Service[] = [
     ideal: ["You can name a recurring workflow but not its root cause.", "Several tools or handoffs are involved.", "You need a defensible build, improve, or stop decision."],
     process: ["Walk through a recent real example with the people doing the work.", "Map triggers, inputs, decisions, delays, exceptions, systems, and ownership.", "Compare process changes, native features, conventional automation, and AI assistance.", "Define the recommended future state, controls, and acceptance tests."],
     deliverables: ["Current-state workflow map", "Evidence-backed baseline where data exists", "Tool, permission, and dependency map", "Options comparison and recommendation", "Future-state map and implementation scope", "Acceptance tests, risks, and open questions"],
-    pricing: "The initial Workflow Fit Review is complimentary. A full audit is quoted after that review because the number of systems, participants, exceptions, and evidence sources determines the work. You receive a written scope and price before paid work begins.",
+    pricing: `The initial ${FIT_REVIEW_NAME} is complimentary. A full audit is quoted after that review because the number of systems, participants, exceptions, and evidence sources determines the work. You receive a written scope and price before paid work begins. Software and vendor costs stay separate.`,
     faqs: [["Is this a security or compliance audit?", "No. We consider practical privacy, access, and risk boundaries, but formal legal, certification, penetration-testing, and regulated-industry work needs an appropriately qualified specialist."], ["Will the audit recommend AI?", "Only when it is the simplest suitable option. A clearer procedure, an existing software feature, or conventional automation may be the better answer."], ["Do you change our systems during the audit?", "No production change is implied. Implementation receives a separate scope, approval, and rollback plan."]],
   },
   {
@@ -89,7 +90,7 @@ export const services: Service[] = [
     ideal: ["An owner or key employee is the bottleneck.", "The same administrative sequence happens every week.", "You want a bounded first project with a clear handoff."],
     process: ["Choose one workflow with visible friction and a reachable owner.", "Measure enough to understand the starting point.", "Use the simplest suitable change.", "Prove it on representative examples before expanding.", "Leave editable documentation and clear responsibility."],
     deliverables: ["One-workflow current and future maps", "Practical improvement recommendation", "Scoped build when justified", "Exception and fallback design", "Team training and documentation", "Measurement sheet for the first operating period"],
-    pricing: "Start with a complimentary fit review. Any paid diagnostic or build is separately quoted, with software and usage costs shown apart from our work. We do not price from company size or an assessment score alone.",
+    pricing: `Start with a complimentary ${FIT_REVIEW_NAME}. Any paid diagnostic or build is separately quoted, with software and usage costs shown apart from our work. We do not price from company size or an assessment score alone.`,
     faqs: [["Is my business too small for automation?", "Possibly—but team size is not the deciding factor. Frequency, clarity, consequence of error, and maintenance capacity matter more."], ["Should we automate several processes together?", "Usually begin with one bounded workflow. What you learn about data, ownership, and adoption will make later decisions better."], ["Will our team be able to run it?", "That is an acceptance requirement: client-owned accounts where practical, documentation, training, and a manual path are part of the design."]],
   },
 ];
@@ -192,7 +193,7 @@ export function ServicePage({ service }: { service: Service }) {
       <Faqs items={service.faqs} />
     </article>
     <Related />
-    <section className="ww-search-cta"><p className="ww-eyebrow">Next step</p><h2>Bring one recurring workflow.</h2><p>Complete the two-minute assessment (contact details and save), then book a complimentary 30-minute Workflow Fit Review on the calendar.</p><Link className="ww-button" to="/assessment">Start the assessment <span aria-hidden="true">↗</span></Link></section>
+    <section className="ww-search-cta"><p className="ww-eyebrow">Next step</p><h2>Bring one real path of work.</h2><p>Complete the two-minute assessment (contact details and save), then book a complimentary {FIT_REVIEW_NAME} on the calendar. {ONE_PATH_COPY}</p><p className="ww-cta-ladder">{LADDER_NOTE}</p><Link className="ww-button" to="/assessment">Start the assessment <span aria-hidden="true">↗</span></Link></section>
   </>;
 }
 
@@ -211,7 +212,7 @@ export function GuidePage({ guide }: { guide: Guide }) {
       <p className="ww-editorial-note">Reviewed September 9, 2026. This guide describes a decision method, not a guaranteed result. Feasibility depends on the actual workflow, tools, data, permissions, and consequences of error.</p>
     </article>
     <Related />
-    <section className="ww-search-cta"><p className="ww-eyebrow">Apply the answer</p><h2>Find the first workflow worth improving.</h2><p>The assessment takes about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review.</p><Link className="ww-button" to="/assessment">Assess your operations <span aria-hidden="true">↗</span></Link></section>
+    <section className="ww-search-cta"><p className="ww-eyebrow">Apply the answer</p><h2>Find the first improvement worth making.</h2><p>The assessment takes about two minutes. Save your contact details, then book a complimentary {FIT_REVIEW_NAME}. {ONE_PATH_COPY}</p><p className="ww-cta-ladder">{LADDER_NOTE}</p><Link className="ww-button" to="/assessment">Assess your operations <span aria-hidden="true">↗</span></Link></section>
   </>;
 }
 

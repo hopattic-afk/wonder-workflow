@@ -8,6 +8,19 @@ import {
   useLocation,
 } from "react-router-dom";
 import { captureCampaign, publicHref } from "./campaign";
+import {
+  ASSESSMENT_META,
+  FIT_REVIEW_NAME,
+  FIT_REVIEW_PLAIN,
+  HOME_DESCRIPTION,
+  HOME_TITLE,
+  ICP_EXCLUDE,
+  ICP_LINE,
+  LADDER_NOTE,
+  ONE_PATH_COPY,
+  TOOL_AGNOSTIC_COPY,
+  TOOL_AGNOSTIC_HEADING,
+} from "./publicOffer";
 import { AssessmentCaseStudy, GuidePage, GuidesIndex, ServiceDirectory, ServicePage, guides, searchPages, services, structuredData } from "./SearchContent";
 import "./website.css";
 
@@ -28,29 +41,26 @@ function NavLink(props: ComponentProps<typeof RouterNavLink>) {
   );
 }
 export const pages: Record<string, [string, string]> = {
-  "/": [
-    "Ops workflows that save time",
-    "Improve one recurring workflow at a time. Wonder & Workflow maps the work, chooses the simplest suitable solution, tests it, and leaves your team in control.",
-  ],
+  "/": [HOME_TITLE, HOME_DESCRIPTION],
   "/services": [
-    "Workflow Diagnostic and AI Operations Services",
-    "Map, improve, test, and hand over one recurring business workflow. See Wonder & Workflow’s diagnostic, implementation, and support approach.",
+    "Operations Fit Review, diagnostic, and implementation",
+    "Start with a complimentary Operations Fit Review, then a named paid diagnostic, implementation, and optional support. Software and vendor costs stay separate.",
   ],
   "/how-we-work": [
-    "How We Design Dependable AI Workflows",
-    "See how Wonder & Workflow maps, simplifies, builds, tests, and hands over one business workflow with clear human ownership and fallback.",
+    "How We Map How Work Gets Done",
+    "See how Wonder & Workflow maps one real path of work, picks one improvement, tests it, and leaves people in control.",
   ],
   "/about": [
     "About Wonder & Workflow",
-    "Wonder & Workflow helps owner-led service businesses improve recurring operations through careful discovery, proportionate technology, testing, and clear ownership.",
+    "Wonder & Workflow helps owner-led field and service shops improve how work gets done through careful discovery, proportionate technology, testing, and clear ownership.",
   ],
   "/start": [
     "Start With an Operations Assessment",
-    "Assess your operations in about two minutes, save your contact details, then book a complimentary 30-minute Workflow Fit Review on the calendar.",
+    ASSESSMENT_META,
   ],
   "/privacy": [
     "Privacy",
-    "How Wonder & Workflow handles website, assessment, consultation, and workflow-project information.",
+    "How Wonder & Workflow handles website, assessment, consultation, and project information.",
   ],
   "/terms": [
     "Terms & Conditions",
@@ -58,7 +68,7 @@ export const pages: Record<string, [string, string]> = {
   ],
   "/contact": [
     "Contact Wonder & Workflow",
-    "Contact Wonder&Workflow LLC about a workflow, a project, or an existing inquiry.",
+    "Contact Wonder&Workflow LLC about an Operations Fit Review, a project, or an existing inquiry.",
   ],
   ...searchPages,
 };
@@ -80,9 +90,12 @@ function Cta({ secondary = false }: { secondary?: boolean }) {
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return <p className="ww-eyebrow">{children}</p>;
 }
+function NextStepNote() {
+  return <p className="ww-cta-ladder">{LADDER_NOTE}</p>;
+}
 function Invitation({
   title = "Find where work slows down.",
-  copy = "Complete the short assessment (contact details and save), then book a complimentary 30-minute Workflow Fit Review on the calendar.",
+  copy = `Complete the short assessment (contact details and save), then book a complimentary ${FIT_REVIEW_PLAIN}.`,
 }: {
   title?: string;
   copy?: string;
@@ -96,6 +109,7 @@ function Invitation({
         <Link className="ww-button" to="/assessment">
           Assess your operations <Arrow />
         </Link>
+        <NextStepNote />
         <Link className="ww-text-link" to="/how-we-work">
           How the process works <Arrow />
         </Link>
@@ -310,7 +324,7 @@ function WorkflowEntrance({ready}: {ready: boolean}) {
 
   return (
     <section className={`ww-live-scene${moving ? " ww-motion-running" : ""}`} data-phase={phase} aria-label="Animated illustration of a business workflow">
-      <div className="ww-live-heading"><span>One request. A connected workflow.</span><button className="ww-motion-control" aria-pressed={!paused && !reduced} onClick={() => { if(reduced) { const url = new URL(window.location.href); url.searchParams.set("motion", "full"); window.location.assign(url.toString()); } else setPaused(value => !value); }}>{reduced ? "Enable animation" : paused ? "Resume animation" : "Pause animation"}</button></div>
+      <div className="ww-live-heading"><span>One request. A clear next step.</span><button className="ww-motion-control" aria-pressed={!paused && !reduced} onClick={() => { if(reduced) { const url = new URL(window.location.href); url.searchParams.set("motion", "full"); window.location.assign(url.toString()); } else setPaused(value => !value); }}>{reduced ? "Enable animation" : paused ? "Resume animation" : "Pause animation"}</button></div>
     <div ref={scene} className="ww-operating-scene" role="img" aria-label="Illustration: incoming requests flow through Wonder and Workflow into organized information, human review, and a clear next action.">
       <div className="ww-scene-grid" aria-hidden="true" />
       <div className="ww-arrivals" aria-hidden="true">
@@ -351,49 +365,59 @@ function Home() {
       <section className="ww-hero ww-workflow-hero">
         <div className="ww-workflow-hero-heading">
           <div>
-            <Eyebrow>Ops help for service, retail and hospitality owners</Eyebrow>
+            <Eyebrow>Ops help for 1-50 person field and service shops</Eyebrow>
             <h1 tabIndex={-1}>
-              From scattered requests
+              When everything still{" "}
               <br />
-              <em>to work ready to move.</em>
+              <em>falls on you.</em>
             </h1>
           </div>
           <div className="ww-workflow-hero-intro">
             <p>
-              Turn everyday admin into a clear next step, with connected tools,
-              useful AI, and people in control.
+              Missed calls. Group texts. Quotes waiting. Wonder &amp; Workflow
+              maps how work gets done so one path of work can move without you
+              holding every step.
             </p>
             <Link className="ww-button" to="/assessment">
               Assess your operations <Arrow />
             </Link>
             <p className="ww-trust-note">
-              A 2-minute assessment to spot where work gets slowed down.
+              About two minutes, then a complimentary {FIT_REVIEW_PLAIN}.
             </p>
+            <NextStepNote />
           </div>
         </div>
         <WorkflowEntrance ready={introComplete} />
       </section>
+      <section className="ww-section ww-who-for">
+        <div className="ww-section-heading">
+          <Eyebrow>Who this is for</Eyebrow>
+          <h2>Owner-led field and service shops, not professional firms.</h2>
+        </div>
+        <p>{ICP_LINE}</p>
+        <p className="ww-exclude">{ICP_EXCLUDE}</p>
+      </section>
       <section className="ww-section">
         <div className="ww-section-heading">
           <Eyebrow>What we help with</Eyebrow>
-          <h2>Where is the work slowing down?</h2>
+          <h2>When the day still lives in group texts</h2>
         </div>
         <div className="ww-problem-list">
           {[
             [
-              "Repeated admin",
-              "The same information gets copied between forms, files, and software.",
-              "Simplify data entry and document preparation.",
+              "Missed calls",
+              "Leads wait or get double-booked while you are on the job.",
+              "Catch the request and give it a clear next owner.",
             ],
             [
-              "Missing information",
-              "Your team spends time finding answers or chasing details.",
-              "Organize information and make it easier to use.",
+              "Group texts",
+              "Who is where today lives in chats, screenshots, and your head.",
+              "Give each job a next step that does not wait on you.",
             ],
             [
-              "Unclear handoffs",
-              "Requests, approvals, or follow-ups depend on someone remembering.",
-              "Give each step a clear owner and next action.",
+              "Quotes waiting",
+              "Estimates sit unsent. Customers ask for updates nobody has.",
+              "Move quote, follow-up, and handoff out of memory.",
             ],
           ].map(([title, problem, outcome], index) => (
             <article key={title}>
@@ -412,9 +436,9 @@ function Home() {
         <div>
           <Eyebrow>How we work</Eyebrow>
           <h2>
-            One workflow.
+            One real path of work.
             <br />
-            <em>A practical improvement.</em>
+            <em>Pick one improvement.</em>
           </h2>
           <Link className="ww-text-link" to="/how-we-work">
             See our process <Arrow />
@@ -438,9 +462,74 @@ function Home() {
           </li>
         </ol>
       </section>
+      <section className="ww-section ww-agnostic">
+        <div className="ww-section-heading">
+          <Eyebrow>Tool-agnostic</Eyebrow>
+          <h2>{TOOL_AGNOSTIC_HEADING}</h2>
+        </div>
+        <p>{TOOL_AGNOSTIC_COPY}</p>
+      </section>
+      <section className="ww-section ww-ladder">
+        <div className="ww-section-heading">
+          <Eyebrow>After the review</Eyebrow>
+          <h2>A clear next-step ladder. Fees come later, in writing.</h2>
+        </div>
+        <ol className="ww-ladder-list">
+          <li>
+            <h3>Complimentary {FIT_REVIEW_NAME}</h3>
+            <p>
+              A {FIT_REVIEW_PLAIN}. {ONE_PATH_COPY}
+            </p>
+          </li>
+          <li>
+            <h3>Named paid diagnostic</h3>
+            <p>
+              Ops Audit or Systems Assessment, quoted in writing after the
+              review. No package fees published here.
+            </p>
+          </li>
+          <li>
+            <h3>Implementation</h3>
+            <p>Build the scoped improvement only if it is worth doing.</p>
+          </li>
+          <li>
+            <h3>Optional support</h3>
+            <p>
+              Ongoing help only when coverage and responsibility are defined.
+            </p>
+          </li>
+        </ol>
+        <p>Software and vendor costs stay separate from our work.</p>
+      </section>
+      <section className="ww-section ww-proof">
+        <div className="ww-section-heading">
+          <Eyebrow>Trust for a first visit</Eyebrow>
+          <h2>Proof you can check, not a fabricated story.</h2>
+        </div>
+        <div className="ww-proof-grid">
+          <article>
+            <h3>Shops like yours</h3>
+            <p>
+              Cleaning, landscaping, detailing, signs and print, restoration,
+              moving, fitness, coffee, and pet services. Named client stories
+              will appear here when a shop gives permission.
+            </p>
+          </article>
+          <article>
+            <h3>What we can show today</h3>
+            <p>
+              Until then, see the first-party note on how we bounded our own
+              operations assessment. We will not invent testimonials or metrics.
+            </p>
+            <Link className="ww-text-link" to="/case-studies/operations-assessment">
+              Read the implementation study <Arrow />
+            </Link>
+          </article>
+        </div>
+      </section>
       <Invitation
         title="Find where your operations could improve."
-        copy="Assess your operations in about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review to discuss your results and choose one workflow to improve."
+        copy={`Assess your operations in about two minutes. Save your contact details, then book a complimentary ${FIT_REVIEW_NAME} to discuss your results. ${ONE_PATH_COPY}`}
       />
     </div>
   );
@@ -487,7 +576,7 @@ const faqs = [
   ],
   [
     "Can you work with our current software?",
-    "We assess it first. Available integrations, account permissions, data quality, vendor limits, and cost determine what is feasible. Sometimes the best result is better use of what you already own.",
+    "We assess it first. Available integrations, account permissions, data quality, vendor limits, and cost determine what is feasible. Sometimes the best result is better use of what you already own. You may not need another tool.",
   ],
   [
     "Do you provide compliance or security certification?",
@@ -503,28 +592,28 @@ function Services() {
     <>
       <PageHero
         number="01"
-        label="AI operations and workflow improvement"
+        label="Operations help for field and service shops"
         title="Start small enough to understand."
         accent="Build well enough to depend on."
-        copy="Every engagement begins with a defined workflow, a named owner, and an observable problem. We expand only after the first result is understood."
+        copy="Every engagement begins with one real path of work, a named owner, and an observable problem. We expand only after the first result is understood."
       />
       <section className="ww-service-details ww-offer-details">
         <article>
           <span className="ww-eyebrow">01</span>
           <div>
             <Eyebrow>Complimentary · 30 minutes</Eyebrow>
-            <h2>Workflow Fit Review</h2>
+            <h2>{FIT_REVIEW_NAME}</h2>
           </div>
           <div>
-            <h3>Decide whether this is worth solving—and how.</h3>
+            <h3>Decide whether this is worth solving, and how.</h3>
             <p>
               <strong>For you if:</strong> A recurring process is frustrating,
-              but you do not yet know whether the answer is AI, automation,
-              software configuration, or a better procedure.
+              but you do not yet know whether the answer is a clearer procedure,
+              better use of what you already own, automation, or AI.
             </p>
             <p>
-              <strong>What we do:</strong> Review one workflow, its trigger,
-              people, tools, repeated effort, exceptions, and business
+              <strong>What we do:</strong> {ONE_PATH_COPY} We review its
+              trigger, people, tools, repeated effort, exceptions, and business
               consequence.
             </p>
             <p>
@@ -537,11 +626,12 @@ function Services() {
               security review, compliance opinion, or production change.
             </p>
             <Cta />
+            <NextStepNote />
           </div>
         </article>
         <article>
           <span className="ww-eyebrow">02</span>
-          <h2>One-Workflow Diagnostic</h2>
+          <h2>Ops Audit or Systems Assessment</h2>
           <div>
             <h3>
               Turn a frustrating process into an implementation-ready decision.
@@ -551,7 +641,7 @@ function Services() {
             </p>
             <BulletList
               items={[
-                "Current-state map and workflow boundary.",
+                "Current-state map and process boundary.",
                 "Baseline for volume, time, delay, rework, and cost where evidence is available.",
                 "Tool, information, permission, and dependency map.",
                 "Comparison of process, native-feature, automation, and AI options.",
@@ -560,7 +650,7 @@ function Services() {
               ]}
             />
             <p>
-              <strong>What we need from you:</strong> The workflow owner, one
+              <strong>What we need from you:</strong> The process owner, one
               backup, a walkthrough, sanitized examples, and agreement on what a
               useful result would look like.
             </p>
@@ -572,21 +662,21 @@ function Services() {
               Request a diagnostic <Arrow />
             </Link>
             <p className="ww-small">
-              Begin with a Workflow Fit Review. Diagnostic deliverables and
+              Begin with an {FIT_REVIEW_NAME}. Diagnostic deliverables and
               acceptance criteria are confirmed in a separate written scope and
-              proposal.
+              proposal. Software and vendor costs stay separate.
             </p>
           </div>
         </article>
         <article>
           <span className="ww-eyebrow">03</span>
           <div>
-            <Eyebrow>Scoped implementation pilot</Eyebrow>
-            <h2>Workflow Build &amp; Proof</h2>
+            <Eyebrow>Scoped implementation</Eyebrow>
+            <h2>Implementation</h2>
           </div>
           <div>
             <h3>
-              Build one workflow. Test everyday cases and exceptions. Leave your team able to
+              Build one improvement. Test everyday cases and exceptions. Leave your team able to
               run it.
             </h3>
             <p>
@@ -613,25 +703,26 @@ function Services() {
               business.
             </p>
             <Link className="ww-text-link" to="/start">
-              Scope the first workflow <Arrow />
+              Scope the first improvement <Arrow />
             </Link>
             <p className="ww-small">
-              The first step is a fit review. Build scope, commercial terms, and
+              The first step is an {FIT_REVIEW_NAME}. Build scope, commercial terms, and
               stabilization boundaries are agreed separately after diagnostic
-              work.
+              work. Software and vendor costs stay separate.
             </p>
           </div>
         </article>
       </section>
       <CopySection
         label="After launch"
-        title="Know who looks after the workflow."
+        title="Know who looks after the work."
       >
         <p>
           Every proposal states who watches failures, who reviews exceptions,
           how changes are approved, and what support is included. Ongoing care
           is offered only where we can define real coverage and responsibility;
-          it is not an unlimited retainer.
+          it is not an unlimited retainer. Optional support is the last rung on
+          the ladder, not the starting offer.
         </p>
       </CopySection>
       <ServiceDirectory />
@@ -653,7 +744,7 @@ function Services() {
       </section>
       <Invitation
         title="A useful first step should reduce uncertainty."
-        copy="Start with the operations assessment. We will discuss your results, choose one workflow to improve, and decide together whether a diagnostic is justified."
+        copy={`Start with the operations assessment. We will discuss your results, walk one real path of work, pick one improvement, and decide together whether a diagnostic is justified.`}
       />
     </>
   );
@@ -736,7 +827,7 @@ function Process() {
           Low-consequence drafting may need a quick operator check and version
           history. A workflow that can send commitments, expose confidential
           data, or affect a person’s rights needs stronger controls and may
-          require specialist review. We scale the process to the consequence—not
+          require specialist review. We scale the process to the consequence, not
           to the novelty of the technology.
         </p>
       </CopySection>
@@ -834,7 +925,7 @@ function Start() {
         label="Get started"
         title="What would you like"
         accent="to make easier?"
-        copy="Start with a quick look at your operations. Answer seven questions, save your contact details, then book a complimentary 30-minute Workflow Fit Review on the calendar. You don’t need a technical plan."
+        copy={`Start with a quick look at your operations. Answer seven questions, save your contact details, then book a complimentary ${FIT_REVIEW_PLAIN} on the calendar. You don’t need a technical plan.`}
       />
       <section className="ww-start-simple">
         <div>
@@ -854,24 +945,25 @@ function Start() {
         </div>
         <div>
           <span className="ww-step-label">2 / Complimentary · 30 minutes</span>
-          <h2>Book a Workflow Fit Review</h2>
+          <h2>Book an {FIT_REVIEW_NAME}</h2>
           <p>
-            After the assessment is saved, the Fit Review calendar appears on
+            After the assessment is saved, the {FIT_REVIEW_NAME} calendar appears on
             the same page. Choose a time there. Together we review the result,
-            pick one workflow to improve, and identify a practical next step.
+            walk one real path of work, and pick one improvement.
           </p>
           <p>
             A deeper diagnostic or implementation is optional and receives a
-            separate written scope.
+            separate written scope. Software and vendor costs stay separate.
           </p>
           <Link className="ww-button" to="/assessment">
             Assess your operations <Arrow />
           </Link>
+          <NextStepNote />
           <p className="ww-small">
             Questions only? Email{" "}
             <a href="mailto:operations@wonderworkflow.com">
               operations@wonderworkflow.com</a>. That inbox is for questions, not
-            the Fit Review booking path.
+            the {FIT_REVIEW_NAME} booking path.
           </p>
         </div>
       </section>
@@ -894,7 +986,7 @@ function Privacy() {
           The public operations assessment calculates a score in your browser.
           When you submit it, we receive your answers, score, name, email,
           company, team size, industry, and operational priority. You may also
-          provide optional business details. If you book a Workflow Fit Review,
+          provide optional business details. If you book an {FIT_REVIEW_NAME},
           we receive the appointment details and any optional booking note. Do
           not submit passwords, access keys, regulated records, or unnecessary
           personal information through the assessment or booking form.
@@ -933,7 +1025,7 @@ function Privacy() {
         <h2>Follow-up and marketing</h2>
         <p>
           Your submission is used to respond to your inquiry and prepare the
-          requested Workflow Fit Review. The assessment does not request
+          requested {FIT_REVIEW_NAME}. The assessment does not request
           marketing or SMS opt-in.
         </p>
         <h2>Optional text messages</h2>
@@ -971,7 +1063,7 @@ function Terms() {
         <h2>Website and assessment</h2>
         <p>Our website describes AI operations and workflow services for businesses. The operations assessment provides an indicative score based on your answers. It is not a validated diagnosis, a guarantee of results, or a calculation of financial savings.</p>
         <h2>Consultations and project work</h2>
-        <p>The Workflow Fit Review is a complimentary 30-minute conversation. Booking a review does not commit you to purchase services. Paid work begins only under a separately agreed scope covering deliverables, fees, responsibilities, access, and support. That agreement governs the project.</p>
+        <p>The {FIT_REVIEW_NAME} is a complimentary {FIT_REVIEW_PLAIN}. Booking a review does not commit you to purchase services. Paid work begins only under a separately agreed scope covering deliverables, fees, responsibilities, access, and support. That agreement governs the project. Software and vendor costs stay separate.</p>
         <h2>Information you submit</h2>
         <p>Provide accurate information that you are authorized to share. Do not submit passwords, access credentials, confidential client records, or unnecessary sensitive information through public forms. You remain responsible for decisions about your business and for approving any proposed production changes.</p>
         <h2>Appropriate use</h2>
@@ -994,27 +1086,28 @@ function Contact() {
   return (
     <>
       <PageHero number="07" label="Contact" title="Let's talk about" accent="your operations."
-        copy="Contact Wonder & Workflow about a workflow, a project, or an existing inquiry." />
+        copy="Contact Wonder & Workflow about an Operations Fit Review, a project, or an existing inquiry." />
       <section className="ww-contact-fit">
-        <Eyebrow>Workflow Fit Review</Eyebrow>
+        <Eyebrow>{FIT_REVIEW_NAME}</Eyebrow>
         <h2>Assess your operations</h2>
         <p>
           Complete the 2-minute assessment with your contact details and save.
-          Then book a complimentary 30-minute Workflow Fit Review on the
-          calendar.
+          Then book a complimentary {FIT_REVIEW_PLAIN} on the
+          calendar. {ONE_PATH_COPY}
         </p>
         <div className="ww-contact-actions">
           <Link className="ww-button" to="/assessment">
             Assess your operations <Arrow />
           </Link>
           <Link className="ww-text-link" to="/assessment">
-            Request a Workflow Fit Review <Arrow />
+            Request an {FIT_REVIEW_NAME} <Arrow />
           </Link>
         </div>
+        <NextStepNote />
       </section>
       <section className="ww-prose">
         <h2>General contact</h2>
-        <p>Wonder & Workflow is the public name of Wonder&Workflow LLC. We help service, retail, and hospitality businesses understand, improve, and maintain practical business workflows.</p>
+        <p>Wonder & Workflow is the public name of Wonder&Workflow LLC. We help 1-50 person field and service shops understand, improve, and maintain how work gets done.</p>
         <p>Email <a href="mailto:operations@wonderworkflow.com">operations@wonderworkflow.com</a> for questions or an existing inquiry. Please leave out passwords and confidential client information; we can arrange an appropriate way to discuss sensitive details.</p>
         <h2>Questions about your information</h2>
         <p>Use the same email address above for privacy questions or correction and deletion requests. Read our <Link to="/privacy">Privacy Policy</Link> and <Link to="/terms">Terms & Conditions</Link>.</p>
@@ -1153,7 +1246,7 @@ export default function Website() {
         <div>
           <Link className="ww-footer-name" to="/">
             Wonder & Workflow
-            <span>Ops workflows for work that needs to run reliably.</span>
+            <span>Ops help for 1-50 person field and service shops.</span>
           </Link>
           <Cta secondary />
         </div>
