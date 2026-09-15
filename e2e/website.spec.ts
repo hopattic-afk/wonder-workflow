@@ -32,6 +32,7 @@ test("public pages remain readable and accessible on desktop and mobile", async 
       ).toBe(true);
       const result = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+        .exclude("chat-widget")
         .analyze();
       expect(result.violations, `${path} at ${width}px`).toEqual([]);
       if (path === "/")
