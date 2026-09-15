@@ -1,6 +1,16 @@
 import { Link as RouterLink } from "react-router-dom";
 import { publicHref } from "./campaign";
-import { FIT_REVIEW_NAME, LADDER_NOTE, ONE_PATH_COPY } from "./publicOffer";
+import {
+  FIT_REVIEW_NAME,
+  LADDER_NOTE,
+  ONE_PATH_COPY,
+} from "./publicOffer";
+import {
+  assessmentHowToNode,
+  organizationNode,
+  websiteNode,
+  writeJsonLd,
+} from "./jsonld";
 
 type Service = {
   slug: string;
@@ -74,7 +84,7 @@ export const services: Service[] = [
   {
     slug: "ai-operations-consulting",
     title: "AI Operations Consulting",
-    short: "Turn AI interest into a practical operating decision, with ownership and evidence attached.",
+    short: "Decide whether AI helps intake, handoffs, or admin, or whether a clearer procedure is enough.",
     problem: "Leaders are asked to adopt AI while the real constraints, data, workflow, risk, integration, support, and staff capacity, remain undefined.",
     ideal: ["You have several possible AI projects and need a sequence.", "A pilot exists but nobody owns its operating risks.", "You need a practical plan rather than a broad transformation presentation."],
     process: ["Connect the business problem to a specific workflow.", "Assess variability, consequence of error, information sensitivity, and maintenance capacity.", "Choose a proportionate pilot and define where people retain authority.", "Set acceptance criteria, monitoring, and a stop condition before expansion."],
@@ -161,9 +171,36 @@ export const guides: Guide[] = [
 export const searchPages: Record<string, [string, string]> = Object.fromEntries([
   ...services.map((s) => [`/services/${s.slug}`, [s.title, s.short] as [string, string]]),
   ...guides.map((g) => [`/guides/${g.slug}`, [g.title, g.answer] as [string, string]]),
-  ["/case-studies/operations-assessment", ["Operations Assessment Workflow Study", "A transparent, first-party implementation note showing how Wonder & Workflow bounded, built, and tested its own browser-based operations assessment."]],
-  ["/guides", ["Small Business Workflow Automation Guides", "Direct, practical answers to common questions about automation, CRM work, customer intake, cost, and capacity."]],
+  ["/case-studies/operations-assessment", ["Operations assessment implementation note", "A first-party note showing how Wonder & Workflow bounded, built, and tested its own public operations assessment. Not a client case study."]],
+  ["/guides", ["Guides for field and service shops stuck in intake and admin", "Direct answers on missed intake, leaking handoffs, CRM busywork, and whether you need another tool. For owners of 1–50 person shops."]],
 ]);
+
+export const honestyFaqs: [string, string][] = [
+  [
+    "Do you only build with AI?",
+    "No. We choose between process change, existing software, conventional automation, and AI based on the work. AI is useful where interpretation or flexible language matters; fixed rules are often better for deterministic steps.",
+  ],
+  [
+    "Can you guarantee how many hours we will save?",
+    "No. We establish a baseline and agree on measurement before making a client-specific estimate. Recovered capacity is not automatically cash savings.",
+  ],
+  [
+    "Will this replace an employee?",
+    "That is not our default goal or claim. Most useful projects remove repeated administration, improve handoffs, or support decisions while people retain responsibility.",
+  ],
+  [
+    "Can you work with our current software?",
+    "We assess it first. Available integrations, account permissions, data quality, vendor limits, and cost determine what is feasible. Sometimes the best result is better use of what you already own. You may not need another tool.",
+  ],
+  [
+    "Do you provide compliance or security certification?",
+    "No. We use practical risk, privacy, testing, and access-control disciplines. Formal legal, certification, penetration-testing, and regulated-industry work requires an appropriately qualified specialist.",
+  ],
+  [
+    "Who owns the finished workflow?",
+    "The proposal identifies ownership and licensing. Our default recommendation is client-owned service accounts, editable documentation, and a clear offboarding path. Third-party platforms retain their own terms.",
+  ],
+];
 
 function Breadcrumbs({ items }: { items: [string, string][] }) {
   return <nav className="ww-breadcrumbs" aria-label="Breadcrumb"><ol>{items.map(([label, href], i) => <li key={href}>{i ? <span aria-hidden="true">/</span> : null}<Link to={href}>{label}</Link></li>)}</ol></nav>;
@@ -198,7 +235,7 @@ export function ServicePage({ service }: { service: Service }) {
 }
 
 export function GuidesIndex() {
-  return <article className="ww-search-page"><Breadcrumbs items={[["Guides", "/guides"]]} /><header><p className="ww-eyebrow">Practical answers</p><h1>Workflow automation guides for small businesses</h1><p className="ww-search-lede">Clear answers to the questions that come before a responsible automation project.</p></header><section className="ww-guide-grid">{guides.map(g => <Link key={g.slug} to={`/guides/${g.slug}`}><span>Guide</span><h2>{g.title}</h2><p>{g.answer}</p><b>Read the answer ↗</b></Link>)}</section></article>;
+  return <article className="ww-search-page"><Breadcrumbs items={[["Guides", "/guides"]]} /><header><p className="ww-eyebrow">Practical answers</p><h1>Guides for shops stuck between intake and paid</h1><p className="ww-search-lede">Clear answers on missed intake, leaking handoffs, CRM busywork, and whether you need another tool.</p></header><section className="ww-guide-grid">{guides.map(g => <Link key={g.slug} to={`/guides/${g.slug}`}><span>Guide</span><h2>{g.title}</h2><p>{g.answer}</p><b>Read the answer ↗</b></Link>)}</section></article>;
 }
 
 export function GuidePage({ guide }: { guide: Guide }) {
@@ -231,19 +268,72 @@ export function AssessmentCaseStudy() {
   </article>;
 }
 
+function faqPage(items: [string, string][]) {
+  return {
+    "@type": "FAQPage",
+    mainEntity: items.map(([question, answer]) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer },
+    })),
+  };
+}
+
 export function structuredData(pathname: string) {
-  const service = services.find(s => pathname === `/services/${s.slug}`);
-  const guide = guides.find(g => pathname === `/guides/${g.slug}`);
-  const page = searchPages[pathname];
-  if (!page) return null;
-  const base = {
-    "@context": "https://schema.org",
-    "@graph": [
-      { "@type": "Organization", "@id": "https://wonderworkflow.com/#organization", name: "Wonder & Workflow", legalName: "Wonder&Workflow LLC", url: "https://wonderworkflow.com", email: "operations@wonderworkflow.com", logo: "https://wonderworkflow.com/brand/primary-stacked-paper.png" },
-      { "@type": "BreadcrumbList", itemListElement: pathname.split("/").filter(Boolean).map((part, i, all) => ({ "@type": "ListItem", position: i + 1, name: part.replaceAll("-", " "), item: `https://wonderworkflow.com/${all.slice(0, i + 1).join("/")}` })) },
-    ],
-  } as { "@context": string; "@graph": Record<string, unknown>[] };
-  if (service) base["@graph"].push({ "@type": "Service", name: service.title, description: service.short, provider: { "@id": "https://wonderworkflow.com/#organization" }, url: `https://wonderworkflow.com${pathname}`, offers: { "@type": "Offer", description: service.pricing } });
-  if (guide) base["@graph"].push({ "@type": "Article", headline: guide.title, description: guide.answer, dateModified: "2026-09-09", author: { "@id": "https://wonderworkflow.com/#organization" }, publisher: { "@id": "https://wonderworkflow.com/#organization" }, mainEntityOfPage: `https://wonderworkflow.com${pathname}` });
-  return base;
+  const service = services.find((s) => pathname === `/services/${s.slug}`);
+  const guide = guides.find((g) => pathname === `/guides/${g.slug}`);
+  const graph: Record<string, unknown>[] = [organizationNode()];
+  if (pathname === "/") {
+    graph.push(websiteNode());
+    return { "@context": "https://schema.org", "@graph": graph };
+  }
+  if (pathname === "/services") {
+    graph.push(faqPage(honestyFaqs));
+    return { "@context": "https://schema.org", "@graph": graph };
+  }
+  if (pathname === "/assessment") {
+    graph.push(assessmentHowToNode());
+    return { "@context": "https://schema.org", "@graph": graph };
+  }
+  if (!searchPages[pathname] && !service && !guide) return null;
+  graph.push({
+    "@type": "BreadcrumbList",
+    itemListElement: pathname
+      .split("/")
+      .filter(Boolean)
+      .map((part, i, all) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: part.replaceAll("-", " "),
+        item: `https://wonderworkflow.com/${all.slice(0, i + 1).join("/")}`,
+      })),
+  });
+  if (service) {
+    graph.push({
+      "@type": "Service",
+      name: service.title,
+      description: service.short,
+      provider: { "@id": "https://wonderworkflow.com/#organization" },
+      url: `https://wonderworkflow.com${pathname}`,
+      offers: { "@type": "Offer", description: service.pricing },
+    });
+    graph.push(faqPage(service.faqs));
+  }
+  if (guide) {
+    graph.push({
+      "@type": "Article",
+      headline: guide.title,
+      description: guide.answer,
+      dateModified: "2026-09-09",
+      author: { "@id": "https://wonderworkflow.com/#organization" },
+      publisher: { "@id": "https://wonderworkflow.com/#organization" },
+      mainEntityOfPage: `https://wonderworkflow.com${pathname}`,
+    });
+    graph.push(faqPage(guide.faqs));
+  }
+  return { "@context": "https://schema.org", "@graph": graph };
+}
+
+export function applyStructuredData(pathname: string) {
+  writeJsonLd(structuredData(pathname));
 }

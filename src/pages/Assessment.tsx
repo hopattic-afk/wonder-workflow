@@ -6,6 +6,7 @@ import {
   FIT_REVIEW_NAME,
   ONE_PATH_COPY,
 } from "../site/publicOffer";
+import { assessmentJsonLd, writeJsonLd } from "../site/jsonld";
 import {
   ASSESSMENT_BOOKING_URL,
   ASSESSMENT_PHONE_HINT,
@@ -58,6 +59,7 @@ export function Assessment() {
       document.head.appendChild(canonical);
     }
     canonical.href = "https://wonderworkflow.com/assessment";
+    writeJsonLd(assessmentJsonLd());
     return () => {
       if (cooldown.current) clearTimeout(cooldown.current);
     };
@@ -243,6 +245,7 @@ export function LegacyAssessment() {
       document.head.appendChild(canonical);
     }
     canonical.href = "https://wonderworkflow.com/assessment";
+    writeJsonLd(assessmentJsonLd());
   }, []);
   const [contact, setContact] = useState(blankContact);
   const [answers, setAnswers] = useState<Record<string, number>>({});
@@ -602,7 +605,7 @@ export function LegacyAssessment() {
             </p>
             <form
               onSubmit={(event) => void submit(event)}
-              aria-label="AI Operations assessment"
+              aria-label="Operations assessment"
             >
               <fieldset
                 className="assessment-form-fields"

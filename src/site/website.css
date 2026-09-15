@@ -1103,50 +1103,50 @@
   }
 }
 
-.ww-site .ww-workflow-hero {
+.ww-site .ww-home-hero {
   display: block;
   max-width: 1440px;
   padding: 64px 5% 72px;
   min-height: 0;
 }
-.ww-workflow-hero-heading {
+.ww-home-hero-heading {
   display: grid;
   grid-template-columns: 1.45fr 1fr;
   gap: 8%;
   align-items: end;
 }
-.ww-site .ww-workflow-hero-heading h1 {
+.ww-site .ww-home-hero-heading h1 {
   font-size: clamp(40px, 4.4vw, 64px);
   line-height: 1.12;
   margin: 19px 0 0;
   letter-spacing: -0.045em;
   max-width: 16ch;
 }
-.ww-workflow-hero-heading h1:focus {
+.ww-home-hero-heading h1:focus {
   outline: none;
 }
-.ww-workflow-hero-intro > p {
+.ww-home-hero-intro > p {
   max-width: 460px;
   font-size: 18px;
   line-height: 1.65;
 }
-.ww-workflow-hero-intro > .ww-button {
+.ww-home-hero-intro > .ww-button {
   margin-top: 23px;
 }
-.ww-site .ww-workflow-hero-intro .ww-trust-note {
+.ww-site .ww-home-hero-intro .ww-trust-note {
   font-size: 15px;
   line-height: 1.6;
   max-width: 400px;
   margin: 15px 0 0;
 }
 @media (max-width: 850px) {
-  .ww-workflow-hero-heading {
+  .ww-home-hero-heading {
     grid-template-columns: 1fr;
     gap: 26px;
   }
 }
 @media (max-width: 600px) {
-  .ww-site .ww-workflow-hero {
+  .ww-site .ww-home-hero {
     padding: 39px 6% 48px;
   }
 }

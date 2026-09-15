@@ -141,5 +141,6 @@ describe("P0 public funnel and machine files", () => {
     expect(netlify).toMatch(/from = "\/pricing"\s+to = "\/services"\s+status = 301/);
     expect(netlify).toContain('from = "/.well-known/llms.txt"');
     expect(netlify).toContain("Content-Type = \"text/plain; charset=utf-8\"");
+    expect(netlify).toMatch(/from = "\/ai\.txt"[\s\S]*?status = 404/);
   });
 });

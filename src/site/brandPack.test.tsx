@@ -110,6 +110,7 @@ describe("Ian-approved brand pack", () => {
     expect(source).not.toContain("One request. A connected workflow.");
     expect(source).not.toContain("WorkflowEntrance");
     expect(source).not.toContain("LaunchFilm");
+    expect(source).not.toContain("ww-workflow-hero");
     expect(source).not.toContain("/brand/launch.mp4");
     expect(source).not.toContain("/brand/emblem.png");
     renderPath("/");

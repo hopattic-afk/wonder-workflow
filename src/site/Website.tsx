@@ -26,7 +26,7 @@ import {
   WHO_FOR_BODY,
   WHO_FOR_EXCLUDE,
 } from "./publicOffer";
-import { AssessmentCaseStudy, GuidePage, GuidesIndex, ServiceDirectory, ServicePage, guides, searchPages, services, structuredData } from "./SearchContent";
+import { AssessmentCaseStudy, GuidePage, GuidesIndex, ServiceDirectory, ServicePage, applyStructuredData, guides, honestyFaqs, searchPages, services } from "./SearchContent";
 import "./website.css";
 
 function Link(props: ComponentProps<typeof RouterLink>) {
@@ -203,13 +203,13 @@ function Flow() {
 function Home() {
   return (
     <div className="ww-home">
-      <section className="ww-hero ww-workflow-hero">
-        <div className="ww-workflow-hero-heading">
+      <section className="ww-hero ww-home-hero">
+        <div className="ww-home-hero-heading">
           <div>
             <Eyebrow>{HOME_EYEBROW}</Eyebrow>
             <h1 tabIndex={-1}>{HOME_H1}</h1>
           </div>
-          <div className="ww-workflow-hero-intro">
+          <div className="ww-home-hero-intro">
             <p>{HOME_DECK}</p>
             <p className="ww-tool-line">{TOOL_AGNOSTIC_COPY}</p>
             <Link className="ww-button" to="/assessment">
@@ -377,32 +377,7 @@ function PageHero({
     </section>
   );
 }
-const faqs = [
-  [
-    "Do you only build with AI?",
-    "No. We choose between process change, existing software, conventional automation, and AI based on the work. AI is useful where interpretation or flexible language matters; fixed rules are often better for deterministic steps.",
-  ],
-  [
-    "Can you guarantee how many hours we will save?",
-    "No. We establish a baseline and agree on measurement before making a client-specific estimate. Recovered capacity is not automatically cash savings.",
-  ],
-  [
-    "Will this replace an employee?",
-    "That is not our default goal or claim. Most useful projects remove repeated administration, improve handoffs, or support decisions while people retain responsibility.",
-  ],
-  [
-    "Can you work with our current software?",
-    "We assess it first. Available integrations, account permissions, data quality, vendor limits, and cost determine what is feasible. Sometimes the best result is better use of what you already own. You may not need another tool.",
-  ],
-  [
-    "Do you provide compliance or security certification?",
-    "No. We use practical risk, privacy, testing, and access-control disciplines. Formal legal, certification, penetration-testing, and regulated-industry work requires an appropriately qualified specialist.",
-  ],
-  [
-    "Who owns the finished workflow?",
-    "The proposal identifies ownership and licensing. Our default recommendation is client-owned service accounts, editable documentation, and a clear offboarding path. Third-party platforms retain their own terms.",
-  ],
-];
+const faqs = honestyFaqs;
 function Services() {
   return (
     <>
@@ -956,7 +931,7 @@ export default function Website() {
     const canonicalPath = canonicalPaths[pathname] || pathname;
     const metadata = pages[canonicalPath] || [
       "Page not found",
-      "Explore Wonder & Workflow AI operations.",
+      "This page is not available on Wonder & Workflow.",
     ];
     document.title = `${metadata[0]} | Wonder & Workflow`;
     let description = document.querySelector<HTMLMetaElement>(
@@ -977,15 +952,7 @@ export default function Website() {
       document.head.appendChild(canonical);
     }
     canonical.href = `https://wonderworkflow.com${canonicalPath}`;
-    document.querySelector("#ww-structured-data")?.remove();
-    const schema = structuredData(canonicalPath);
-    if (schema) {
-      const script = document.createElement("script");
-      script.id = "ww-structured-data";
-      script.type = "application/ld+json";
-      script.textContent = JSON.stringify(schema).replaceAll("<", "\\u003c");
-      document.head.appendChild(script);
-    }
+    applyStructuredData(canonicalPath);
     window.scrollTo({ top: 0, behavior: "instant" });
     if (!initial.current) main.current?.focus({ preventScroll: true });
     initial.current = false;
