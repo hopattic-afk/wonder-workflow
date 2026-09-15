@@ -711,6 +711,30 @@
 .ww-start-simple .ww-button {
   margin: 5px 0 18px;
 }
+.ww-start-simple a:not(.ww-button) {
+  color: var(--ww-violet);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ww-contact-fit {
+  max-width: 890px;
+  padding: 40px 5% 10px;
+}
+.ww-contact-fit h2 {
+  font-size: clamp(30px, 3vw, 44px);
+  margin: 16px 0 18px;
+}
+.ww-contact-fit p {
+  max-width: 640px;
+  margin-bottom: 8px;
+}
+.ww-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  align-items: center;
+  margin: 22px 0 8px;
+}
 .ww-prose {
   max-width: 890px;
   padding: 20px 5% 70px;

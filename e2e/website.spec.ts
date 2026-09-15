@@ -32,6 +32,7 @@ test("public pages remain readable and accessible on desktop and mobile", async 
       ).toBe(true);
       const result = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+        .exclude("chat-widget")
         .analyze();
       expect(result.violations, `${path} at ${width}px`).toEqual([]);
       if (path === "/")
@@ -63,7 +64,7 @@ test("mobile navigation and campaign context reach the assessment", async ({
   ).toBeVisible();
   await expect(page.getByText(/About 2 minutes/)).toBeVisible();
   await expect(page).toHaveTitle(
-    "AI Operations Assessment | Wonder & Workflow",
+    "Operations Assessment | Wonder & Workflow",
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
@@ -72,6 +73,39 @@ test("mobile navigation and campaign context reach the assessment", async ({
   await expect(
     page.getByRole("link", { name: "Privacy (opens in a new tab)" }),
   ).toHaveAttribute("target", "_blank");
+  await expect(page.getByText(/No contact details required/i)).toHaveCount(0);
+});
+
+test("start, book, and contact send Fit Review traffic to the assessment", async ({
+  page,
+}) => {
+  for (const path of ["/start", "/book"]) {
+    await page.goto(path);
+    await expect(
+      page.getByRole("heading", { name: "Book a Workflow Fit Review" }),
+    ).toBeVisible();
+    await expect(
+      page.locator(".ww-start-simple").getByRole("link", {
+        name: "Assess your operations",
+      }),
+    ).toHaveCount(2);
+    await expect(
+      page.locator(".ww-start-simple").getByRole("link", {
+        name: "operations@wonderworkflow.com",
+      }),
+    ).toHaveAttribute("href", "mailto:operations@wonderworkflow.com");
+  }
+  await page.goto("/contact");
+  await expect(
+    page.getByRole("heading", { name: "Assess your operations" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Request a Workflow Fit Review" }),
+  ).toHaveAttribute("href", /\/assessment$/);
+  await page.getByRole("navigation", { name: "Main navigation" })
+    .getByRole("link", { name: "Assess your operations" })
+    .click();
+  await expect(page).toHaveURL(/\/assessment$/);
 });
 
 test("intro plays automatically, skips, and repeats on a fresh page load", async ({

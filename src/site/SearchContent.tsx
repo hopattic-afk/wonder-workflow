@@ -192,7 +192,7 @@ export function ServicePage({ service }: { service: Service }) {
       <Faqs items={service.faqs} />
     </article>
     <Related />
-    <section className="ww-search-cta"><p className="ww-eyebrow">Next step</p><h2>Bring one recurring workflow.</h2><p>Complete the two-minute assessment, then use your result to request a complimentary 30-minute Workflow Fit Review.</p><Link className="ww-button" to="/assessment">Start the assessment <span aria-hidden="true">↗</span></Link></section>
+    <section className="ww-search-cta"><p className="ww-eyebrow">Next step</p><h2>Bring one recurring workflow.</h2><p>Complete the two-minute assessment (contact details and save), then book a complimentary 30-minute Workflow Fit Review on the calendar.</p><Link className="ww-button" to="/assessment">Start the assessment <span aria-hidden="true">↗</span></Link></section>
   </>;
 }
 
@@ -211,7 +211,7 @@ export function GuidePage({ guide }: { guide: Guide }) {
       <p className="ww-editorial-note">Reviewed September 9, 2026. This guide describes a decision method, not a guaranteed result. Feasibility depends on the actual workflow, tools, data, permissions, and consequences of error.</p>
     </article>
     <Related />
-    <section className="ww-search-cta"><p className="ww-eyebrow">Apply the answer</p><h2>Find the first workflow worth improving.</h2><p>The assessment takes about two minutes and stores answers only in your browser unless you choose to contact us.</p><Link className="ww-button" to="/assessment">Assess your operations <span aria-hidden="true">↗</span></Link></section>
+    <section className="ww-search-cta"><p className="ww-eyebrow">Apply the answer</p><h2>Find the first workflow worth improving.</h2><p>The assessment takes about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review.</p><Link className="ww-button" to="/assessment">Assess your operations <span aria-hidden="true">↗</span></Link></section>
   </>;
 }
 

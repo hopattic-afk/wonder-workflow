@@ -7,9 +7,45 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 [[redirects]]
+  from = "/pricing"
+  to = "/services"
+  status = 301
+[[redirects]]
+  from = "/.well-known/llms.txt"
+  to = "/llms.txt"
+  status = 200
+[[redirects]]
+  from = "/.well-known/*"
+  to = "/404.html"
+  status = 404
+[[redirects]]
+  from = "/ads.txt"
+  to = "/404.html"
+  status = 404
+[[redirects]]
+  from = "/ai.txt"
+  to = "/404.html"
+  status = 404
+[[redirects]]
+  from = "/humans.txt"
+  to = "/404.html"
+  status = 404
+[[redirects]]
+  from = "/security.txt"
+  to = "/404.html"
+  status = 404
+[[redirects]]
+  from = "/sellers.json"
+  to = "/404.html"
+  status = 404
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
 [[headers]]
   for = "/*"
   [headers.values]
