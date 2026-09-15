@@ -1,5 +1,5 @@
 .assessment-page {
-  --assessment-bronze: #7ba1af;
+  --assessment-bronze: #3e6673;
   --assessment-ink: #20232b;
   --assessment-muted: #535760;
   min-height: 100vh;
@@ -119,8 +119,8 @@
   transition: none;
 }
 .assessment-page .assessment-button:hover {
-  background: #44336f;
-  border-color: #44336f;
+  background: #20232b;
+  border-color: #20232b;
 }
 .assessment-page .assessment-button:disabled {
   cursor: default;
@@ -195,7 +195,7 @@
 }
 .assessment-page .assessment-option[aria-pressed="true"] {
   border-color: var(--assessment-bronze);
-  background: #efebf6;
+  background: #eef2f3;
 }
 .assessment-page .assessment-option input {
   width: 16px;
@@ -322,7 +322,7 @@
   margin-top: 32px;
   padding: 30px;
   border: 1px solid var(--assessment-bronze);
-  background: #f0edf7;
+  background: #eef2f3;
   border-radius: 6px;
 }
 .assessment-page .assessment-score {
@@ -424,8 +424,8 @@
 .assessment-page .assessment-button:hover {
   color: #fff;
 }
-.assessment-page .assessment-booking {margin-top:32px;padding-top:28px;border-top:1px solid #ddd6e5;text-align:left;}
+.assessment-page .assessment-booking {margin-top:32px;padding-top:28px;border-top:1px solid #d5d6dc;text-align:left;}
 .assessment-page .assessment-booking h2 {font-size:clamp(23px,3vw,32px);line-height:1.3;margin:8px 0;}
 .assessment-page .assessment-calendar {display:block;width:100%;height:850px;border:0;margin-top:24px;background:#fff;border-radius:8px;}
-.assessment-page .assessment-calendar-reload {font:inherit;background:transparent;border:0;text-decoration:underline;color:#7ba1af;min-height:44px;cursor:pointer;}
+.assessment-page .assessment-calendar-reload {font:inherit;background:transparent;border:0;text-decoration:underline;color:#3e6673;min-height:44px;cursor:pointer;}
 @media(max-width:600px){.assessment-page .assessment-calendar{height:1000px;}.assessment-page .assessment-result{padding:24px 12px;}}

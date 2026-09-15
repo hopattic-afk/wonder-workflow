@@ -48,6 +48,7 @@ describe("Ian-approved brand pack", () => {
     expect(css).toMatch(/--ww-paper:\s*#fafaf8/i);
     expect(css).toMatch(/--ww-ink:\s*#20232b/i);
     expect(css).toMatch(/--ww-accent:\s*#7ba1af/i);
+    expect(css).toMatch(/--ww-accent-text:\s*#3e6673/i);
     expect(css).toMatch(/--ww-muted:\s*#535760/i);
     expect(css).toMatch(/--ww-line:\s*#d5d6dc/i);
     expect(css).not.toMatch(/--ww-violet:\s*#56438a/i);
