@@ -52,6 +52,9 @@ describe("sitewide Google Analytics 4 (gtag)", () => {
     expect(bootstrap).toContain("window.dataLayer = window.dataLayer || []");
     expect(bootstrap).toContain("function gtag()");
     expect(bootstrap).toContain("gtag('js', new Date())");
+    expect(bootstrap).toContain(
+      "/^\\/(workspace|audit|meetings|settings)(\\/|$)/.test(location.pathname)",
+    );
     expect(html).toMatch(
       new RegExp(
         `<head>[\\s\\S]*${MEASUREMENT_ID}[\\s\\S]*</head>\\s*<body>`,
