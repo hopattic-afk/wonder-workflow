@@ -1,5 +1,6 @@
 import { Link as RouterLink } from "react-router-dom";
 import { publicHref } from "./campaign";
+import { FIT_REVIEW_NAME, LADDER_NOTE, ONE_PATH_COPY } from "./publicOffer";
 
 type Service = {
   slug: string;
@@ -34,7 +35,7 @@ export const services: Service[] = [
     ideal: ["You can name a recurring workflow but not its root cause.", "Several tools or handoffs are involved.", "You need a defensible build, improve, or stop decision."],
     process: ["Walk through a recent real example with the people doing the work.", "Map triggers, inputs, decisions, delays, exceptions, systems, and ownership.", "Compare process changes, native features, conventional automation, and AI assistance.", "Define the recommended future state, controls, and acceptance tests."],
     deliverables: ["Current-state workflow map", "Evidence-backed baseline where data exists", "Tool, permission, and dependency map", "Options comparison and recommendation", "Future-state map and implementation scope", "Acceptance tests, risks, and open questions"],
-    pricing: "The initial Workflow Fit Review is complimentary. A full audit is quoted after that review because the number of systems, participants, exceptions, and evidence sources determines the work. You receive a written scope and price before paid work begins.",
+    pricing: `The initial ${FIT_REVIEW_NAME} is complimentary. A full audit is quoted after that review because the number of systems, participants, exceptions, and evidence sources determines the work. You receive a written scope and price before paid work begins. Software and vendor costs stay separate.`,
     faqs: [["Is this a security or compliance audit?", "No. We consider practical privacy, access, and risk boundaries, but formal legal, certification, penetration-testing, and regulated-industry work needs an appropriately qualified specialist."], ["Will the audit recommend AI?", "Only when it is the simplest suitable option. A clearer procedure, an existing software feature, or conventional automation may be the better answer."], ["Do you change our systems during the audit?", "No production change is implied. Implementation receives a separate scope, approval, and rollback plan."]],
   },
   {
@@ -74,12 +75,12 @@ export const services: Service[] = [
     slug: "ai-operations-consulting",
     title: "AI Operations Consulting",
     short: "Turn AI interest into a practical operating decision, with ownership and evidence attached.",
-    problem: "Leaders are asked to adopt AI while the real constraints—data, workflow, risk, integration, support, and staff capacity—remain undefined.",
+    problem: "Leaders are asked to adopt AI while the real constraints, data, workflow, risk, integration, support, and staff capacity, remain undefined.",
     ideal: ["You have several possible AI projects and need a sequence.", "A pilot exists but nobody owns its operating risks.", "You need a practical plan rather than a broad transformation presentation."],
     process: ["Connect the business problem to a specific workflow.", "Assess variability, consequence of error, information sensitivity, and maintenance capacity.", "Choose a proportionate pilot and define where people retain authority.", "Set acceptance criteria, monitoring, and a stop condition before expansion."],
     deliverables: ["Prioritized workflow opportunity list", "Pilot recommendation and no-go boundaries", "Decision and ownership register", "Vendor or approach comparison", "Testing and measurement plan", "Implementation roadmap"],
     pricing: "Consulting is scoped around the decision to be made, the workflows reviewed, the participants required, and the depth of evidence. A written proposal states deliverables, exclusions, schedule, and price.",
-    faqs: [["Do you sell a specific AI platform?", "No. The recommendation should follow the workflow, existing systems, risk, and maintainability—not a predetermined tool."], ["Do you provide AI governance certification?", "No. We apply practical controls within workflow delivery; formal governance, legal opinions, or certification require qualified specialists."], ["Can you help with a pilot already underway?", "Yes, if its boundary, access, testability, and decision owner can be established."]],
+    faqs: [["Do you sell a specific AI platform?", "No. The recommendation should follow the workflow, existing systems, risk, and maintainability, not a predetermined tool."], ["Do you provide AI governance certification?", "No. We apply practical controls within workflow delivery; formal governance, legal opinions, or certification require qualified specialists."], ["Can you help with a pilot already underway?", "Yes, if its boundary, access, testability, and decision owner can be established."]],
   },
   {
     slug: "small-business-workflow-automation",
@@ -89,8 +90,8 @@ export const services: Service[] = [
     ideal: ["An owner or key employee is the bottleneck.", "The same administrative sequence happens every week.", "You want a bounded first project with a clear handoff."],
     process: ["Choose one workflow with visible friction and a reachable owner.", "Measure enough to understand the starting point.", "Use the simplest suitable change.", "Prove it on representative examples before expanding.", "Leave editable documentation and clear responsibility."],
     deliverables: ["One-workflow current and future maps", "Practical improvement recommendation", "Scoped build when justified", "Exception and fallback design", "Team training and documentation", "Measurement sheet for the first operating period"],
-    pricing: "Start with a complimentary fit review. Any paid diagnostic or build is separately quoted, with software and usage costs shown apart from our work. We do not price from company size or an assessment score alone.",
-    faqs: [["Is my business too small for automation?", "Possibly—but team size is not the deciding factor. Frequency, clarity, consequence of error, and maintenance capacity matter more."], ["Should we automate several processes together?", "Usually begin with one bounded workflow. What you learn about data, ownership, and adoption will make later decisions better."], ["Will our team be able to run it?", "That is an acceptance requirement: client-owned accounts where practical, documentation, training, and a manual path are part of the design."]],
+    pricing: `Start with a complimentary ${FIT_REVIEW_NAME}. Any paid diagnostic or build is separately quoted, with software and usage costs shown apart from our work. We do not price from company size or an assessment score alone.`,
+    faqs: [["Is my business too small for automation?", "Possibly, but team size is not the deciding factor. Frequency, clarity, consequence of error, and maintenance capacity matter more."], ["Should we automate several processes together?", "Usually begin with one bounded workflow. What you learn about data, ownership, and adoption will make later decisions better."], ["Will our team be able to run it?", "That is an acceptance requirement: client-owned accounts where practical, documentation, training, and a manual path are part of the design."]],
   },
 ];
 
@@ -103,7 +104,7 @@ export const guides: Guide[] = [
       { title: "Use five filters", body: "A good first candidate is not merely annoying. It is observable and bounded enough to improve safely.", points: ["Frequency: it happens often enough to learn from.", "Clarity: the trigger, inputs, next action, and finish can be described.", "Consequence: mistakes are detectable and recoverable.", "Access: the necessary systems and information can be used appropriately.", "Ownership: one person can approve, test, and maintain the change."] },
       { title: "Strong first candidates", body: "Common examples include routing complete intake forms, creating internal tasks from approved requests, preparing a standard document from validated fields, or alerting an owner when a case stalls." },
       { title: "Poor first candidates", body: "Do not lead with a process that changes weekly, depends on undocumented expert judgment, makes financial or safety commitments, or has no reliable source of truth." },
-      { title: "A practical next step", body: "List three recurring processes. For each, record monthly volume, touch time, waiting time, rework, systems, owner, and the worst plausible error. The best first project is usually the one with useful upside and manageable failure—not the largest theoretical saving." },
+      { title: "A practical next step", body: "List three recurring processes. For each, record monthly volume, touch time, waiting time, rework, systems, owner, and the worst plausible error. The best first project is usually the one with useful upside and manageable failure, not the largest theoretical saving." },
     ],
     faqs: [["Should I automate the most time-consuming process first?", "Not automatically. A smaller, clearer process can produce safer learning and a faster proof point."], ["Does the first process need AI?", "No. Rules-based automation or better use of an existing feature is often easier to test and maintain."], ["How do I compare candidates?", "Use the same evidence for each: frequency, effort, delay, error, risk, systems, owner, and maintenance burden."]],
   },
@@ -112,7 +113,7 @@ export const guides: Guide[] = [
     title: "Why does my CRM require so much manual work?",
     answer: "A CRM usually feels manual because it does not match the real customer process: information enters through several places, fields do not support decisions, stages have unclear meaning, ownership is missing, or integrations move data without handling duplicates and exceptions.",
     sections: [
-      { title: "The CRM may be recording symptoms", body: "If staff update the same fact in email, a spreadsheet, and the CRM, the main problem is an undefined source of truth—not slow data entry." },
+      { title: "The CRM may be recording symptoms", body: "If staff update the same fact in email, a spreadsheet, and the CRM, the main problem is an undefined source of truth, not slow data entry." },
       { title: "Look for four design gaps", body: "Trace one recent record and note every handoff.", points: ["Entry: where information first arrives.", "Decision: what staff must know before moving forward.", "Ownership: who is responsible at each stage.", "Exit: the event that completes or stops follow-up."] },
       { title: "Automate after simplifying", body: "Remove unused fields and ambiguous stages first. Then automate well-defined actions such as assignment, task creation, internal alerts, and status updates. Customer messages require consent, accurate context, and a human takeover path." },
       { title: "Measure process quality", body: "Useful measures include record completeness, duplicate rate, time to ownership, stalled cases, manual touches, opt-outs, exceptions, and the percentage of records with a clear outcome." },
@@ -146,7 +147,7 @@ export const guides: Guide[] = [
   {
     slug: "automate-customer-intake-without-losing-personal-touch",
     title: "How do I automate customer intake without losing the personal touch?",
-    answer: "Automate the repetitive coordination around customer intake—collection, completeness checks, routing, confirmations, and reminders—while keeping people responsible for empathy, clarification, sensitive situations, and commitments. Tell customers what happens next and make human help easy to reach.",
+    answer: "Automate the repetitive coordination around customer intake, collection, completeness checks, routing, confirmations, and reminders, while keeping people responsible for empathy, clarification, sensitive situations, and commitments. Tell customers what happens next and make human help easy to reach.",
     sections: [
       { title: "Ask only what the next step needs", body: "Long forms shift your internal complexity onto the customer. Start with the minimum information required to route or prepare the next conversation, then ask more only when relevant." },
       { title: "Write like a helpful person", body: "Use plain labels, explain why sensitive information is needed, confirm what was received, give a realistic response path, and never pretend an automated message was personally written." },
@@ -192,7 +193,7 @@ export function ServicePage({ service }: { service: Service }) {
       <Faqs items={service.faqs} />
     </article>
     <Related />
-    <section className="ww-search-cta"><p className="ww-eyebrow">Next step</p><h2>Bring one recurring workflow.</h2><p>Complete the two-minute assessment (contact details and save), then book a complimentary 30-minute Workflow Fit Review on the calendar.</p><Link className="ww-button" to="/assessment">Start the assessment <span aria-hidden="true">↗</span></Link></section>
+    <section className="ww-search-cta"><p className="ww-eyebrow">Next step</p><h2>Bring one real path of work.</h2><p>Complete the two-minute assessment (contact details and save), then book a complimentary {FIT_REVIEW_NAME} on the calendar. {ONE_PATH_COPY}</p><p className="ww-cta-ladder">{LADDER_NOTE}</p><Link className="ww-button" to="/assessment">Start the assessment <span aria-hidden="true">↗</span></Link></section>
   </>;
 }
 
@@ -211,20 +212,20 @@ export function GuidePage({ guide }: { guide: Guide }) {
       <p className="ww-editorial-note">Reviewed September 9, 2026. This guide describes a decision method, not a guaranteed result. Feasibility depends on the actual workflow, tools, data, permissions, and consequences of error.</p>
     </article>
     <Related />
-    <section className="ww-search-cta"><p className="ww-eyebrow">Apply the answer</p><h2>Find the first workflow worth improving.</h2><p>The assessment takes about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review.</p><Link className="ww-button" to="/assessment">Assess your operations <span aria-hidden="true">↗</span></Link></section>
+    <section className="ww-search-cta"><p className="ww-eyebrow">Apply the answer</p><h2>Find the first improvement worth making.</h2><p>The assessment takes about two minutes. Save your contact details, then book a complimentary {FIT_REVIEW_NAME}. {ONE_PATH_COPY}</p><p className="ww-cta-ladder">{LADDER_NOTE}</p><Link className="ww-button" to="/assessment">Assess your operations <span aria-hidden="true">↗</span></Link></section>
   </>;
 }
 
 export function AssessmentCaseStudy() {
   return <article className="ww-search-page ww-case-study">
     <Breadcrumbs items={[["Case studies", "/case-studies/operations-assessment"], ["Operations assessment", "/case-studies/operations-assessment"]]} />
-    <header><p className="ww-eyebrow">First-party implementation study</p><h1>Building our operations assessment as a bounded workflow</h1><p className="ww-search-lede">This is an internal implementation note, not a client case study. It shows the inputs, design decisions, controls, and tests behind Wonder & Workflow’s own public assessment—without claiming invented savings.</p></header>
+    <header><p className="ww-eyebrow">First-party implementation study</p><h1>Building our operations assessment as a bounded workflow</h1><p className="ww-search-lede">This is an internal implementation note, not a client case study. It shows the inputs, design decisions, controls, and tests behind Wonder & Workflow’s own public assessment, without claiming invented savings.</p></header>
     <section className="ww-case-facts"><div><span>Boundary</span><strong>Seven questions; 0–21 indicative score</strong></div><div><span>Data posture</span><strong>Answers calculated in the browser</strong></div><div><span>Human role</span><strong>Consultant interprets context</strong></div><div><span>Claim limit</span><strong>No automatic diagnosis or savings claim</strong></div></section>
     <section className="ww-answer-block"><p className="ww-eyebrow">Starting condition</p><h2>The business needed a useful first step that did not pretend a short questionnaire could diagnose an operation.</h2><p>The assessment had to help an owner notice workflow friction, preserve privacy, work on mobile and keyboard, and lead naturally to a human conversation. It could not collect credentials, infer ROI, or activate a customer workflow.</p></section>
     <section className="ww-process-map"><p className="ww-eyebrow">Before and after process map</p><h2>From a vague request to a reviewable next step</h2><div className="ww-map-row"><span>Before</span><ol><li>Owner feels operational friction</li><li>Problem stays broad</li><li>Solution discussion begins too early</li></ol></div><div className="ww-map-row ww-map-after"><span>After</span><ol><li>Owner answers seven bounded questions</li><li>Browser calculates an indicative band</li><li>Result names discussion areas and limitations</li><li>Owner chooses whether to email for a fit review</li></ol></div></section>
-    <section className="ww-guide-section"><span>01</span><div><h2>Controls built into the workflow</h2><ul><li>The assessment does not request contact details or confidential records.</li><li>Answers and result remain in browser memory unless the visitor independently chooses to contact us.</li><li>Score language is indicative, not diagnostic.</li><li>The consultation—not the score—determines whether a deeper diagnostic makes sense.</li><li>Customer communications and CRM automation remain outside this workflow.</li></ul></div></section>
+    <section className="ww-guide-section"><span>01</span><div><h2>Controls built into the workflow</h2><ul><li>The assessment does not request contact details or confidential records.</li><li>Answers and result remain in browser memory unless the visitor independently chooses to contact us.</li><li>Score language is indicative, not diagnostic.</li><li>The consultation, not the score, determines whether a deeper diagnostic makes sense.</li><li>Customer communications and CRM automation remain outside this workflow.</li></ul></div></section>
     <section className="ww-guide-section"><span>02</span><div><h2>Acceptance criteria</h2><ul><li>All seven questions are usable by keyboard and at narrow mobile widths.</li><li>Score boundaries follow the documented 0–21 calculation rules.</li><li>Refresh and back/forward behavior do not submit information.</li><li>Privacy, contact, and assessment routes are crawlable public pages; internal workspace routes are excluded.</li><li>The result states its limits and provides a clear next step.</li></ul></div></section>
-    <section className="ww-pricing"><p className="ww-eyebrow">Observed result</p><h2>A functioning assessment with explicit boundaries—not a fabricated ROI story.</h2><p>The implemented flow gives visitors a two-minute self-assessment and keeps their answers local to the browser. Automated build, calculation, route, accessibility, and browser tests are maintained in the project. Test results describe software behavior only; they do not prove client savings or commercial outcomes.</p></section>
+    <section className="ww-pricing"><p className="ww-eyebrow">Observed result</p><h2>A functioning assessment with explicit boundaries, not a fabricated ROI story.</h2><p>The implemented flow gives visitors a two-minute self-assessment and keeps their answers local to the browser. Automated build, calculation, route, accessibility, and browser tests are maintained in the project. Test results describe software behavior only; they do not prove client savings or commercial outcomes.</p></section>
     <section className="ww-answer-block"><p className="ww-eyebrow">What we would measure next</p><h2>Evidence should grow with real use.</h2><p>Useful next measures include completion rate, qualified fit-review requests, the workflows visitors choose to discuss, accessibility issues, and the percentage of reviews that lead to a grounded proceed, revise, or stop decision. Any future case study should state its baseline, method, period, limitations, and permission.</p></section>
     <section className="ww-search-cta"><p className="ww-eyebrow">See the workflow</p><h2>Use the same assessment.</h2><p>Try the public assessment, then decide whether one workflow deserves a closer look.</p><Link className="ww-button" to="/assessment">Start the assessment <span aria-hidden="true">↗</span></Link></section>
   </article>;
@@ -238,7 +239,7 @@ export function structuredData(pathname: string) {
   const base = {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": "Organization", "@id": "https://wonderworkflow.com/#organization", name: "Wonder & Workflow", legalName: "Wonder&Workflow LLC", url: "https://wonderworkflow.com", email: "operations@wonderworkflow.com", logo: "https://wonderworkflow.com/brand/logo.png" },
+      { "@type": "Organization", "@id": "https://wonderworkflow.com/#organization", name: "Wonder & Workflow", legalName: "Wonder&Workflow LLC", url: "https://wonderworkflow.com", email: "operations@wonderworkflow.com", logo: "https://wonderworkflow.com/brand/primary-stacked-paper.png" },
       { "@type": "BreadcrumbList", itemListElement: pathname.split("/").filter(Boolean).map((part, i, all) => ({ "@type": "ListItem", position: i + 1, name: part.replaceAll("-", " "), item: `https://wonderworkflow.com/${all.slice(0, i + 1).join("/")}` })) },
     ],
   } as { "@context": string; "@graph": Record<string, unknown>[] };

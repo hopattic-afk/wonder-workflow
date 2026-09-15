@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 753.00 287.00" role="img"
+     aria-labelledby="title desc">
+  <title id="title">Wonder &amp; Workflow - primary stacked</title>
+  <desc id="desc">Stacked wordmark Wonder &amp; over Workflow with three ascending steel-cyan step squares locked to the left of the text block.</desc>
+  <rect width="753.00" height="287.00" fill="#20232B"/>
+  <g font-family="IBM Plex Sans, 'IBM Plex Sans', Inter, system-ui, sans-serif"
+     font-weight="560" font-size="100" fill="#FAFAF8">
+    <text x="257.0" y="126.00">Wonder &amp;</text>
+    <text x="257.0" y="234.00">Workflow</text>
+  </g>
+  <g fill="#7BA1AF">
+    <rect x="48.00" y="178.23" width="60.77" height="60.77"/>
+    <rect x="113.11" y="113.11" width="60.77" height="60.77"/>
+    <rect x="178.23" y="48.00" width="60.77" height="60.77"/>
+  </g>
+</svg>

@@ -82,7 +82,7 @@ test("start, book, and contact send Fit Review traffic to the assessment", async
   for (const path of ["/start", "/book"]) {
     await page.goto(path);
     await expect(
-      page.getByRole("heading", { name: "Book a Workflow Fit Review" }),
+      page.getByRole("heading", { name: "Book an Operations Fit Review" }),
     ).toBeVisible();
     await expect(
       page.locator(".ww-start-simple").getByRole("link", {
@@ -100,7 +100,7 @@ test("start, book, and contact send Fit Review traffic to the assessment", async
     page.getByRole("heading", { name: "Assess your operations" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Request a Workflow Fit Review" }),
+    page.getByRole("link", { name: "Request an Operations Fit Review" }),
   ).toHaveAttribute("href", /\/assessment$/);
   await page.getByRole("navigation", { name: "Main navigation" })
     .getByRole("link", { name: "Assess your operations" })
@@ -108,59 +108,34 @@ test("start, book, and contact send Fit Review traffic to the assessment", async
   await expect(page).toHaveURL(/\/assessment$/);
 });
 
-test("intro plays automatically, skips, and repeats on a fresh page load", async ({
+test("homepage is type-led with no intro film or workflow theater", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
-  const video = page.locator(".ww-launch-intro video");
-  await expect(video).toBeVisible();
-  await expect
-    .poll(() =>
-      video.evaluate((v: HTMLVideoElement) => !v.paused && v.currentTime > 0),
-    )
-    .toBe(true);
-  await page.getByRole("button", { name: "Skip intro" }).click();
   await expect(page.locator(".ww-launch-intro")).toHaveCount(0);
+  await expect(page.locator("video")).toHaveCount(0);
+  await expect(page.locator(".ww-operating-scene")).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", {
+      name: "Your business has outgrown the way the work gets done.",
+    }),
+  ).toBeVisible();
   await expect(
     page.locator(".ww-hero").getByRole("link", { name: "Assess your operations" }),
   ).toBeVisible();
-  await page.reload();
-  await expect(page.locator(".ww-launch-intro video")).toBeVisible();
-  await page.getByRole("button", { name: "Skip intro" }).click();
-  await expect(page.locator(".ww-launch-intro")).toHaveCount(0);
-  await expect(
-    page.getByRole("button", { name: "Play logo film" }),
-  ).toHaveCount(0);
+  await page
+    .locator(".ww-hero")
+    .getByRole("link", { name: "Assess your operations" })
+    .click();
+  await expect(page).toHaveURL(/assessment$/);
 });
 
-test("intro finishes naturally and reduced motion or failed video never blocks content", async ({
+test("reduced motion still shows the homepage immediately", async ({
   page,
 }) => {
-  await page.emulateMedia({ reducedMotion: "no-preference" });
-  await page.goto("/");
-  await expect(page.locator(".ww-launch-intro video")).toBeVisible();
-  await expect(page.locator(".ww-launch-intro")).toHaveCount(0, { timeout: 12000 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/services");
   await page.goto("/");
   await expect(page.locator("video")).toHaveCount(0);
-  await expect(page.locator(".ww-hero h1")).toBeVisible();
-});
-
-test("failed intro reveals the website", async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: "no-preference" });
-  await page.route("**/brand/launch.mp4", (route) => route.abort());
-  await page.goto("/");
-  await expect(page.locator(".ww-launch-intro")).toHaveCount(0, { timeout: 12000 });
-  await expect(page.locator(".ww-hero h1")).toBeVisible();
-});
-
-test("Escape dismisses the intro", async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: "no-preference" });
-  await page.goto("/");
-  await expect(page.locator(".ww-launch-intro video")).toBeVisible();
-  await page.keyboard.press("Escape");
-  await expect(page.locator(".ww-launch-intro")).toHaveCount(0);
   await expect(page.locator(".ww-hero h1")).toBeVisible();
 });

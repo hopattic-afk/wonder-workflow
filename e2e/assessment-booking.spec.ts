@@ -61,7 +61,13 @@ test("question screens support keyboard choices, backtracking, and mobile layout
 }) => {
   const writes: string[] = [];
   page.on("request", (request) => {
-    if (request.method() === "POST") writes.push(request.url());
+    if (request.method() !== "POST") return;
+    const url = request.url();
+    if (
+      /google-analytics|googletagmanager|leadconnectorhq|msgsndr/.test(url)
+    )
+      return;
+    writes.push(url);
   });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/assessment/?utm_source=facebook");
