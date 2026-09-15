@@ -14,6 +14,7 @@ import {
   type AssessmentContact,
   type AssessmentSubmission,
 } from "../domain/assessment";
+import { applyPageHead, assessmentStructuredData } from "../site/head";
 import "./assessment.css";
 
 const blankContact = () =>
@@ -32,26 +33,12 @@ export function Assessment() {
   const score = complete ? assessmentScore(answers) : null;
 
   useEffect(() => {
-    document.title = "Operations Assessment | Wonder & Workflow";
-    let description = document.querySelector<HTMLMetaElement>(
-      'meta[name="description"]',
+    applyPageHead(
+      "/assessment",
+      "Operations Assessment",
+      "Assess your operations in about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review.",
+      assessmentStructuredData(),
     );
-    if (!description) {
-      description = document.createElement("meta");
-      description.name = "description";
-      document.head.appendChild(description);
-    }
-    description.content =
-      "Assess your operations in about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review.";
-    let canonical = document.querySelector<HTMLLinkElement>(
-      'link[rel="canonical"]',
-    );
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.rel = "canonical";
-      document.head.appendChild(canonical);
-    }
-    canonical.href = "https://wonderworkflow.com/assessment";
     return () => {
       if (cooldown.current) clearTimeout(cooldown.current);
     };
@@ -221,22 +208,12 @@ export function Assessment() {
 // Public assessment flow: validates and saves server-side before showing the booking calendar.
 export function LegacyAssessment() {
   useEffect(() => {
-    document.title = "Operations Assessment | Wonder & Workflow";
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute(
-        "content",
-        "Assess your operations in about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review.",
-      );
-    let canonical = document.querySelector<HTMLLinkElement>(
-      'link[rel="canonical"]',
+    applyPageHead(
+      "/assessment",
+      "Operations Assessment",
+      "Assess your operations in about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review.",
+      assessmentStructuredData(),
     );
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.rel = "canonical";
-      document.head.appendChild(canonical);
-    }
-    canonical.href = "https://wonderworkflow.com/assessment";
   }, []);
   const [contact, setContact] = useState(blankContact);
   const [answers, setAnswers] = useState<Record<string, number>>({});

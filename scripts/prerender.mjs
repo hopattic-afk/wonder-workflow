@@ -20,6 +20,9 @@ try {
       .replace(/<meta property="og:title" content="[^"]*"\s*\/?\s*>/, `<meta property="og:title" content="${escape(page.metadata[0])} | Wonder &amp; Workflow">`)
       .replace(/<meta property="og:description" content="[^"]*"\s*\/?\s*>/, `<meta property="og:description" content="${escape(page.metadata[1])}">`)
       .replace(/<meta property="og:url" content="[^"]*"\s*\/?\s*>/, `<meta property="og:url" content="${canonical}">`)
+      .replace(/<meta property="og:image" content="[^"]*"\s*\/?\s*>/, `<meta property="og:image" content="https://wonderworkflow.com/brand/og-ops.png">`)
+      .replace(/<meta property="og:type" content="[^"]*"\s*\/?\s*>/, `<meta property="og:type" content="website">`)
+      .replace(/<meta name="twitter:card" content="[^"]*"\s*\/?\s*>/, `<meta name="twitter:card" content="summary_large_image">`)
       .replace("</head>", `<link rel="canonical" href="${canonical}">${routeCss.map(name => `<link rel="stylesheet" href="/assets/${name}">`).join("")}${schema}</head>`);
     const directory = path.join("dist", page.path);
     await mkdir(directory, { recursive: true });

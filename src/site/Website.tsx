@@ -8,7 +8,8 @@ import {
   useLocation,
 } from "react-router-dom";
 import { captureCampaign, publicHref } from "./campaign";
-import { AssessmentCaseStudy, GuidePage, GuidesIndex, ServiceDirectory, ServicePage, guides, searchPages, services, structuredData } from "./SearchContent";
+import { applyPageHead } from "./head";
+import { AssessmentCaseStudy, GuidePage, GuidesIndex, ServiceDirectory, ServicePage, guides, searchPages, services, servicesHubFaqs, structuredData } from "./SearchContent";
 import "./website.css";
 
 function Link(props: ComponentProps<typeof RouterLink>) {
@@ -42,7 +43,7 @@ export const pages: Record<string, [string, string]> = {
   ],
   "/about": [
     "About Wonder & Workflow",
-    "Wonder & Workflow helps owner-led service businesses improve recurring operations through careful discovery, proportionate technology, testing, and clear ownership.",
+    "Wonder & Workflow helps owner-operators in service, retail, and hospitality improve recurring operations through careful discovery, proportionate technology, testing, and clear ownership.",
   ],
   "/start": [
     "Start With an Operations Assessment",
@@ -75,6 +76,59 @@ function Cta({ secondary = false }: { secondary?: boolean }) {
     <Link className={secondary ? "ww-text-link" : "ww-button"} to="/assessment">
       Assess your operations <Arrow />
     </Link>
+  );
+}
+function FunnelCtas({ extra }: { extra?: React.ReactNode } = {}) {
+  return (
+    <div className="ww-funnel-ctas">
+      <Cta />
+      {extra}
+      <p className="ww-small">
+        Prefer email? Request a Fit Review through the assessment, or email{" "}
+        <a href="mailto:operations@wonderworkflow.com">
+          operations@wonderworkflow.com
+        </a>{" "}
+        for questions only.
+      </p>
+    </div>
+  );
+}
+const icpVignettes = [
+  [
+    "Shop floor",
+    "A shop-floor team still re-enters the same job details from a counter intake form into the schedule and a follow-up list.",
+  ],
+  [
+    "Front-of-house",
+    "Front-of-house staff chase incomplete bookings, then reconstruct the next guest step from notes and memory.",
+  ],
+  [
+    "Service dispatch",
+    "A dispatch board depends on someone remembering who was booked, who needs a follow-up, and which request is still incomplete.",
+  ],
+];
+function WhoWeHelp() {
+  return (
+    <section className="ww-section ww-icp">
+      <div className="ww-section-heading">
+        <Eyebrow>Who it is for</Eyebrow>
+        <h2>Owner-operators in service, retail, and hospitality</h2>
+      </div>
+      <p className="ww-icp-lede">
+        We work with owner-operators in service, retail, and hospitality whose
+        week is eaten by repeated admin, missing information, and unclear
+        handoffs around intake, scheduling, and follow-up.
+      </p>
+      <div className="ww-problem-list">
+        {icpVignettes.map(([title, copy], index) => (
+          <article key={title}>
+            <span className="ww-index">0{index + 1}</span>
+            <h3>{title}</h3>
+            <p>{copy}</p>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -363,16 +417,18 @@ function Home() {
               Turn everyday admin into a clear next step, with connected tools,
               useful AI, and people in control.
             </p>
+            <p>
+              Improve one recurring workflow so admin stops eating the week.
+              Start with a 2-minute assessment.
+            </p>
             <Link className="ww-button" to="/assessment">
               Assess your operations <Arrow />
             </Link>
-            <p className="ww-trust-note">
-              A 2-minute assessment to spot where work gets slowed down.
-            </p>
           </div>
         </div>
         <WorkflowEntrance ready={introComplete} />
       </section>
+      <WhoWeHelp />
       <section className="ww-section">
         <div className="ww-section-heading">
           <Eyebrow>What we help with</Eyebrow>
@@ -472,32 +528,7 @@ function PageHero({
     </section>
   );
 }
-const faqs = [
-  [
-    "Do you only build with AI?",
-    "No. We choose between process change, existing software, conventional automation, and AI based on the work. AI is useful where interpretation or flexible language matters; fixed rules are often better for deterministic steps.",
-  ],
-  [
-    "Can you guarantee how many hours we will save?",
-    "No. We establish a baseline and agree on measurement before making a client-specific estimate. Recovered capacity is not automatically cash savings.",
-  ],
-  [
-    "Will this replace an employee?",
-    "That is not our default goal or claim. Most useful projects remove repeated administration, improve handoffs, or support decisions while people retain responsibility.",
-  ],
-  [
-    "Can you work with our current software?",
-    "We assess it first. Available integrations, account permissions, data quality, vendor limits, and cost determine what is feasible. Sometimes the best result is better use of what you already own.",
-  ],
-  [
-    "Do you provide compliance or security certification?",
-    "No. We use practical risk, privacy, testing, and access-control disciplines. Formal legal, certification, penetration-testing, and regulated-industry work requires an appropriately qualified specialist.",
-  ],
-  [
-    "Who owns the finished workflow?",
-    "The proposal identifies ownership and licensing. Our default recommendation is client-owned service accounts, editable documentation, and a clear offboarding path. Third-party platforms retain their own terms.",
-  ],
-];
+const faqs = servicesHubFaqs;
 function Services() {
   return (
     <>
@@ -516,7 +547,7 @@ function Services() {
             <h2>Workflow Fit Review</h2>
           </div>
           <div>
-            <h3>Decide whether this is worth solving—and how.</h3>
+            <h3>Decide whether this is worth solving, and how.</h3>
             <p>
               <strong>For you if:</strong> A recurring process is frustrating,
               but you do not yet know whether the answer is AI, automation,
@@ -536,7 +567,7 @@ function Services() {
               <strong>What this is not:</strong> A full technical specification,
               security review, compliance opinion, or production change.
             </p>
-            <Cta />
+            <FunnelCtas />
           </div>
         </article>
         <article>
@@ -568,9 +599,13 @@ function Services() {
               <strong>Good result:</strong> You can make a grounded proceed,
               revise, or stop decision without buying an unnecessary build.
             </p>
-            <Link className="ww-text-link" to="/start">
-              Request a diagnostic <Arrow />
-            </Link>
+            <FunnelCtas
+              extra={
+                <Link className="ww-text-link" to="/start">
+                  Request a diagnostic <Arrow />
+                </Link>
+              }
+            />
             <p className="ww-small">
               Begin with a Workflow Fit Review. Diagnostic deliverables and
               acceptance criteria are confirmed in a separate written scope and
@@ -612,9 +647,13 @@ function Services() {
               ROI, uninterrupted third-party services, or an autonomous
               business.
             </p>
-            <Link className="ww-text-link" to="/start">
-              Scope the first workflow <Arrow />
-            </Link>
+            <FunnelCtas
+              extra={
+                <Link className="ww-text-link" to="/start">
+                  Scope the first workflow <Arrow />
+                </Link>
+              }
+            />
             <p className="ww-small">
               The first step is a fit review. Build scope, commercial terms, and
               stabilization boundaries are agreed separately after diagnostic
@@ -774,7 +813,7 @@ function About() {
         label="About Wonder & Workflow"
         title="Better operations begin with respect"
         accent="for the people doing the work."
-        copy="Wonder & Workflow is a husband-and-wife-owned AI operations business focused on the processes behind service delivery: intake, documents, information, approvals, follow-up, reporting, and handoffs."
+        copy="Wonder & Workflow is a husband-and-wife-owned operations practice for owner-operators in service, retail, and hospitality. We focus on the processes behind service delivery: intake, documents, information, approvals, follow-up, reporting, and handoffs."
       />
       <section className="ww-about-statement">
         <img
@@ -800,6 +839,13 @@ function About() {
             it, and leave the team able to own what was built.
           </p>
         </div>
+      </section>
+      <WhoWeHelp />
+      <section className="ww-section ww-icp-note">
+        <p>
+          We are not a fit for law, CPA, or clinical practices seeking regulated
+          AI.
+        </p>
       </section>
       <section className="ww-section ww-principle-section">
         <Eyebrow>Our principles</Eyebrow>
@@ -1052,34 +1098,12 @@ export default function Website() {
       "Page not found",
       "Explore Wonder & Workflow AI operations.",
     ];
-    document.title = `${metadata[0]} | Wonder & Workflow`;
-    let description = document.querySelector<HTMLMetaElement>(
-      'meta[name="description"]',
+    applyPageHead(
+      canonicalPath,
+      metadata[0],
+      metadata[1],
+      structuredData(canonicalPath),
     );
-    if (!description) {
-      description = document.createElement("meta");
-      description.name = "description";
-      document.head.appendChild(description);
-    }
-    description.content = metadata[1];
-    let canonical = document.querySelector<HTMLLinkElement>(
-      'link[rel="canonical"]',
-    );
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.rel = "canonical";
-      document.head.appendChild(canonical);
-    }
-    canonical.href = `https://wonderworkflow.com${canonicalPath}`;
-    document.querySelector("#ww-structured-data")?.remove();
-    const schema = structuredData(canonicalPath);
-    if (schema) {
-      const script = document.createElement("script");
-      script.id = "ww-structured-data";
-      script.type = "application/ld+json";
-      script.textContent = JSON.stringify(schema).replaceAll("<", "\\u003c");
-      document.head.appendChild(script);
-    }
     window.scrollTo({ top: 0, behavior: "instant" });
     if (!initial.current) main.current?.focus({ preventScroll: true });
     initial.current = false;
