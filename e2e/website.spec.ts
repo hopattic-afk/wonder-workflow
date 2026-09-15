@@ -21,6 +21,9 @@ test("public pages remain readable and accessible on desktop and mobile", async 
       "/contact",
       "/ai-operations",
       "/book",
+      "/services/operations-consultant-for-small-business",
+      "/services/operations-audit-for-small-business",
+      "/guides/how-to-stop-being-the-bottleneck-in-your-business",
     ]) {
       await page.goto(path);
       await expect(page.locator(".ww-site h1")).toBeVisible();
@@ -151,7 +154,7 @@ test("stage 1 SEO pages render and send the CTA to the assessment", async ({
     await page.goto(path);
     await expect(page.getByRole("heading", { level: 1, name: heading })).toBeVisible();
     await expect(
-      page.getByRole("link", { name: /Assess your operations/i }).first(),
+      page.locator(".ww-search-page header a.ww-button, .ww-search-cta a.ww-button").first(),
     ).toHaveAttribute("href", /\/assessment$/);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",

@@ -97,7 +97,7 @@ describe("Stage 1 SEO pages", () => {
     expect(copy).not.toMatch(/\$\d/);
     expect(copy).not.toContain("\u2014");
     expect(
-      screen.getAllByRole("link", { name: /Assess your operations/i })[0],
+      document.querySelector(".ww-search-page header a.ww-button"),
     ).toHaveAttribute("href", "/assessment");
     const schema = json(CONSULTANT);
     expect(schema).toContain('"@type":"Service"');
@@ -128,7 +128,7 @@ describe("Stage 1 SEO pages", () => {
     expect(copy).not.toMatch(/\$\d/);
     expect(copy).not.toContain("\u2014");
     expect(
-      screen.getAllByRole("link", { name: /Assess your operations/i })[0],
+      document.querySelector(".ww-search-page header a.ww-button"),
     ).toHaveAttribute("href", "/assessment");
     const schema = json(AUDIT);
     expect(schema).toContain('"@type":"Service"');
@@ -152,7 +152,7 @@ describe("Stage 1 SEO pages", () => {
     expect(copy).not.toMatch(/\$\d/);
     expect(copy).not.toContain("\u2014");
     expect(
-      screen.getAllByRole("link", { name: /Assess your operations/i })[0],
+      document.querySelector(".ww-search-cta a.ww-button"),
     ).toHaveAttribute("href", "/assessment");
     const schema = json(BOTTLENECK);
     expect(schema).toContain('"@type":"Article"');

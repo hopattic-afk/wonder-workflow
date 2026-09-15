@@ -111,11 +111,11 @@ export const services: Service[] = [
       {
         eyebrow: "Start here",
         title: "Complimentary Operations Fit Review vs a typical multi-week paid audit",
-        body: `The ${FIT_REVIEW_NAME} is a complimentary 30-minute business operations review. You take a two-minute assessment, leave your details, and we look at the results together. A typical operations audit for a small business runs across multiple weeks, with a longer written diagnostic as the product. That deeper paid diagnostic exists here too, but it is scoped after the Fit Review. We do not start with a multi-week engagement.`,
+        body: `The ${FIT_REVIEW_NAME} is a complimentary 30-minute business operations review. You take a two-minute assessment, leave your details, and we look at the results together. A typical operations audit for a small business runs across multiple weeks, with a longer written diagnostic as the product. That deeper paid diagnostic exists here too, but it is scoped after the ${FIT_REVIEW_NAME}. We do not start with a multi-week engagement.`,
         points: [
           "Complimentary Operations Fit Review: about 30 minutes, after a two-minute assessment.",
           "Typical paid audit: multi-week discovery, more people, a longer written report.",
-          "Our paid diagnostic: quoted in writing only after the Fit Review, if it is worth doing.",
+          `Our paid diagnostic: quoted in writing only after the ${FIT_REVIEW_NAME}, if it is worth doing.`,
         ],
       },
       {
@@ -141,13 +141,13 @@ export const services: Service[] = [
       "Clear proceed, revise, or stop decision",
       "Written scope if a paid diagnostic follows",
       "Software and vendor costs kept separate",
-      "No package price invented on this page",
+      "Handoff so the owner knows what happens next",
     ],
     pricing: `The ${FIT_REVIEW_NAME} is complimentary. A multi-week paid audit is not the first product. Any paid diagnostic is quoted after that review because the number of systems, people, and exceptions determines the work. You receive a written scope and price before paid work begins.`,
     faqs: [
       ["Is the Operations Fit Review a full operations audit?", `No. It is a complimentary 30-minute business operations review. A typical multi-week paid audit is a different product. If you need that depth, we quote it after the ${FIT_REVIEW_NAME}.`],
       ["Do you publish audit package prices?", "No. Price follows scope. Software and vendor costs stay separate."],
-      ["Will you change our systems during the review?", "No. The Fit Review is a conversation and a look at how work moves. Implementation receives a separate scope, approval, and rollback plan."],
+      ["Will you change our systems during the review?", `No. The ${FIT_REVIEW_NAME} is a conversation and a look at how work moves. Implementation receives a separate scope, approval, and rollback plan.`],
     ],
   },
   {
@@ -356,15 +356,12 @@ export function ServicePage({ service }: { service: Service }) {
       <Breadcrumbs items={[["Services", "/services"], [service.title, `/services/${service.slug}`]]} />
       <header><p className="ww-eyebrow">Service / {service.title}</p><h1>{service.title}</h1><p className="ww-search-lede">{service.short}</p><Link className="ww-button" to="/assessment">Assess your operations <span aria-hidden="true">↗</span></Link></header>
       <section className="ww-answer-block"><p className="ww-eyebrow">The problem</p><h2>{service.problem}</h2></section>
-      {service.extraSections?.map((section, i) => (
-        <section className="ww-guide-section" key={section.title}>
-          <span>0{i + 1}</span>
-          <div>
-            {section.eyebrow ? <p className="ww-eyebrow">{section.eyebrow}</p> : null}
-            <h2>{section.title}</h2>
-            <p>{section.body}</p>
-            {section.points ? <ul>{section.points.map((x) => <li key={x}>{x}</li>)}</ul> : null}
-          </div>
+      {service.extraSections?.map((section) => (
+        <section className="ww-service-extra" key={section.title}>
+          {section.eyebrow ? <p className="ww-eyebrow">{section.eyebrow}</p> : null}
+          <h2>{section.title}</h2>
+          <p>{section.body}</p>
+          {section.points ? <ul>{section.points.map((x) => <li key={x}>{x}</li>)}</ul> : null}
         </section>
       ))}
       <div className="ww-search-columns"><section><p className="ww-eyebrow">Ideal customer</p><h2>This is a fit when…</h2><ul>{service.ideal.map(x => <li key={x}>{x}</li>)}</ul></section><section><p className="ww-eyebrow">Process</p><h2>How the work moves</h2><ol>{service.process.map((x, i) => <li key={x}><span>0{i + 1}</span>{x}</li>)}</ol></section></div>
