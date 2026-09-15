@@ -12,6 +12,13 @@ import {
   writeJsonLd,
 } from "./jsonld";
 
+type ExtraSection = {
+  eyebrow?: string;
+  title: string;
+  body: string;
+  points?: string[];
+};
+
 type Service = {
   slug: string;
   title: string;
@@ -22,6 +29,7 @@ type Service = {
   deliverables: string[];
   pricing: string;
   faqs: [string, string][];
+  extraSections?: ExtraSection[];
 };
 
 type Guide = {
@@ -30,6 +38,8 @@ type Guide = {
   answer: string;
   sections: { title: string; body: string; points?: string[] }[];
   faqs: [string, string][];
+  reviewed?: string;
+  dateModified?: string;
 };
 
 function Link({ to, children, className }: { to: string; children: React.ReactNode; className?: string }) {
@@ -37,6 +47,109 @@ function Link({ to, children, className }: { to: string; children: React.ReactNo
 }
 
 export const services: Service[] = [
+  {
+    slug: "operations-consultant-for-small-business",
+    title: "Operations consultant for small business",
+    short: "For owners of 1–50 person field and service shops. We map one real path of work and make the next step obvious. Start with a complimentary Operations Fit Review.",
+    problem: "You still hold the day together. Missed calls while you are on a job. Quotes sitting. Notes that never reach the crew. An operations consultant for a small business should fix how work moves, not sell a software stack.",
+    extraSections: [
+      {
+        eyebrow: "Process work",
+        title: "What a business process consultant does for a small business",
+        body: "A business process consultant sits with the person doing the work and follows one live example, from request to done to paid. The job is to make intake, handoffs, quotes, and admin visible enough to fix. Wonder & Workflow does that for field and service shops. We do not lead with a tool, an AI agency pitch, or a fractional COO title.",
+      },
+      {
+        eyebrow: "Owner nouns",
+        title: "How a business process consultant maps intake, handoffs, and admin",
+        body: "We use the words you already use. Who answers the phone. Who writes the quote. Who tells the crew. Who invoices. If those steps live in group texts and “just ask me,” a business process consultant should name the next owner and the next action.",
+        points: [
+          "Intake: calls and texts while you are on the tools.",
+          "Handoffs: the office has one version of the job, the crew has another.",
+          "Admin: quotes waiting, invoices after the fact, payroll pieced together.",
+        ],
+      },
+      {
+        eyebrow: "Not a fit",
+        title: "Who this is not for",
+        body: "Not law, CPA, or clinical practices. Not companies shopping for another all-in-one field app. Not an AI agency engagement. Not a full-time fractional COO embed. If you need a chief of operations living in the business, that is a different hire.",
+      },
+    ],
+    ideal: [
+      "You own a field or service shop with roughly 1–50 people.",
+      "Cleaning, landscaping, detailing, signs and print, restoration, moving, or similar work.",
+      "Admin, intake, and handoffs still land on you.",
+      "You want one process clearer, not a full-time operations chief.",
+    ],
+    process: [
+      "Walk one live job from request to done to paid.",
+      "Name the stuck point in owner language: intake, handoffs, quotes waiting, admin that chases you.",
+      "Pick the smallest change that makes the next step obvious.",
+      "Test on real jobs. Leave a named owner, clear instructions, and a fallback.",
+    ],
+    deliverables: [
+      "Map of one real path of work",
+      "Named stuck point and owner",
+      "Practical next-step plan",
+      "Written scope before any paid work",
+      "Handoff notes the team can use",
+      "Fallback if the change does not stick",
+    ],
+    pricing: `The ${FIT_REVIEW_NAME} is complimentary. Paid diagnostic or implementation work is quoted in writing after that review. Software and vendor costs stay separate. We do not publish package prices.`,
+    faqs: [
+      ["Do you work with service businesses, or only offices?", "Field and service shops with roughly 1–50 people are the core fit: cleaning, landscaping, detailing, signs and print, restoration, moving, and similar work. Law, CPA, and clinical practices are out of scope."],
+      ["Are you a fractional COO?", "No. We do not lead with a fractional COO retainer or embed as your operations chief. We map one real path of work and make the next step obvious."],
+      ["Is this an AI agency?", "No. Most of the time this is a structure and ownership problem, not a software problem. You may not need another tool. AI is optional later, not the pitch."],
+      ["How do we start?", `Take the two-minute assessment, leave your details, and book a complimentary ${FIT_REVIEW_NAME}. That 30-minute business operations review is the first conversation.`],
+    ],
+  },
+  {
+    slug: "operations-audit-for-small-business",
+    title: "Operations audit for small business",
+    short: "A complimentary 30-minute Operations Fit Review that names where jobs get stuck. Not a multi-week paid audit as the first step.",
+    problem: "Owners search for an operations audit when the day feels stuck and they want someone to look. Many audits are multi-week paid projects. Wonder & Workflow starts with a complimentary 30-minute business operations review.",
+    extraSections: [
+      {
+        eyebrow: "Start here",
+        title: "Complimentary Operations Fit Review vs a typical multi-week paid audit",
+        body: `The ${FIT_REVIEW_NAME} is a complimentary 30-minute business operations review. You take a two-minute assessment, leave your details, and we look at the results together. A typical operations audit for a small business runs across multiple weeks, with a longer written diagnostic as the product. That deeper paid diagnostic exists here too, but it is scoped after the Fit Review. We do not start with a multi-week engagement.`,
+        points: [
+          "Complimentary Operations Fit Review: about 30 minutes, after a two-minute assessment.",
+          "Typical paid audit: multi-week discovery, more people, a longer written report.",
+          "Our paid diagnostic: quoted in writing only after the Fit Review, if it is worth doing.",
+        ],
+      },
+      {
+        eyebrow: "What we look at",
+        title: "What a 30-minute business operations review can actually cover",
+        body: "We review where intake, handoffs, and admin slow the day. We choose one path of work worth improving. We do not rewrite the whole company in one sitting. If a longer audit is the right next step, you will hear that in plain language, with scope before price.",
+      },
+    ],
+    ideal: [
+      "You can name a recurring stuck point but not the root cause.",
+      "You want a live look at how work moves, not a binder of unused recommendations.",
+      "You are not ready to buy a multi-week audit before a conversation.",
+    ],
+    process: [
+      "Complete the two-minute operations assessment.",
+      `Book a complimentary ${FIT_REVIEW_NAME}.`,
+      "Walk one real path of work together.",
+      "Decide whether a paid diagnostic is worth scoping, or stop.",
+    ],
+    deliverables: [
+      "Shared read on where jobs get stuck",
+      "One path of work named as the first improvement",
+      "Clear proceed, revise, or stop decision",
+      "Written scope if a paid diagnostic follows",
+      "Software and vendor costs kept separate",
+      "No package price invented on this page",
+    ],
+    pricing: `The ${FIT_REVIEW_NAME} is complimentary. A multi-week paid audit is not the first product. Any paid diagnostic is quoted after that review because the number of systems, people, and exceptions determines the work. You receive a written scope and price before paid work begins.`,
+    faqs: [
+      ["Is the Operations Fit Review a full operations audit?", `No. It is a complimentary 30-minute business operations review. A typical multi-week paid audit is a different product. If you need that depth, we quote it after the ${FIT_REVIEW_NAME}.`],
+      ["Do you publish audit package prices?", "No. Price follows scope. Software and vendor costs stay separate."],
+      ["Will you change our systems during the review?", "No. The Fit Review is a conversation and a look at how work moves. Implementation receives a separate scope, approval, and rollback plan."],
+    ],
+  },
   {
     slug: "ai-workflow-audit",
     title: "AI Workflow Audit",
@@ -106,6 +219,25 @@ export const services: Service[] = [
 ];
 
 export const guides: Guide[] = [
+  {
+    slug: "how-to-stop-being-the-bottleneck-in-your-business",
+    title: "How to stop being the bottleneck in your business",
+    answer: "You stop being the bottleneck when the next step of a job does not wait for you. Map where work actually stalls (intake, quotes waiting, handoffs, admin), name an owner for that step, and make the next action obvious. Do not start by buying another tool or hiring a fractional COO.",
+    dateModified: "2026-09-15",
+    reviewed: "September 15, 2026",
+    sections: [
+      { title: "The product is not the bottleneck. You are.", body: "Owners say it plainly: nothing moves without me. That is not a character flaw. It is a process that still routes every decision, quote, and handoff through the founder. The work is to take one path off your plate, not to vanish from the business overnight." },
+      { title: "Name the stuck steps in owner language", body: "Skip enterprise labels. Write down the last five jobs and mark where they waited.", points: ["Intake: a missed call, an incomplete request, a lead that sat in a text thread.", "Quotes waiting: the estimate is in your head or your drafts, not with the customer.", "Handoffs: the office has one version of the job, the crew has another.", "Admin: invoices, payroll, and follow-up that only you can finish."] },
+      { title: "Give one path of work a next owner", body: "Pick the path that repeats every week. Write the trigger, the information needed, who acts, and what done looks like. Then run the next three live jobs without you as the default next step. If the team still has to ask you, the instruction is not done." },
+      { title: "Do not wait for a full exit from day-to-day work", body: "Getting out of daily operations is a later chapter. The first win is narrower: one process clearer, one owner named, one fallback if it breaks. A mastermind, an AI agency, or a fractional COO title will not fix a quote that sits until you send it." },
+      { title: "A practical next step", body: "Take the two-minute assessment, then book a complimentary Operations Fit Review. We will look at where jobs get stuck between intake and paid and choose one improvement worth doing. You may not need another tool." },
+    ],
+    faqs: [
+      ["Is the founder always the bottleneck?", "Often, in shops this size. The founder holds intake, quotes, handoffs, and admin because the next step was never given an owner."],
+      ["Should I hire before I fix the process?", "Not automatically. If people spend the day chasing information, a clearer path of work can free capacity before a new hire."],
+      ["Will this make the business run without me?", "Not in one sitting. The honest first win is that one repeating job no longer waits for you."],
+    ],
+  },
   {
     slug: "what-business-processes-should-i-automate-first",
     title: "What business processes should I automate first?",
@@ -215,7 +347,7 @@ function Related() {
 }
 
 export function ServiceDirectory() {
-  return <section className="ww-related ww-service-directory"><p className="ww-eyebrow">Explore by need</p><h2>Six ways to start with one workflow.</h2><div>{services.map((s) => <Link key={s.slug} to={`/services/${s.slug}`}><strong>{s.title}</strong><span>{s.short}</span><b aria-hidden="true">↗</b></Link>)}</div></section>;
+  return <section className="ww-related ww-service-directory"><p className="ww-eyebrow">Explore by need</p><h2>Start with the stuck point you can name.</h2><div>{services.map((s) => <Link key={s.slug} to={`/services/${s.slug}`}><strong>{s.title}</strong><span>{s.short}</span><b aria-hidden="true">↗</b></Link>)}</div></section>;
 }
 
 export function ServicePage({ service }: { service: Service }) {
@@ -224,6 +356,17 @@ export function ServicePage({ service }: { service: Service }) {
       <Breadcrumbs items={[["Services", "/services"], [service.title, `/services/${service.slug}`]]} />
       <header><p className="ww-eyebrow">Service / {service.title}</p><h1>{service.title}</h1><p className="ww-search-lede">{service.short}</p><Link className="ww-button" to="/assessment">Assess your operations <span aria-hidden="true">↗</span></Link></header>
       <section className="ww-answer-block"><p className="ww-eyebrow">The problem</p><h2>{service.problem}</h2></section>
+      {service.extraSections?.map((section, i) => (
+        <section className="ww-guide-section" key={section.title}>
+          <span>0{i + 1}</span>
+          <div>
+            {section.eyebrow ? <p className="ww-eyebrow">{section.eyebrow}</p> : null}
+            <h2>{section.title}</h2>
+            <p>{section.body}</p>
+            {section.points ? <ul>{section.points.map((x) => <li key={x}>{x}</li>)}</ul> : null}
+          </div>
+        </section>
+      ))}
       <div className="ww-search-columns"><section><p className="ww-eyebrow">Ideal customer</p><h2>This is a fit when…</h2><ul>{service.ideal.map(x => <li key={x}>{x}</li>)}</ul></section><section><p className="ww-eyebrow">Process</p><h2>How the work moves</h2><ol>{service.process.map((x, i) => <li key={x}><span>0{i + 1}</span>{x}</li>)}</ol></section></div>
       <section className="ww-deliverables"><p className="ww-eyebrow">Deliverables</p><h2>What you receive</h2><div>{service.deliverables.map((x, i) => <article key={x}><span>0{i + 1}</span><h3>{x}</h3></article>)}</div></section>
       <section className="ww-pricing"><p className="ww-eyebrow">Pricing approach</p><h2>Scope first. Price in writing.</h2><p>{service.pricing}</p></section>
@@ -246,7 +389,7 @@ export function GuidePage({ guide }: { guide: Guide }) {
       <aside className="ww-guide-checklist"><p className="ww-eyebrow">Short answer</p><p>{guide.answer}</p></aside>
       {guide.sections.map((s, i) => <section className="ww-guide-section" key={s.title}><span>0{i + 1}</span><div><h2>{s.title}</h2><p>{s.body}</p>{s.points ? <ul>{s.points.map(x => <li key={x}>{x}</li>)}</ul> : null}</div></section>)}
       <Faqs items={guide.faqs} />
-      <p className="ww-editorial-note">Reviewed September 9, 2026. This guide describes a decision method, not a guaranteed result. Feasibility depends on the actual workflow, tools, data, permissions, and consequences of error.</p>
+      <p className="ww-editorial-note">Reviewed {guide.reviewed ?? "September 9, 2026"}. This guide describes a decision method, not a guaranteed result. Feasibility depends on the actual workflow, tools, data, permissions, and consequences of error.</p>
     </article>
     <Related />
     <section className="ww-search-cta"><p className="ww-eyebrow">Apply the answer</p><h2>Find the first improvement worth making.</h2><p>The assessment takes about two minutes. Save your contact details, then book a complimentary {FIT_REVIEW_NAME}. {ONE_PATH_COPY}</p><p className="ww-cta-ladder">{LADDER_NOTE}</p><Link className="ww-button" to="/assessment">Assess your operations <span aria-hidden="true">↗</span></Link></section>
@@ -324,7 +467,7 @@ export function structuredData(pathname: string) {
       "@type": "Article",
       headline: guide.title,
       description: guide.answer,
-      dateModified: "2026-09-09",
+      dateModified: guide.dateModified ?? "2026-09-09",
       author: { "@id": "https://wonderworkflow.com/#organization" },
       publisher: { "@id": "https://wonderworkflow.com/#organization" },
       mainEntityOfPage: `https://wonderworkflow.com${pathname}`,
