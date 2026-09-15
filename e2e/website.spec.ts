@@ -21,6 +21,9 @@ test("public pages remain readable and accessible on desktop and mobile", async 
       "/contact",
       "/ai-operations",
       "/book",
+      "/services/operations-consultant-for-small-business",
+      "/services/operations-audit-for-small-business",
+      "/guides/how-to-stop-being-the-bottleneck-in-your-business",
     ]) {
       await page.goto(path);
       await expect(page.locator(".ww-site h1")).toBeVisible();
@@ -129,6 +132,35 @@ test("homepage is type-led with no intro film or workflow theater", async ({
     .getByRole("link", { name: "Assess your operations" })
     .click();
   await expect(page).toHaveURL(/assessment$/);
+});
+
+test("stage 1 SEO pages render and send the CTA to the assessment", async ({
+  page,
+}) => {
+  for (const [path, heading] of [
+    [
+      "/services/operations-consultant-for-small-business",
+      "Operations consultant for small business",
+    ],
+    [
+      "/services/operations-audit-for-small-business",
+      "Operations audit for small business",
+    ],
+    [
+      "/guides/how-to-stop-being-the-bottleneck-in-your-business",
+      "How to stop being the bottleneck in your business",
+    ],
+  ] as const) {
+    await page.goto(path);
+    await expect(page.getByRole("heading", { level: 1, name: heading })).toBeVisible();
+    await expect(
+      page.locator(".ww-search-page header a.ww-button, .ww-search-cta a.ww-button").first(),
+    ).toHaveAttribute("href", /\/assessment$/);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      `https://wonderworkflow.com${path}`,
+    );
+  }
 });
 
 test("reduced motion still shows the homepage immediately", async ({
