@@ -735,6 +735,30 @@
   align-items: center;
   margin: 22px 0 8px;
 }
+.ww-funnel-ctas {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 8px 0 0;
+}
+.ww-funnel-ctas .ww-small {
+  margin-top: 4px;
+  max-width: 46ch;
+}
+.ww-icp-lede {
+  max-width: 720px;
+  margin: -16px 0 28px;
+  font-size: 18px;
+}
+.ww-icp-note {
+  padding-top: 0;
+}
+.ww-icp-note p {
+  max-width: 720px;
+  font-size: 16px;
+  color: var(--ww-violet);
+}
 .ww-prose {
   max-width: 890px;
   padding: 20px 5% 70px;

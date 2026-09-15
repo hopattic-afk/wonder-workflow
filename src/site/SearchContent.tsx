@@ -1,5 +1,12 @@
 import { Link as RouterLink } from "react-router-dom";
 import { publicHref } from "./campaign";
+import {
+  SITE_ORIGIN,
+  assessmentStructuredData,
+  faqPage,
+  graph,
+  organization,
+} from "./head";
 
 type Service = {
   slug: string;
@@ -230,19 +237,73 @@ export function AssessmentCaseStudy() {
   </article>;
 }
 
+export const servicesHubFaqs: [string, string][] = [
+  [
+    "Do you only build with AI?",
+    "No. We choose between process change, existing software, conventional automation, and AI based on the work. AI is useful where interpretation or flexible language matters; fixed rules are often better for deterministic steps.",
+  ],
+  [
+    "Can you guarantee how many hours we will save?",
+    "No. We establish a baseline and agree on measurement before making a client-specific estimate. Recovered capacity is not automatically cash savings.",
+  ],
+  [
+    "Will this replace an employee?",
+    "That is not our default goal or claim. Most useful projects remove repeated administration, improve handoffs, or support decisions while people retain responsibility.",
+  ],
+  [
+    "Can you work with our current software?",
+    "We assess it first. Available integrations, account permissions, data quality, vendor limits, and cost determine what is feasible. Sometimes the best result is better use of what you already own.",
+  ],
+  [
+    "Do you provide compliance or security certification?",
+    "No. We use practical risk, privacy, testing, and access-control disciplines. Formal legal, certification, penetration-testing, and regulated-industry work requires an appropriately qualified specialist.",
+  ],
+  [
+    "Who owns the finished workflow?",
+    "The proposal identifies ownership and licensing. Our default recommendation is client-owned service accounts, editable documentation, and a clear offboarding path. Third-party platforms retain their own terms.",
+  ],
+  [
+    "Are you a fit for law, CPA, or clinical practices?",
+    "No. We are not a fit for law, CPA, or clinical practices seeking regulated AI. Formal legal, certification, and regulated-industry work needs an appropriately qualified specialist.",
+  ],
+];
+
 export function structuredData(pathname: string) {
+  if (pathname === "/") {
+    return graph([
+      organization,
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_ORIGIN}/#website`,
+        url: `${SITE_ORIGIN}/`,
+        name: "Wonder & Workflow",
+        publisher: { "@id": `${SITE_ORIGIN}/#organization` },
+      },
+    ]);
+  }
+  if (pathname === "/services") {
+    return graph([
+      organization,
+      faqPage(`${SITE_ORIGIN}/services`, servicesHubFaqs),
+    ]);
+  }
+  if (pathname === "/assessment") return assessmentStructuredData();
   const service = services.find(s => pathname === `/services/${s.slug}`);
   const guide = guides.find(g => pathname === `/guides/${g.slug}`);
   const page = searchPages[pathname];
   if (!page) return null;
-  const base = {
-    "@context": "https://schema.org",
-    "@graph": [
-      { "@type": "Organization", "@id": "https://wonderworkflow.com/#organization", name: "Wonder & Workflow", legalName: "Wonder&Workflow LLC", url: "https://wonderworkflow.com", email: "operations@wonderworkflow.com", logo: "https://wonderworkflow.com/brand/logo.png" },
-      { "@type": "BreadcrumbList", itemListElement: pathname.split("/").filter(Boolean).map((part, i, all) => ({ "@type": "ListItem", position: i + 1, name: part.replaceAll("-", " "), item: `https://wonderworkflow.com/${all.slice(0, i + 1).join("/")}` })) },
-    ],
-  } as { "@context": string; "@graph": Record<string, unknown>[] };
-  if (service) base["@graph"].push({ "@type": "Service", name: service.title, description: service.short, provider: { "@id": "https://wonderworkflow.com/#organization" }, url: `https://wonderworkflow.com${pathname}`, offers: { "@type": "Offer", description: service.pricing } });
-  if (guide) base["@graph"].push({ "@type": "Article", headline: guide.title, description: guide.answer, dateModified: "2026-09-09", author: { "@id": "https://wonderworkflow.com/#organization" }, publisher: { "@id": "https://wonderworkflow.com/#organization" }, mainEntityOfPage: `https://wonderworkflow.com${pathname}` });
+  const url = `${SITE_ORIGIN}${pathname}`;
+  const base = graph([
+    organization,
+    { "@type": "BreadcrumbList", itemListElement: pathname.split("/").filter(Boolean).map((part, i, all) => ({ "@type": "ListItem", position: i + 1, name: part.replaceAll("-", " "), item: `${SITE_ORIGIN}/${all.slice(0, i + 1).join("/")}` })) },
+  ]);
+  if (service) {
+    base["@graph"].push({ "@type": "Service", name: service.title, description: service.short, provider: { "@id": `${SITE_ORIGIN}/#organization` }, url, offers: { "@type": "Offer", description: service.pricing } });
+    base["@graph"].push(faqPage(url, service.faqs));
+  }
+  if (guide) {
+    base["@graph"].push({ "@type": "Article", headline: guide.title, description: guide.answer, dateModified: "2026-09-09", author: { "@id": `${SITE_ORIGIN}/#organization` }, publisher: { "@id": `${SITE_ORIGIN}/#organization` }, mainEntityOfPage: url });
+    base["@graph"].push(faqPage(url, guide.faqs));
+  }
   return base;
 }
