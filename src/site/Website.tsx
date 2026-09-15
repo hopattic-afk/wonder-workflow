@@ -926,6 +926,10 @@ function Privacy() {
           in this tab’s session storage, so it remains enabled as you browse.
           Closing the tab ends that choice. It is not submitted with your assessment.
         </p>
+        <h2>Website analytics</h2>
+        <p>
+          This website uses Google Analytics to measure visits to public pages.
+        </p>
         <h2>Follow-up and marketing</h2>
         <p>
           Your submission is used to respond to your inquiry and prepare the
