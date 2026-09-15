@@ -32,7 +32,7 @@ export function Assessment() {
   const score = complete ? assessmentScore(answers) : null;
 
   useEffect(() => {
-    document.title = "AI Operations Assessment | Wonder & Workflow";
+    document.title = "Operations Assessment | Wonder & Workflow";
     let description = document.querySelector<HTMLMetaElement>(
       'meta[name="description"]',
     );
@@ -42,7 +42,7 @@ export function Assessment() {
       document.head.appendChild(description);
     }
     description.content =
-      "Answer seven questions about your business workflows in about two minutes. See an indicative score calculated in your browser, then contact Wonder & Workflow.";
+      "Assess your operations in about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review.";
     let canonical = document.querySelector<HTMLLinkElement>(
       'link[rel="canonical"]',
     );
@@ -82,7 +82,7 @@ export function Assessment() {
           <img src="/brand/emblem.png" alt="" width="40" height="48" />
           <span>Wonder &amp; Workflow</span>
         </a>
-        <span>AI OPERATIONS</span>
+        <span>OPERATIONS ASSESSMENT</span>
       </header>
       <main className="assessment-main">
         {!complete && (
@@ -131,10 +131,6 @@ export function Assessment() {
             >
               Back
             </button>
-            <p className="assessment-small">
-              No contact details required. Your answers are calculated in this
-              browser tab.
-            </p>
           </section>
         )}
         {score && (
@@ -196,7 +192,7 @@ export function Assessment() {
         )}
       </main>
       <footer className="assessment-footer">
-        <span>Wonder&amp;Workflow LLC · AI Operations</span>
+        <span>Wonder&amp;Workflow LLC · Operations</span>
         <a href="mailto:operations@wonderworkflow.com">
           operations@wonderworkflow.com
         </a>
@@ -225,12 +221,12 @@ export function Assessment() {
 // Public assessment flow: validates and saves server-side before showing the booking calendar.
 export function LegacyAssessment() {
   useEffect(() => {
-    document.title = "AI Operations Assessment | Wonder & Workflow";
+    document.title = "Operations Assessment | Wonder & Workflow";
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute(
         "content",
-        "A two-minute assessment about your business workflows. Answer seven questions to prepare for a separate complimentary 30-minute Workflow Fit Review.",
+        "Assess your operations in about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review.",
       );
     let canonical = document.querySelector<HTMLLinkElement>(
       'link[rel="canonical"]',
@@ -524,7 +520,7 @@ export function LegacyAssessment() {
           <img src="/brand/emblem.png" alt="" width="40" height="48" />
           <span>Wonder &amp; Workflow</span>
         </a>
-        <span>AI OPERATIONS</span>
+        <span>OPERATIONS ASSESSMENT</span>
       </header>
       <main className="assessment-main">
         {step >= 0 && step < QUESTIONS.length && !result && (
@@ -736,7 +732,7 @@ export function LegacyAssessment() {
             aria-label="Assessment result"
           >
             <p className="assessment-eyebrow">
-              YOUR INDICATIVE AI OPERATIONS SCORE
+              YOUR INDICATIVE OPERATIONS SCORE
             </p>
             <h1 className="assessment-score" ref={stepHeading} tabIndex={-1}>
               {result.submission.score} / {result.submission.max_score}
@@ -787,7 +783,7 @@ export function LegacyAssessment() {
         )}
       </main>
       <footer className="assessment-footer">
-        <span>Wonder&amp;Workflow LLC · AI Operations</span>
+        <span>Wonder&amp;Workflow LLC · Operations</span>
         <a href="mailto:operations@wonderworkflow.com">
           operations@wonderworkflow.com
         </a>

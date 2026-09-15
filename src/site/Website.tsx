@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ComponentProps } from "react";
 import {
   Link as RouterLink,
   NavLink as RouterNavLink,
+  Navigate,
   Route,
   Routes,
   useLocation,
@@ -28,7 +29,7 @@ function NavLink(props: ComponentProps<typeof RouterNavLink>) {
 }
 export const pages: Record<string, [string, string]> = {
   "/": [
-    "AI Operations for Dependable Workflows",
+    "Ops workflows that save time",
     "Improve one recurring workflow at a time. Wonder & Workflow maps the work, chooses the simplest suitable solution, tests it, and leaves your team in control.",
   ],
   "/services": [
@@ -45,7 +46,7 @@ export const pages: Record<string, [string, string]> = {
   ],
   "/start": [
     "Start With an Operations Assessment",
-    "Assess your operations in about two minutes, discuss your results in a complimentary 30-minute Workflow Fit Review, and choose one workflow to improve.",
+    "Assess your operations in about two minutes, save your contact details, then book a complimentary 30-minute Workflow Fit Review on the calendar.",
   ],
   "/privacy": [
     "Privacy",
@@ -57,13 +58,14 @@ export const pages: Record<string, [string, string]> = {
   ],
   "/contact": [
     "Contact Wonder & Workflow",
-    "Contact Wonder&Workflow LLC about AI operations, workflow services, or your information.",
+    "Contact Wonder&Workflow LLC about a workflow, a project, or an existing inquiry.",
   ],
   ...searchPages,
 };
 const canonicalPaths: Record<string, string> = {
   "/ai-operations": "/services",
   "/book": "/start",
+  "/pricing": "/services",
 };
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -80,7 +82,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 function Invitation({
   title = "Find where work slows down.",
-  copy = "Complete the short assessment, then request a complimentary 30-minute Workflow Fit Review.",
+  copy = "Complete the short assessment (contact details and save), then book a complimentary 30-minute Workflow Fit Review on the calendar.",
 }: {
   title?: string;
   copy?: string;
@@ -349,7 +351,7 @@ function Home() {
       <section className="ww-hero ww-workflow-hero">
         <div className="ww-workflow-hero-heading">
           <div>
-            <Eyebrow>AI operations for service businesses</Eyebrow>
+            <Eyebrow>Ops help for service, retail and hospitality owners</Eyebrow>
             <h1 tabIndex={-1}>
               From scattered requests
               <br />
@@ -358,7 +360,7 @@ function Home() {
           </div>
           <div className="ww-workflow-hero-intro">
             <p>
-              Turn everyday admin into a clear next step—with connected tools,
+              Turn everyday admin into a clear next step, with connected tools,
               useful AI, and people in control.
             </p>
             <Link className="ww-button" to="/assessment">
@@ -438,7 +440,7 @@ function Home() {
       </section>
       <Invitation
         title="Find where your operations could improve."
-        copy="Assess your operations in about two minutes. Then request a complimentary 30-minute Workflow Fit Review to discuss your results and choose one workflow to improve."
+        copy="Assess your operations in about two minutes. Save your contact details, then book a complimentary 30-minute Workflow Fit Review to discuss your results and choose one workflow to improve."
       />
     </div>
   );
@@ -832,16 +834,16 @@ function Start() {
         label="Get started"
         title="What would you like"
         accent="to make easier?"
-        copy="Start with a quick look at your operations. Answer seven simple questions, discuss your results, and choose one workflow to improve. You don’t need a technical plan."
+        copy="Start with a quick look at your operations. Answer seven questions, save your contact details, then book a complimentary 30-minute Workflow Fit Review on the calendar. You don’t need a technical plan."
       />
       <section className="ww-start-simple">
         <div>
           <span className="ww-step-label">1 / About 2 minutes</span>
           <h2>Complete the assessment</h2>
           <p>
-            Answer a few questions about how the work happens today. Your
-            score offers a starting point; it is not an automatic diagnosis or a
-            savings guarantee.
+            Answer a few questions about how the work happens today, then add
+            your contact details and save. Your score offers a starting point.
+            It is not an automatic diagnosis or a savings guarantee.
           </p>
           <Link className="ww-button" to="/assessment">
             Assess your operations <Arrow />
@@ -854,13 +856,22 @@ function Start() {
           <span className="ww-step-label">2 / Complimentary · 30 minutes</span>
           <h2>Book a Workflow Fit Review</h2>
           <p>
-            After your assessment is saved, choose a time in the embedded
-            calendar. Together, we’ll review the result, choose one workflow to
-            improve, and identify a practical next step.
+            After the assessment is saved, the Fit Review calendar appears on
+            the same page. Choose a time there. Together we review the result,
+            pick one workflow to improve, and identify a practical next step.
           </p>
           <p>
             A deeper diagnostic or implementation is optional and receives a
             separate written scope.
+          </p>
+          <Link className="ww-button" to="/assessment">
+            Assess your operations <Arrow />
+          </Link>
+          <p className="ww-small">
+            Questions only? Email{" "}
+            <a href="mailto:operations@wonderworkflow.com">
+              operations@wonderworkflow.com</a>. That inbox is for questions, not
+            the Fit Review booking path.
           </p>
         </div>
       </section>
@@ -980,12 +991,27 @@ function Contact() {
     <>
       <PageHero number="07" label="Contact" title="Let's talk about" accent="your operations."
         copy="Contact Wonder & Workflow about a workflow, a project, or an existing inquiry." />
+      <section className="ww-contact-fit">
+        <Eyebrow>Workflow Fit Review</Eyebrow>
+        <h2>Assess your operations</h2>
+        <p>
+          Complete the 2-minute assessment with your contact details and save.
+          Then book a complimentary 30-minute Workflow Fit Review on the
+          calendar.
+        </p>
+        <div className="ww-contact-actions">
+          <Link className="ww-button" to="/assessment">
+            Assess your operations <Arrow />
+          </Link>
+          <Link className="ww-text-link" to="/assessment">
+            Request a Workflow Fit Review <Arrow />
+          </Link>
+        </div>
+      </section>
       <section className="ww-prose">
-        <h2>Wonder&Workflow LLC</h2>
-        <p>Wonder & Workflow is the public name of Wonder&Workflow LLC. We help service businesses understand, improve, and maintain practical business workflows.</p>
-        <p>Email <a href="mailto:operations@wonderworkflow.com">operations@wonderworkflow.com</a>. Please leave out passwords and confidential client information; we can arrange an appropriate way to discuss sensitive details.</p>
-        <h2>Start with your operations</h2>
-        <p>Our <Link to="/assessment">two-minute operations assessment</Link> helps you identify areas to discuss in a complimentary 30-minute Workflow Fit Review.</p>
+        <h2>General contact</h2>
+        <p>Wonder & Workflow is the public name of Wonder&Workflow LLC. We help service, retail, and hospitality businesses understand, improve, and maintain practical business workflows.</p>
+        <p>Email <a href="mailto:operations@wonderworkflow.com">operations@wonderworkflow.com</a> for questions or an existing inquiry. Please leave out passwords and confidential client information; we can arrange an appropriate way to discuss sensitive details.</p>
         <h2>Questions about your information</h2>
         <p>Use the same email address above for privacy questions or correction and deletion requests. Read our <Link to="/privacy">Privacy Policy</Link> and <Link to="/terms">Terms & Conditions</Link>.</p>
       </section>
@@ -1112,6 +1138,7 @@ export default function Website() {
           <Route path="about" element={<About />} />
           <Route path="start" element={<Start />} />
           <Route path="book" element={<Start />} />
+          <Route path="pricing" element={<Navigate to="/services" replace />} />
           <Route path="privacy" element={<Privacy />} />
           <Route path="terms" element={<Terms />} />
           <Route path="contact" element={<Contact />} />
@@ -1122,7 +1149,7 @@ export default function Website() {
         <div>
           <Link className="ww-footer-name" to="/">
             Wonder & Workflow
-            <span>AI operations for work that needs to run reliably.</span>
+            <span>Ops workflows for work that needs to run reliably.</span>
           </Link>
           <Cta secondary />
         </div>
