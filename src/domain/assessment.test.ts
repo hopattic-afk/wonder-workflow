@@ -13,6 +13,7 @@ import {
   ASSESSMENT_BOOKING_URL,
   ASSESSMENT_VERSION,
   ASSESSMENT_SUBMIT_LABEL,
+  GHL_ASSESSMENT_Q_FIELDS,
   LEGACY_ASSESSMENT_VERSION,
   ORIGINAL_ASSESSMENT_QUESTIONS,
   QUESTIONS,
@@ -135,6 +136,43 @@ describe("canonical assessment scoring and validation", () => {
     expect(assessmentUi).not.toMatch(/AI Operations/);
     expect(domain).not.toContain("Healthcare / wellness");
     expect(domain).not.toContain("wonder-workflow-operations-v1-21");
+  });
+
+  it("keeps Casey’s positional GHL q1–q7 fields and puts semantic ids in answers JSON", () => {
+    expect(GHL_ASSESSMENT_Q_FIELDS.map((field) => field.field)).toEqual([
+      "ww_assessment_q1",
+      "ww_assessment_q2",
+      "ww_assessment_q3",
+      "ww_assessment_q4",
+      "ww_assessment_q5",
+      "ww_assessment_q6",
+      "ww_assessment_q7",
+    ]);
+    expect(GHL_ASSESSMENT_Q_FIELDS.map((field) => field.key)).toEqual(
+      QUESTIONS.map((question) => question.key),
+    );
+    expect(GHL_ASSESSMENT_Q_FIELDS.map((field) => field.previousKey)).toEqual([
+      "admin_time",
+      "routine_drafting",
+      "document_processing",
+      "information_access",
+      "duplicate_entry",
+      "process_repeatability",
+      "software_overlap",
+    ]);
+    const posted = submission();
+    expect(posted.assessment_version).toBe(
+      "wonder-workflow-operations-v1-22",
+    );
+    expect(posted.answers.map((answer) => answer.key)).toEqual(
+      GHL_ASSESSMENT_Q_FIELDS.map((field) => field.key),
+    );
+    expect(posted.contact.industry).toBe("Construction / trades");
+    expect(posted.contact.operational_priority).toBe(
+      "Catch work that waits on me",
+    );
+    expect(JSON.stringify(posted.answers)).toContain("owner_bottleneck");
+    expect(JSON.stringify(posted.answers)).not.toContain("ww_assessment_q");
   });
 
   it("keeps 0–3 ordinal scoring for six questions and remaps categorical Q7", () => {

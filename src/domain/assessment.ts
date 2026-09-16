@@ -261,6 +261,40 @@ export const QUESTIONS = [
     scoreValues: [3, 3, 3, 3, 3, 3, 3, 0],
   },
 ] as const satisfies readonly AssessmentQuestion[];
+/** Live GHL TEXT fields (Casey 2026-09-16). Positional q1–q7 only. Do not add custom fields. Semantic ids belong in ww_assessment_answers_json. Filter reporting by ww_assessment_version so v1-21 q2/q3/q4/q7 values are not mixed with v1-22. */
+export const GHL_ASSESSMENT_Q_FIELDS = [
+  { field: "ww_assessment_q1", key: "admin_time", previousKey: "admin_time" },
+  {
+    field: "ww_assessment_q2",
+    key: "owner_bottleneck",
+    previousKey: "routine_drafting",
+  },
+  {
+    field: "ww_assessment_q3",
+    key: "things_go_missing",
+    previousKey: "document_processing",
+  },
+  {
+    field: "ww_assessment_q4",
+    key: "role_handoffs",
+    previousKey: "information_access",
+  },
+  {
+    field: "ww_assessment_q5",
+    key: "duplicate_entry",
+    previousKey: "duplicate_entry",
+  },
+  {
+    field: "ww_assessment_q6",
+    key: "process_repeatability",
+    previousKey: "process_repeatability",
+  },
+  {
+    field: "ww_assessment_q7",
+    key: "friction_home",
+    previousKey: "software_overlap",
+  },
+] as const;
 export type AssessmentVersion =
   typeof ASSESSMENT_VERSION | typeof LEGACY_ASSESSMENT_VERSION;
 export function assessmentQuestions(version: AssessmentVersion) {
