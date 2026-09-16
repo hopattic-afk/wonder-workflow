@@ -10,6 +10,7 @@ import { assessmentJsonLd, writeJsonLd } from "../site/jsonld";
 import {
   ASSESSMENT_BOOKING_URL,
   ASSESSMENT_PHONE_HINT,
+  ASSESSMENT_SUBMIT_LABEL,
   validAssessmentPhone,
   assessmentScore,
   QUESTIONS,
@@ -20,9 +21,15 @@ import {
   buildAssessmentSubmission,
   readAssessmentAttribution,
   type AssessmentContact,
+  type AssessmentQuestion,
   type AssessmentSubmission,
 } from "../domain/assessment";
 import "./assessment.css";
+
+function questionHelper(step: number) {
+  const question: AssessmentQuestion = QUESTIONS[step];
+  return question.helper ? ` ${question.helper}` : "";
+}
 
 const blankContact = () =>
   Object.fromEntries(
@@ -114,6 +121,7 @@ export function Assessment() {
             <p className="assessment-section-copy">
               Choose the answer closest to your current situation. Selecting an
               answer continues to the next step.
+              {questionHelper(step)}
             </p>
             <div className="assessment-options">
               {QUESTIONS[step].options.map((label, value) => (
@@ -147,7 +155,7 @@ export function Assessment() {
             aria-label="Assessment result"
           >
             <p className="assessment-eyebrow">
-              Your indicative AI operations score
+              Your indicative operations score
             </p>
             <h1 className="assessment-score" ref={heading} tabIndex={-1}>
               {score.score} / {score.max_score}
@@ -156,9 +164,10 @@ export function Assessment() {
               <strong>{score.tier}</strong>
             </p>
             <p>
-              This score reflects your answers. It is not an independent
-              diagnosis, a recommendation to buy services, or proof of potential
-              savings.
+              This score is indicative, not a diagnosis or a savings guarantee.
+              It reflects your answers about missing invoices, inventory,
+              handoffs, and owner bottleneck. It is not a recommendation to buy
+              services.
             </p>
             <p>
               Your answers stay in this browser tab. Share your result when you
@@ -557,6 +566,7 @@ export function LegacyAssessment() {
             <p className="assessment-section-copy">
               Choose the answer closest to your current situation. Selecting an
               answer continues to the next step.
+              {questionHelper(step)}
             </p>
             <div className="assessment-options">
               {QUESTIONS[step].options.map((label, value) => (
@@ -671,7 +681,7 @@ export function LegacyAssessment() {
                         maxLength: 2000,
                         wide: true,
                         placeholder:
-                          "Describe the process. Please leave out passwords, client details and other sensitive information.",
+                          "Restaurant invoices, inventory walking off, missed handoffs, or anything else. Please leave out passwords, client details and other sensitive information.",
                       })}
                     </div>
                   </details>
@@ -714,7 +724,7 @@ export function LegacyAssessment() {
                       ? "Retry Original Request"
                       : accepting === null
                         ? "Checking availability…"
-                        : "Get My AI Operations Score"}
+                        : ASSESSMENT_SUBMIT_LABEL}
               </button>
               <button
                 className="assessment-back"
@@ -753,8 +763,10 @@ export function LegacyAssessment() {
               results. {ONE_PATH_COPY}
             </p>
             <p className="assessment-small">
-              This score is based on your answers. We’ll explore what it means
-              for your business during your review.
+              This score is indicative, not a diagnosis or a savings guarantee.
+              It reflects your answers about missing invoices, inventory,
+              handoffs, and owner bottleneck. We’ll explore what it means for
+              your business during your review.
             </p>
             <section
               className="assessment-booking"

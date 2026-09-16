@@ -46,7 +46,7 @@ describe("P0 public funnel and machine files", () => {
     );
     const source = readFileSync(join(process.cwd(), "src/site/publicOffer.ts"), "utf8");
     expect(source).toContain(
-      "For owners of 1–50 person field and service shops",
+      "For owners of 1–50 person field, service, retail, and hospitality shops",
     );
     expect(source).not.toContain("AI operations for service businesses");
     expect(pages["/"][0] + pages["/"][1]).not.toContain("\u2014");

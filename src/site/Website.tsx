@@ -57,7 +57,7 @@ export const pages: Record<string, [string, string]> = {
   ],
   "/about": [
     "About Wonder & Workflow",
-    "Wonder & Workflow helps owner-led field and service shops improve how work gets done through careful discovery, proportionate technology, testing, and clear ownership.",
+    "Wonder & Workflow helps owner-led field, service, retail, and hospitality shops improve how work gets done through careful discovery, proportionate technology, testing, and clear ownership.",
   ],
   "/start": ["Start With an Operations Assessment", ASSESSMENT_META],
   "/privacy": [
@@ -245,6 +245,10 @@ function Home() {
             [
               "Admin that chases you",
               "Quotes waiting. Invoices after the fact. Payroll pieced together from texts and paper.",
+            ],
+            [
+              "Invoices and inventory that walk off",
+              "Kitchen invoices in a folder. Bar invoices with someone else. Materials and supplies that never get counted.",
             ],
           ].map(([title, problem], index) => (
             <article key={title}>
@@ -656,7 +660,7 @@ function About() {
         label="About Wonder & Workflow"
         title="Better operations begin with respect"
         accent="for the people doing the work."
-        copy="Wonder & Workflow is a husband-and-wife-owned operations business focused on how field and service work actually gets done: intake, documents, information, approvals, follow-up, reporting, and handoffs."
+        copy="Wonder & Workflow is a husband-and-wife-owned operations business focused on how field, service, retail, and hospitality work actually gets done: invoices, inventory, intake, documents, information, approvals, follow-up, reporting, and handoffs."
       />
       <section className="ww-about-statement">
         <BrandLockup variant="ink" className="ww-brand-lockup ww-brand-lockup-panel" />

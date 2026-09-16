@@ -79,7 +79,9 @@ describe("public browser-only assessment", () => {
     expect(
       screen.getByRole("button", { name: QUESTIONS[0].options[0] }),
     ).toHaveAttribute("aria-pressed", "true");
-    for (let index = 0; index < QUESTIONS.length; index++) answer(0);
+    for (let index = 0; index < QUESTIONS.length; index++) {
+      answer(QUESTIONS[index].key === "friction_home" ? 7 : 0);
+    }
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "0 / 21",
     );

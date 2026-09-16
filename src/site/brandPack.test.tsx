@@ -131,7 +131,7 @@ describe("Homepage verbal rewrite", () => {
       screen.getByRole("heading", { level: 1, name: HOME_H1 }),
     ).toBeVisible();
     expect(
-      screen.getByText("For owners of 1–50 person field and service shops"),
+      screen.getByText("For owners of 1–50 person field, service, retail, and hospitality shops"),
     ).toBeVisible();
     expect(
       document.body.textContent,
@@ -159,6 +159,7 @@ describe("Homepage verbal rewrite", () => {
       }),
     ).toBeVisible();
     expect(document.body.textContent).toMatch(/Cleaning, landscaping, detailing/);
+    expect(document.body.textContent).toMatch(/hospitality \(restaurants, bars, hotels, catering\)/);
     expect(document.body.textContent).toMatch(/all-in-one field app/);
     expect(document.body.textContent).toMatch(/fractional COO/);
     expect(screen.getByRole("heading", { name: /Missed intake/i })).toBeVisible();
@@ -167,6 +168,11 @@ describe("Homepage verbal rewrite", () => {
     ).toBeVisible();
     expect(
       screen.getByRole("heading", { name: /Admin that chases you/i }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("heading", {
+        name: /Invoices and inventory that walk off/i,
+      }),
     ).toBeVisible();
     expect(document.body.textContent).toMatch(
       /If nothing moves without you, the process is the product/,

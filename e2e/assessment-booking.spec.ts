@@ -5,7 +5,7 @@ import { createBridge } from "../server/bridge";
 import type { BridgeConfig } from "../server/config";
 import type { DurableStore, Stored } from "../server/storage";
 import type { GhlAppointment, GhlClient, GhlContact } from "../server/ghl";
-import { QUESTIONS, ASSESSMENT_BOOKING_URL } from "../src/domain/assessment";
+import { QUESTIONS, ASSESSMENT_BOOKING_URL, ASSESSMENT_SUBMIT_LABEL } from "../src/domain/assessment";
 import {
   INTAKE_LOCATION_ID,
   INTAKE_CALENDAR_ID,
@@ -29,13 +29,13 @@ async function fillAssessment(page: Page) {
     .fill("Fictional Workshop");
   await page
     .getByLabel("Team size", { exact: true })
-    .selectOption("6–20 people");
+    .selectOption("6–20");
   await page
     .getByLabel("Industry", { exact: true })
     .selectOption("Construction / trades");
   await page
-    .getByLabel("Your main operational priority", { exact: true })
-    .selectOption("Reduce repetitive admin");
+    .getByLabel("Main operational priority", { exact: true })
+    .selectOption("Catch work that waits on me");
   await page.getByText("Add optional details", { exact: true }).click();
   await page
     .getByLabel("Current tools (optional, not scored)", { exact: true })
@@ -49,7 +49,7 @@ test("unavailable submission service retains answers and never shows a false sav
   await page.route("**/api/integration-status",route=>route.fulfill({json:{acceptingSubmissions:false}}));
   await page.goto("/assessment/");
   await fillAssessment(page);
-  await page.getByRole("button",{name:"Get My AI Operations Score"}).click();
+  await page.getByRole("button",{name:ASSESSMENT_SUBMIT_LABEL}).click();
   await expect(page.getByRole("alert")).toContainText("We can’t save your assessment right now");
   await expect(page.getByLabel("Email",{exact:true})).toHaveValue("taylor@example.test");
   await expect(page.locator(".assessment-calendar")).toHaveCount(0);
@@ -219,7 +219,7 @@ test("assessment → canonical booking → protected inbox → audit using fake 
   await page.goto("/assessment");
   await fillAssessment(page);
   await page
-    .getByRole("button", { name: "Get My AI Operations Score", exact: true })
+    .getByRole("button", { name: ASSESSMENT_SUBMIT_LABEL, exact: true })
     .click();
   await expect(
     page.getByRole("heading", { name: "21 / 21", exact: true }),
