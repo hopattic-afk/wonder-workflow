@@ -1201,9 +1201,9 @@
 }
 .ww-proof-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 46px;
-  max-width: 640px;
+  max-width: none;
 }
 .ww-proof-grid article {
   border-top: 1px solid var(--ww-line);
@@ -1211,6 +1211,10 @@
 }
 .ww-proof-grid h3 {
   margin-bottom: 14px;
+}
+.ww-proof .ww-text-link {
+  display: inline-block;
+  margin-top: 8px;
 }
 .ww-site .ww-cta-ladder {
   font-size: 15px;
