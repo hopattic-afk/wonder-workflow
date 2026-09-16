@@ -214,6 +214,12 @@ describe("Homepage verbal rewrite", () => {
     ).toBeVisible();
     const proofCards = document.querySelectorAll(".ww-proof-grid article");
     expect(proofCards).toHaveLength(3);
+    expect(
+      document.querySelector(".ww-proof-grid .ww-proof-note")?.textContent,
+    ).toMatch(/no invented testimonials/i);
+    expect(
+      document.querySelector(".ww-proof-grid article .ww-proof-note"),
+    ).toBeNull();
     for (const card of HOME_PROOF_CARDS) {
       expect(screen.getByRole("heading", { name: card.title })).toBeVisible();
       expect(document.body.textContent).toContain(card.body);

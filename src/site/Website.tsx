@@ -330,14 +330,16 @@ function Home() {
               <p className="ww-outcome">{card.note}</p>
             </article>
           ))}
+          <div className="ww-proof-note">
+            <p>{HOME_PROOF_HONESTY}</p>
+            <Link
+              className="ww-text-link"
+              to="/case-studies/operations-assessment"
+            >
+              First-party implementation study <Arrow />
+            </Link>
+          </div>
         </div>
-        <p>{HOME_PROOF_HONESTY}</p>
-        <Link
-          className="ww-text-link"
-          to="/case-studies/operations-assessment"
-        >
-          First-party implementation study <Arrow />
-        </Link>
       </section>
       <Invitation title={HOME_INVITATION_TITLE} />
     </div>

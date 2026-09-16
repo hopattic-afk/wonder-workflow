@@ -1212,7 +1212,15 @@
 .ww-proof-grid h3 {
   margin-bottom: 14px;
 }
-.ww-proof .ww-text-link {
+.ww-proof-note {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--ww-line);
+  padding-top: 22px;
+}
+.ww-proof-note p {
+  max-width: 760px;
+}
+.ww-proof-note .ww-text-link {
   display: inline-block;
   margin-top: 8px;
 }
