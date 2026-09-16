@@ -22,7 +22,9 @@ import {
   HOME_INVITATION_TITLE,
   HOME_PAIN_CARDS,
   HOME_PROOF_CARDS,
+  HOME_PROOF_EYEBROW,
   HOME_PROOF_HONESTY,
+  HOME_PROOF_TITLE,
   HOME_TITLE,
   LADDER_NOTE,
   ONE_PATH_COPY,
@@ -319,8 +321,8 @@ function Home() {
       </section>
       <section className="ww-section ww-proof">
         <div className="ww-section-heading">
-          <Eyebrow>Proof</Eyebrow>
-          <h2>Shops like yours</h2>
+          <Eyebrow>{HOME_PROOF_EYEBROW}</Eyebrow>
+          <h2>{HOME_PROOF_TITLE}</h2>
         </div>
         <div className="ww-proof-grid">
           {HOME_PROOF_CARDS.map((card) => (

@@ -42,7 +42,7 @@ describe("P0 public funnel and machine files", () => {
 
   it("home title and eyebrow lead with locked field-shop copy", () => {
     expect(pages["/"][0]).toBe(
-      "Business operations help for field and service shops",
+      "Business operations help for hospitality, field, and service shops",
     );
     const source = readFileSync(join(process.cwd(), "src/site/publicOffer.ts"), "utf8");
     expect(source).toContain(

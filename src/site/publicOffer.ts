@@ -3,14 +3,15 @@ export const FIT_REVIEW_PLAIN = "30-minute business operations review";
 export const ASSESSMENT_PATH = "/assessment";
 export const ASSESSMENT_META =
   "Assess your operations in about two minutes. Save your contact details, then book a complimentary 30-minute Operations Fit Review.";
-export const HOME_TITLE = "Business operations help for field and service shops";
+export const HOME_TITLE =
+  "Business operations help for hospitality, field, and service shops";
 export const HOME_DESCRIPTION =
   "For owners of hospitality, retail, construction, field and home services, and signs/production shops with roughly 1–50 people. Spot where work gets stuck: invoices in the wrong hands, inventory that walks, work that waits on you. Free 2-minute assessment, then a complimentary 30-minute Operations Fit Review.";
 export const HOME_H1 =
   "Your business has outgrown the way the work gets done.";
 export const HOME_EYEBROW = "For owners of 1–50 person field, service, retail, and hospitality shops";
 export const HOME_DECK =
-  "Invoices in the wrong hands. Inventory that walks. Work that waits on you… We map one real path of work and make the next step obvious.";
+  "Invoices in the wrong hands. Inventory that walks. Work that waits on you… We dig into the ops problem at your business and build the right fix, not a canned intake script.";
 export const TOOL_AGNOSTIC_COPY =
   "Most of the time this is a structure and ownership problem, not a software problem. You may not need another tool.";
 export const TRUST_LINE =
@@ -50,6 +51,8 @@ export const HOME_PROOF_CARDS: { title: string; body: string; note: string }[] =
     note: "One example of stuck work, not the product. We still start from the unique problem in that shop.",
   },
 ];
+export const HOME_PROOF_EYEBROW = "How the work actually breaks";
+export const HOME_PROOF_TITLE = "Unique problems. Equal weight. Not one funnel.";
 export const HOME_PROOF_HONESTY =
   "These are examples of problems we map. No invented testimonials. Named owner quotes land here when we have them.";
 export const HOME_INVITATION_TITLE =
@@ -57,7 +60,7 @@ export const HOME_INVITATION_TITLE =
 export const ABOUT_OPS_INSERT =
   "We dig into the unique operations problem at that business and build the right fix. Intake to paid is one example, not the offer. The Operations Fit Review is a complimentary 30-minute business operations review. You can bring several issues; the call prioritizes.";
 export const FOOTER_BLURB =
-  "Wonder & Workflow helps field and service owners fix how work gets done, without defaulting to another tool.";
+  "Wonder & Workflow helps hospitality, field, and service owners fix how work gets done, without defaulting to another tool.";
 export const LADDER_NOTE =
   "Next: complimentary Operations Fit Review. Then a paid diagnostic scoped after the review, then implementation, then optional support. Software and vendor costs stay separate.";
 export const BOOKING_IFRAME_TITLE =

@@ -16,6 +16,8 @@ import {
   HOME_INVITATION_TITLE,
   HOME_PAIN_CARDS,
   HOME_PROOF_CARDS,
+  HOME_PROOF_EYEBROW,
+  HOME_PROOF_TITLE,
   HOME_TITLE,
   LOGO_AVATAR,
   LOGO_OG,
@@ -141,6 +143,8 @@ describe("Homepage verbal rewrite", () => {
       screen.getByText("For owners of 1–50 person field, service, retail, and hospitality shops"),
     ).toBeVisible();
     expect(document.body.textContent).toContain(HOME_DECK);
+    expect(HOME_DECK).not.toMatch(/one real path of work/i);
+    expect(HOME_DECK).toMatch(/not a canned intake script/i);
     expect(document.body.textContent).toMatch(
       /Invoices in the wrong hands\. Inventory that walks\. Work that waits on you/,
     );
@@ -209,9 +213,13 @@ describe("Homepage verbal rewrite", () => {
     expect(document.body.textContent).toMatch(/Paid diagnostic/);
     expect(document.body.textContent).toMatch(/Optional support/);
     expect(document.body.textContent).not.toMatch(/\$\d/);
+    expect(screen.getByText(HOME_PROOF_EYEBROW)).toBeVisible();
     expect(
-      screen.getByRole("heading", { name: /Shops like yours/i }),
+      screen.getByRole("heading", { name: HOME_PROOF_TITLE }),
     ).toBeVisible();
+    expect(
+      screen.queryByRole("heading", { name: /Shops like yours/i }),
+    ).toBeNull();
     const proofCards = document.querySelectorAll(".ww-proof-grid article");
     expect(proofCards).toHaveLength(3);
     expect(
