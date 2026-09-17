@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" role="img" aria-labelledby="title">
+  <title id="title">Path steps  -  clear path, steps-left family</title>
+  <desc>Three ascending flat squares then accent path to next-owner square.</desc>
+  <!-- ground hairline -->
+  <line x1="16" y1="96" x2="264" y2="96" stroke="rgba(32,35,43,0.12)" stroke-width="1.5"/>
+  <!-- ascending steps (logo family), left to right along path -->
+  <g fill="#7BA1AF">
+    <rect x="40" y="72" width="28" height="28"/>
+    <rect x="78" y="52" width="28" height="28"/>
+    <rect x="116" y="32" width="28" height="28"/>
+  </g>
+  <!-- continuing path line after steps -->
+  <line x1="144" y1="46" x2="248" y2="46" stroke="#7BA1AF" stroke-width="3" stroke-linecap="square"/>
+  <rect x="248" y="40" width="12" height="12" fill="#7BA1AF"/>
+
+</svg>

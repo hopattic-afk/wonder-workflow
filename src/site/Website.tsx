@@ -8,6 +8,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { BrandLockup } from "./BrandLockup";
+import { OwnershipPathScroll } from "./OwnershipPathScroll";
 import { captureCampaign, publicHref } from "./campaign";
 import {
   ASSESSMENT_META,
@@ -219,6 +220,7 @@ function Home() {
           </div>
         </div>
       </section>
+      <OwnershipPathScroll />
       <section className="ww-section ww-who-for">
         <div className="ww-section-heading">
           <Eyebrow>Who this is for</Eyebrow>
@@ -982,6 +984,9 @@ export default function Website() {
         >
           {menuOpen ? "Close −" : "Menu +"}
         </button>
+        <Link className="ww-header-assess" to="/assessment">
+          Assess your operations
+        </Link>
         <nav
           id="ww-navigation"
           className={menuOpen ? "ww-nav ww-nav-open" : "ww-nav"}
