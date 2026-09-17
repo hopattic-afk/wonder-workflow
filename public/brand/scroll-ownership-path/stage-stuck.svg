@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 384" role="img" aria-labelledby="title">
+  <title id="title">Stage Stuck  -  Office, Crew, Owner separate, no connectors</title>
+  <desc>Full composition for scroll beat 01. Industry-neutral primary roles.</desc>
+  <rect width="480" height="384" fill="#FAFAF8"/>
+  <rect x="24" y="24" width="432" height="336" rx="4" fill="#FFFFFF" stroke="rgba(32,35,43,0.12)" stroke-width="1.5"/>
+  <!-- Office (scattered) -->
+  <g>
+    <rect x="48" y="72" width="100" height="72" rx="3" fill="#FFFFFF" stroke="rgba(32,35,43,0.12)" stroke-width="1.5"/>
+    <rect x="60" y="86" width="24" height="24" fill="#20232B"/>
+    <rect x="64" y="90" width="6" height="6" fill="#FAFAF8"/>
+    <rect x="74" y="90" width="6" height="6" fill="#FAFAF8"/>
+    <rect x="64" y="100" width="16" height="6" fill="#FAFAF8" opacity="0.85"/>
+    <rect x="94" y="90" width="40" height="6" rx="1" fill="#20232B" opacity="0.85"/>
+    <rect x="94" y="102" width="28" height="5" rx="1" fill="rgba(32,35,43,0.62)"/>
+    <text x="60" y="132" font-family="IBM Plex Sans, Inter, system-ui, sans-serif" font-size="9" font-weight="600" fill="rgba(32,35,43,0.62)" letter-spacing="0.06em">OFFICE</text>
+  </g>
+  <!-- Crew (scattered) -->
+  <g>
+    <rect x="300" y="56" width="100" height="72" rx="3" fill="#FFFFFF" stroke="rgba(32,35,43,0.12)" stroke-width="1.5"/>
+    <rect x="312" y="70" width="24" height="24" fill="#20232B"/>
+    <rect x="315" y="76" width="7" height="14" fill="#FAFAF8" opacity="0.9"/>
+    <rect x="326" y="76" width="7" height="14" fill="#FAFAF8" opacity="0.75"/>
+    <rect x="346" y="74" width="40" height="6" rx="1" fill="#20232B" opacity="0.85"/>
+    <rect x="346" y="86" width="28" height="5" rx="1" fill="rgba(32,35,43,0.62)"/>
+    <text x="312" y="116" font-family="IBM Plex Sans, Inter, system-ui, sans-serif" font-size="9" font-weight="600" fill="rgba(32,35,43,0.62)" letter-spacing="0.06em">CREW</text>
+  </g>
+  <!-- Owner (scattered) -->
+  <g>
+    <rect x="160" y="220" width="100" height="72" rx="3" fill="#FFFFFF" stroke="rgba(32,35,43,0.12)" stroke-width="1.5"/>
+    <rect x="172" y="234" width="24" height="24" fill="#20232B"/>
+    <rect x="188" y="234" width="8" height="8" fill="#7BA1AF"/>
+    <rect x="206" y="238" width="40" height="6" rx="1" fill="#20232B" opacity="0.85"/>
+    <rect x="206" y="250" width="28" height="5" rx="1" fill="rgba(32,35,43,0.62)"/>
+    <text x="172" y="280" font-family="IBM Plex Sans, Inter, system-ui, sans-serif" font-size="9" font-weight="600" fill="rgba(32,35,43,0.62)" letter-spacing="0.06em">OWNER</text>
+  </g>
+  <text x="40" y="348" font-family="IBM Plex Sans, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#7BA1AF" letter-spacing="0.12em">BEAT 01 · STUCK</text>
+</svg>
