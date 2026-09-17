@@ -124,6 +124,7 @@ describe("Feel→Understand→Assess homepage chapter", () => {
     expect(css).toMatch(/#fafaf8/i);
     expect(css).toMatch(/#20232b/i);
     expect(css).toMatch(/#7ba1af/i);
+    expect(css).toMatch(/\.ww-site \.fua-block a\.fua-btn/);
     expect(css).not.toContain("#56438a");
     expect(css).not.toContain("ww-live-scene");
     expect(css).not.toContain("ww-operating-scene");

@@ -450,6 +450,32 @@
   font-size: 0.72rem;
 }
 
+.ww-site .fua-block a.fua-btn {
+  color: var(--fua-paper);
+  background: var(--fua-ink);
+}
+
+.ww-site .fua-block a.fua-btn:hover {
+  color: var(--fua-ink);
+  background: transparent;
+}
+
+.ww-site .fua-block a.fua-btn .fua-arrow {
+  color: var(--fua-accent);
+}
+
+.ww-site .fua-block .fua-ghost.g1 {
+  color: color-mix(in srgb, var(--fua-ink) 28%, transparent);
+}
+
+.ww-site .fua-block .fua-ghost.g2 {
+  color: color-mix(in srgb, var(--fua-accent) 45%, transparent);
+}
+
+.ww-site .fua-block .fua-ghost.g3 {
+  color: color-mix(in srgb, var(--fua-ink) 14%, transparent);
+}
+
 @media (max-width: 720px) {
   .fua-beat {
     padding: 5.5rem 1.35rem 4rem;
