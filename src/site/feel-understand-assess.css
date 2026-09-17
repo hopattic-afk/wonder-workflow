@@ -1,0 +1,483 @@
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts/InstrumentSerif-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts/InstrumentSerif-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+.fua-block {
+  --fua-paper: #fafaf8;
+  --fua-ink: #20232b;
+  --fua-accent: #7ba1af;
+  --fua-muted: #5a5e68;
+  --fua-line: rgba(32, 35, 43, 0.12);
+  background: var(--fua-paper);
+  color: var(--fua-ink);
+}
+
+.fua-chapter {
+  position: relative;
+  height: 320vh;
+}
+
+.fua-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--fua-paper);
+  display: grid;
+  place-items: center;
+}
+
+.fua-beat {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem 8vw 4rem;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.fua-beat-feel {
+  opacity: 1;
+}
+
+.fua-beat.is-active {
+  pointer-events: auto;
+}
+
+.fua-label {
+  font-family: "IBM Plex Sans", Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fua-accent);
+  margin-bottom: 1.5rem;
+}
+
+.fua-display {
+  font-family: "Instrument Serif", Georgia, Times, serif;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  text-wrap: balance;
+  max-width: 18ch;
+  font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+}
+
+.fua-lede {
+  margin-top: 1.75rem;
+  max-width: 36rem;
+  color: var(--fua-muted);
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  line-height: 1.7;
+}
+
+.fua-feel-stack {
+  position: relative;
+  max-width: min(92vw, 1100px);
+}
+
+.fua-feel-line,
+.fua-ghost {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(2.6rem, 6.8vw, 5.5rem);
+  letter-spacing: -0.038em;
+  line-height: 1.02;
+  color: var(--fua-ink);
+}
+
+.fua-ghost {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.fua-ghost.g1 {
+  transform: translate(0.04em, -0.06em);
+  color: color-mix(in srgb, var(--fua-ink) 28%, transparent);
+}
+
+.fua-ghost.g2 {
+  transform: translate(-0.06em, 0.08em);
+  color: color-mix(in srgb, var(--fua-accent) 45%, transparent);
+}
+
+.fua-ghost.g3 {
+  transform: translate(0.12em, 0.02em);
+  color: color-mix(in srgb, var(--fua-ink) 14%, transparent);
+}
+
+.fua-pace-marks {
+  position: absolute;
+  right: 8vw;
+  bottom: 18vh;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  align-items: flex-end;
+  opacity: 0;
+}
+
+.fua-pace-marks span {
+  display: block;
+  height: 1px;
+  background: var(--fua-ink);
+  transform-origin: right center;
+}
+
+.fua-pace-marks span:nth-child(1) {
+  width: 4.5rem;
+  opacity: 0.55;
+}
+
+.fua-pace-marks span:nth-child(2) {
+  width: 7rem;
+  opacity: 0.35;
+}
+
+.fua-pace-marks span:nth-child(3) {
+  width: 2.8rem;
+  opacity: 0.7;
+}
+
+.fua-pace-marks span:nth-child(4) {
+  width: 9rem;
+  opacity: 0.2;
+}
+
+.fua-pace-caption {
+  position: absolute;
+  left: 8vw;
+  bottom: 12vh;
+  font-size: 0.9rem;
+  color: var(--fua-muted);
+  max-width: 22rem;
+  opacity: 0;
+}
+
+.fua-steps {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  max-width: 40rem;
+}
+
+.fua-step {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 1rem;
+  align-items: start;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.fua-num {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.5rem;
+  color: var(--fua-accent);
+  line-height: 1.2;
+}
+
+.fua-step p {
+  color: var(--fua-muted);
+  font-size: 1.05rem;
+}
+
+.fua-assess-panel {
+  max-width: 42rem;
+}
+
+.fua-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 1.75rem;
+  margin-top: 2.25rem;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.fua-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1rem 1.5rem;
+  background: var(--fua-ink);
+  color: var(--fua-paper);
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  border: 1.5px solid var(--fua-ink);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.fua-btn:hover {
+  background: transparent;
+  color: var(--fua-ink);
+}
+
+.fua-btn .fua-arrow {
+  color: var(--fua-accent);
+}
+
+.fua-fit-note {
+  font-size: 0.95rem;
+  color: var(--fua-muted);
+  max-width: 22rem;
+  line-height: 1.55;
+}
+
+.fua-calm-rule {
+  width: 3.5rem;
+  height: 2px;
+  background: var(--fua-accent);
+  margin: 1.5rem 0 0;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.fua-ticks {
+  position: absolute;
+  left: 8vw;
+  bottom: 5.5vh;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 5;
+}
+
+.fua-ticks i {
+  display: block;
+  width: 2rem;
+  height: 2px;
+  background: var(--fua-line);
+  transition: background 0.35s, width 0.35s;
+}
+
+.fua-ticks i.on {
+  background: var(--fua-accent);
+  width: 2.75rem;
+}
+
+.fua-scroll-hint {
+  position: absolute;
+  right: 8vw;
+  bottom: 5vh;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fua-muted);
+  opacity: 0.7;
+  z-index: 5;
+}
+
+.fua-below {
+  position: relative;
+  background: var(--fua-paper);
+  border-top: 1px solid var(--fua-line);
+  padding: 6rem 8vw 5rem;
+}
+
+.fua-kicker {
+  font-family: "IBM Plex Sans", Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fua-accent);
+  margin-bottom: 1rem;
+}
+
+.fua-section-title {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  max-width: 18ch;
+  margin-bottom: 2.5rem;
+}
+
+.fua-forks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--fua-line);
+  border: 1px solid var(--fua-line);
+  max-width: 56rem;
+}
+
+.fua-fork {
+  background: var(--fua-paper);
+  padding: 1.75rem 1.5rem;
+}
+
+.fua-fork h3 {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.fua-fork p {
+  color: var(--fua-muted);
+  font-size: 0.98rem;
+}
+
+.fua-support {
+  margin-top: 5rem;
+  padding-top: 4rem;
+  border-top: 1px solid var(--fua-line);
+  max-width: 40rem;
+}
+
+.fua-support h2 {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.15rem);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.fua-support p {
+  color: var(--fua-muted);
+  margin-bottom: 0.75rem;
+}
+
+.fua-support .fua-quiet {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.fua-is-reduced .fua-chapter {
+  height: 100vh;
+}
+
+.fua-is-reduced .fua-beat-feel,
+.fua-is-reduced .fua-beat-understand,
+.fua-is-reduced .fua-ghost,
+.fua-is-reduced .fua-pace-marks,
+.fua-is-reduced .fua-pace-caption,
+.fua-is-reduced .fua-scroll-hint {
+  opacity: 0 !important;
+}
+
+.fua-is-reduced .fua-beat-assess,
+.fua-is-reduced .fua-cta-row,
+.fua-is-reduced .fua-calm-rule {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.fua-is-reduced .fua-ticks i:nth-child(3) {
+  background: var(--fua-accent);
+  width: 2.75rem;
+}
+
+/* Win over .ww-site p/h2/h3 so the chapter stays type-led paper/ink. */
+.ww-site .fua-block .fua-feel-line,
+.ww-site .fua-block .fua-ghost {
+  font-family: "Instrument Serif", Georgia, Times, serif;
+  font-size: clamp(2.6rem, 6.8vw, 5.5rem);
+  letter-spacing: -0.038em;
+  line-height: 1.02;
+  color: var(--fua-ink);
+}
+
+.ww-site .fua-block .fua-display,
+.ww-site .fua-block .fua-section-title,
+.ww-site .fua-block .fua-support h2 {
+  font-family: "Instrument Serif", Georgia, Times, serif;
+  font-weight: 400;
+  color: var(--fua-ink);
+}
+
+.ww-site .fua-block .fua-display {
+  font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.ww-site .fua-block .fua-section-title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+}
+
+.ww-site .fua-block .fua-support h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.15rem);
+}
+
+.ww-site .fua-block .fua-fork h3 {
+  font-family: "Instrument Serif", Georgia, Times, serif;
+  font-size: 1.45rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--fua-ink);
+}
+
+.ww-site .fua-block .fua-lede,
+.ww-site .fua-block .fua-pace-caption,
+.ww-site .fua-block .fua-fit-note,
+.ww-site .fua-block .fua-step p,
+.ww-site .fua-block .fua-fork p,
+.ww-site .fua-block .fua-support p {
+  color: var(--fua-muted);
+}
+
+.ww-site .fua-block .fua-label,
+.ww-site .fua-block .fua-kicker {
+  color: var(--fua-accent);
+  font-size: 0.72rem;
+}
+
+@media (max-width: 720px) {
+  .fua-beat {
+    padding: 5.5rem 1.35rem 4rem;
+  }
+
+  .fua-feel-line,
+  .fua-ghost {
+    white-space: normal;
+  }
+
+  .fua-pace-marks {
+    display: none;
+  }
+
+  .fua-forks {
+    grid-template-columns: 1fr;
+  }
+
+  .fua-below {
+    padding: 4rem 1.35rem 5rem;
+  }
+
+  .fua-ticks {
+    left: 1.35rem;
+  }
+
+  .fua-scroll-hint {
+    right: 1.35rem;
+    font-size: 0.65rem;
+  }
+}

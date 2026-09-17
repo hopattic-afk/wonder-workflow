@@ -15,6 +15,41 @@ export const TOOL_AGNOSTIC_COPY =
   "Most of the time this is a structure and ownership problem, not a software problem. You may not need another tool.";
 export const TRUST_LINE =
   "About 2 minutes. Then book a complimentary 30-minute Operations Fit Review.";
+export const FEEL_FACE =
+  "The way work gets done can't keep up with the work.";
+export const FEEL_SEASONING =
+  "Capacity. Pace. The pile that never quite clears.";
+export const UNDERSTAND_HEAD = "Dig into what's actually breaking.";
+export const UNDERSTAND_LEDE =
+  "Then build the fix around how work really runs. Not another pile of tools. Not an org chart.";
+export const ASSESS_CLOSE_HEAD = "You bring what's actually breaking.";
+export const ASSESS_CLOSE_LEDE =
+  "We build the fix around how your work really runs.";
+export const FIT_REVIEW_LOCK =
+  "complimentary 30-minute business operations review";
+export const AUTOMATION_HEAD = "Automation that keeps work moving.";
+export const AUTOMATION_BODY =
+  "When the ops picture is clear, we may add automation that doesn't break under real load. Reliability first.";
+export const AUTOMATION_QUIET =
+  "These businesses don't need a chatbot. They need something that keeps work moving.";
+export const INFLECTION_FORKS = [
+  {
+    title: "First hires",
+    body: "The day stopped fitting in your head.",
+  },
+  {
+    title: "Volume spike",
+    body: "Demand outran how work gets done.",
+  },
+  {
+    title: "Buried in the day",
+    body: "You're the hub. Nothing moves without you.",
+  },
+  {
+    title: "Things falling through",
+    body: "Handoffs, details, status, materials.",
+  },
+] as const;
 export const WHO_FOR_BODY =
   "Cleaning, landscaping, detailing, signs and print, restoration, moving, and similar service businesses with roughly 1–50 people. If work lives in group texts, whiteboards, and “just ask me,” you’re in the right place.";
 export const WHO_FOR_EXCLUDE =

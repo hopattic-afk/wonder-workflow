@@ -8,6 +8,7 @@ test("homepage kills animated workflow theater and keeps the assessment CTA", as
   await page.goto("/");
   await expect(page.locator(".ww-launch-intro")).toHaveCount(0);
   await expect(page.locator(".ww-operating-scene")).toHaveCount(0);
+  await expect(page.locator("#ownership-path")).toHaveCount(0);
   await expect(page.getByText("One request. A connected workflow.")).toHaveCount(
     0,
   );

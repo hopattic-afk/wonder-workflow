@@ -8,10 +8,13 @@ import {
   useLocation,
 } from "react-router-dom";
 import { BrandLockup } from "./BrandLockup";
-import { OwnershipPathScroll } from "./OwnershipPathScroll";
+import { FeelUnderstandAssess } from "./FeelUnderstandAssess";
 import { captureCampaign, publicHref } from "./campaign";
 import {
+  ASSESS_CLOSE_HEAD,
+  ASSESS_CLOSE_LEDE,
   ASSESSMENT_META,
+  FIT_REVIEW_LOCK,
   FIT_REVIEW_NAME,
   FIT_REVIEW_PLAIN,
   FOOTER_BLURB,
@@ -29,6 +32,7 @@ import {
 } from "./publicOffer";
 import { AssessmentCaseStudy, GuidePage, GuidesIndex, ServiceDirectory, ServicePage, applyStructuredData, guides, honestyFaqs, searchPages, services } from "./SearchContent";
 import "./website.css";
+import "./feel-understand-assess.css";
 
 function Link(props: ComponentProps<typeof RouterLink>) {
   return (
@@ -97,8 +101,8 @@ function NextStepNote() {
   return <p className="ww-cta-ladder">{LADDER_NOTE}</p>;
 }
 function Invitation({
-  title = "Find where jobs get stuck between intake and paid.",
-  copy = `Take the 2-minute assessment, leave your details, and book a complimentary ${FIT_REVIEW_NAME}. We’ll look at your results together and pick one improvement worth doing.`,
+  title = ASSESS_CLOSE_HEAD,
+  copy = `${ASSESS_CLOSE_LEDE} Book a ${FIT_REVIEW_LOCK}.`,
 }: {
   title?: string;
   copy?: string;
@@ -220,7 +224,7 @@ function Home() {
           </div>
         </div>
       </section>
-      <OwnershipPathScroll />
+      <FeelUnderstandAssess />
       <section className="ww-section ww-who-for">
         <div className="ww-section-heading">
           <Eyebrow>Who this is for</Eyebrow>
@@ -964,7 +968,7 @@ export default function Website() {
     initial.current = false;
   }, [location.pathname, location.search]);
   return (
-    <div className="ww-site">
+    <div className={location.pathname.replace(/\/+$/, "") === "" || location.pathname === "/" ? "ww-site ww-site-home" : "ww-site"}>
       <a className="ww-skip" href="#ww-main">
         Skip to content
       </a>

@@ -32,6 +32,7 @@ function renderPath(path: string) {
 
 const PUBLIC_COPY_FILES = [
   "src/site/Website.tsx",
+  "src/site/FeelUnderstandAssess.tsx",
   "src/site/SearchContent.tsx",
   "src/pages/Assessment.tsx",
   "src/site/publicOffer.ts",
@@ -191,10 +192,13 @@ describe("Homepage verbal rewrite", () => {
     ).toBeVisible();
     expect(document.body.textContent).toMatch(/no invented testimonials/i);
     expect(
-      screen.getByRole("heading", {
-        name: /Find where jobs get stuck between intake and paid/i,
-      }),
-    ).toBeVisible();
+      screen.getAllByRole("heading", {
+        name: /You bring what's actually breaking/i,
+      }).length,
+    ).toBeGreaterThan(0);
+    expect(document.body.textContent).toMatch(
+      /complimentary 30-minute business operations review/,
+    );
     expect(document.body.textContent).toMatch(
       /fix how work gets done, without defaulting to another tool/,
     );

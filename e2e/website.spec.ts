@@ -124,6 +124,20 @@ test("homepage is type-led with no intro film or workflow theater", async ({
       name: "Your business has outgrown the way the work gets done.",
     }),
   ).toBeVisible();
+  await expect(page.locator("#ownership-path")).toHaveCount(0);
+  await expect(page.locator("#feel-understand-assess")).toBeVisible();
+  await expect(page.locator(".fua-feel-line")).toContainText(
+    "The way work gets done",
+  );
+  await expect(page.locator(".fua-feel-line")).toContainText(
+    "can't keep up with the work.",
+  );
+  await expect(
+    page.getByRole("heading", { name: "First hires" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Automation that keeps work moving." }),
+  ).toBeVisible();
   await expect(
     page.locator(".ww-hero").getByRole("link", { name: "Assess your operations" }),
   ).toBeVisible();

@@ -1245,7 +1245,7 @@
   }
 }
 
-/* Sticky header so Assess stays visible through Ownership path scroll */
+/* Sticky header so Assess stays visible through the Feel→Understand→Assess chapter */
 .ww-site > .ww-header {
   position: sticky;
   top: 0;
@@ -1261,13 +1261,38 @@
   background: #20232b;
   color: #fafaf8 !important;
   text-decoration: none;
+  border: 1.5px solid #20232b;
   border-radius: 2px;
   font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
 }
 .ww-header-assess:hover {
   background: #2e333e;
+}
+.ww-site-home .ww-nav-cta,
+.ww-site-home .ww-header-assess {
+  background: transparent;
+  color: #20232b;
+}
+.ww-site-home .ww-header-assess {
+  color: #20232b !important;
+}
+.ww-site-home .ww-nav-cta:hover,
+.ww-site-home .ww-header-assess:hover,
+html[data-ww-assess-glow="true"] .ww-site-home .ww-nav-cta,
+html[data-ww-assess-glow="true"] .ww-site-home .ww-header-assess {
+  background: #20232b;
+  border-color: #20232b;
+  color: #fafaf8;
+}
+html[data-ww-assess-glow="true"] .ww-site-home .ww-header-assess {
+  color: #fafaf8 !important;
+}
+html[data-ww-assess-glow="true"] .ww-site-home .ww-nav-cta > span,
+.ww-site-home .ww-nav-cta:hover > span {
+  color: #7ba1af;
 }
 @media (max-width: 850px) {
   .ww-header-assess {
