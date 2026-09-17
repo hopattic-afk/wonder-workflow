@@ -64,11 +64,11 @@ describe("technical SEO for the brand pack PR", () => {
     expect(home).toContain("ww-home-hero");
   });
 
-  it("sitemap lastmod matches slashless canonicals and Search Console docs exist", () => {
+  it("sitemap lastmod matches trailing-slash canonicals and Search Console docs exist", () => {
     const sitemap = readFileSync(join(process.cwd(), "public/sitemap.xml"), "utf8");
-    expect(sitemap).toContain("<lastmod>2026-09-15</lastmod>");
-    expect(sitemap).toContain("<loc>https://wonderworkflow.com/assessment</loc>");
-    expect(sitemap).not.toContain("https://wonderworkflow.com/assessment/");
+    expect(sitemap).toContain("<lastmod>2026-09-17</lastmod>");
+    expect(sitemap).toContain("<loc>https://wonderworkflow.com/assessment/</loc>");
+    expect(sitemap).not.toContain("<loc>https://wonderworkflow.com/assessment</loc>");
     expect(sitemap).not.toContain("https://wonderworkflow.com/pricing");
     const checklist = readFileSync(
       join(process.cwd(), "docs/search-console-checklist.md"),
