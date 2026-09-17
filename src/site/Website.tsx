@@ -984,6 +984,9 @@ export default function Website() {
         >
           {menuOpen ? "Close −" : "Menu +"}
         </button>
+        <Link className="ww-header-assess" to="/assessment">
+          Assess your operations
+        </Link>
         <nav
           id="ww-navigation"
           className={menuOpen ? "ww-nav ww-nav-open" : "ww-nav"}
