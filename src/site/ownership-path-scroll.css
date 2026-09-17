@@ -1,3 +1,7 @@
+
+.ops-vignette-label {
+  display: none !important;
+}
 /* Ownership path scroll chapter — tokens aligned with site paper/ink/accent */
 .ops-chapter {
   --ops-paper: #fafaf8;
