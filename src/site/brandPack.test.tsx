@@ -145,7 +145,9 @@ describe("Homepage verbal rewrite", () => {
     ).toMatch(/You may not need another tool/);
     expect(
       document.body.textContent,
-    ).toMatch(/About 2 minutes\. Then book a complimentary 30-minute Operations Fit Review/);
+    ).toMatch(
+      /About 2 minutes\. Then book a complimentary 30-minute Fit Review \(business operations review\)/,
+    );
     const heroCta = document
       .querySelector(".ww-hero")
       ?.querySelector('a[href="/assessment"]');

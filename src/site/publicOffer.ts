@@ -14,11 +14,11 @@ export const HOME_DECK =
 export const TOOL_AGNOSTIC_COPY =
   "Most of the time this is a structure and ownership problem, not a software problem. You may not need another tool.";
 export const TRUST_LINE =
-  "About 2 minutes. Then book a complimentary 30-minute Operations Fit Review.";
+  "About 2 minutes. Then book a complimentary 30-minute Fit Review (business operations review).";
 export const FEEL_FACE =
   "The way work gets done can't keep up with the work.";
 export const FEEL_SEASONING =
-  "Capacity. Pace. The pile that never quite clears.";
+  "Capacity, pace, and the pile that never quite clears.";
 export const UNDERSTAND_HEAD = "Dig into what's actually breaking.";
 export const UNDERSTAND_LEDE =
   "Then build the fix around how work really runs. Not another pile of tools. Not an org chart.";
@@ -43,7 +43,7 @@ export const INFLECTION_FORKS = [
   },
   {
     title: "Buried in the day",
-    body: "You're the hub. Nothing moves without you.",
+    body: "You're the hub, and nothing moves without you.",
   },
   {
     title: "Things falling through",

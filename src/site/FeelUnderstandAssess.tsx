@@ -25,9 +25,9 @@ import {
 import "./feel-understand-assess.css";
 
 const UNDERSTAND_STEPS = [
-  "Sit with the work as it happens. Name the friction in plain language.",
+  "Sit with the work as it happens and name the friction in plain language.",
   "See where handoffs stall, details live in one head, and status has to be chased.",
-  "Design the change to fit your shop. Strategy and execution, not a deck left behind.",
+  "Design the change to fit your shop: strategy and execution, not a deck left behind.",
 ] as const;
 
 const FEEL_LINE = (
