@@ -951,7 +951,11 @@ export default function Website() {
       canonical.rel = "canonical";
       document.head.appendChild(canonical);
     }
-    canonical.href = `https://wonderworkflow.com${canonicalPath}`;
+    const canonicalHref =
+      canonicalPath === "/"
+        ? "https://wonderworkflow.com/"
+        : `https://wonderworkflow.com${canonicalPath}/`;
+    canonical.href = canonicalHref;
     applyStructuredData(canonicalPath);
     window.scrollTo({ top: 0, behavior: "instant" });
     if (!initial.current) main.current?.focus({ preventScroll: true });
