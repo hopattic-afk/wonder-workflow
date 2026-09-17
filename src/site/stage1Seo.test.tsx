@@ -46,8 +46,8 @@ describe("Stage 1 SEO pages", () => {
     );
 
     for (const path of [CONSULTANT, AUDIT, BOTTLENECK]) {
-      expect(sitemap()).toContain(`<loc>https://wonderworkflow.com${path}</loc>`);
-      expect(sitemap()).not.toContain(`https://wonderworkflow.com${path}/`);
+      expect(sitemap()).toContain(`<loc>https://wonderworkflow.com${path}/</loc>`);
+      expect(sitemap()).not.toContain(`<loc>https://wonderworkflow.com${path}</loc>`);
     }
 
     renderPath("/services");
@@ -161,16 +161,16 @@ describe("Stage 1 SEO pages", () => {
     expect(schema).toContain("2026-09-15");
   });
 
-  it("sitemap lists every service and guide slug without trailing slashes", () => {
+  it("sitemap lists every service and guide slug with trailing slashes", () => {
     const xml = sitemap();
     for (const service of services) {
       expect(xml).toContain(
-        `<loc>https://wonderworkflow.com/services/${service.slug}</loc>`,
+        `<loc>https://wonderworkflow.com/services/${service.slug}/</loc>`,
       );
     }
     for (const guide of guides) {
       expect(xml).toContain(
-        `<loc>https://wonderworkflow.com/guides/${guide.slug}</loc>`,
+        `<loc>https://wonderworkflow.com/guides/${guide.slug}/</loc>`,
       );
     }
   });

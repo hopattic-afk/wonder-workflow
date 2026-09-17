@@ -58,7 +58,7 @@ export function Assessment() {
       canonical.rel = "canonical";
       document.head.appendChild(canonical);
     }
-    canonical.href = "https://wonderworkflow.com/assessment";
+    canonical.href = "https://wonderworkflow.com/assessment/";
     writeJsonLd(assessmentJsonLd());
     return () => {
       if (cooldown.current) clearTimeout(cooldown.current);
@@ -244,7 +244,7 @@ export function LegacyAssessment() {
       canonical.rel = "canonical";
       document.head.appendChild(canonical);
     }
-    canonical.href = "https://wonderworkflow.com/assessment";
+    canonical.href = "https://wonderworkflow.com/assessment/";
     writeJsonLd(assessmentJsonLd());
   }, []);
   const [contact, setContact] = useState(blankContact);

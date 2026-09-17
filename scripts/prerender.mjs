@@ -11,7 +11,7 @@ try {
   const { readdir } = await import("node:fs/promises");
   const routeCss = (await readdir("dist/assets")).filter(name => /^(Website|Assessment)-.*\.css$/.test(name));
   for (const page of renderPublicPages()) {
-    const canonical = `https://wonderworkflow.com${page.path}`;
+    const canonical = page.path === "/" ? "https://wonderworkflow.com/" : `https://wonderworkflow.com${page.path}/`;
     const schema = page.schema ? `<script type="application/ld+json" id="ww-structured-data">${JSON.stringify(page.schema).replaceAll("<", "\\u003c")}</script>` : "";
     let html = template.replace('<div id="root"></div>', `<div id="root">${page.html}</div>`)
       .replace(/<noscript>[\s\S]*?<\/noscript>/, "")
