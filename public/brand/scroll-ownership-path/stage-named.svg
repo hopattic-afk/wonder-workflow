@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 384" role="img" aria-labelledby="title">
+  <title id="title">Stage Named  -  connectors and next-owner mark on Crew</title>
+  <desc>Full composition for scroll beat 02. Industry-neutral primary roles.</desc>
+  <rect width="480" height="384" fill="#FAFAF8"/>
+  <rect x="24" y="24" width="432" height="336" rx="4" fill="#FFFFFF" stroke="rgba(32,35,43,0.12)" stroke-width="1.5"/>
+  <!-- connectors (accent) -->
+  <line x1="148" y1="108" x2="300" y2="92" stroke="#7BA1AF" stroke-width="2.5"/>
+  <rect x="218" y="94" width="10" height="10" fill="#7BA1AF"/>
+  <line x1="350" y1="128" x2="260" y2="220" stroke="#7BA1AF" stroke-width="2.5"/>
+  <rect x="298" y="168" width="10" height="10" fill="#7BA1AF"/>
+  <line x1="160" y1="144" x2="200" y2="220" stroke="rgba(32,35,43,0.62)" stroke-width="2" opacity="0.7"/>
+  <!-- Office -->
+  <g>
+    <rect x="48" y="72" width="100" height="72" rx="3" fill="#FFFFFF" stroke="rgba(32,35,43,0.12)" stroke-width="1.5"/>
+    <rect x="60" y="86" width="24" height="24" fill="#20232B"/>
+    <rect x="64" y="90" width="6" height="6" fill="#FAFAF8"/>
+    <rect x="74" y="90" width="6" height="6" fill="#FAFAF8"/>
+    <rect x="64" y="100" width="16" height="6" fill="#FAFAF8" opacity="0.85"/>
+    <rect x="94" y="90" width="40" height="6" rx="1" fill="#20232B" opacity="0.85"/>
+    <rect x="94" y="102" width="28" height="5" rx="1" fill="rgba(32,35,43,0.62)"/>
+    <text x="60" y="132" font-family="IBM Plex Sans, Inter, system-ui, sans-serif" font-size="9" font-weight="600" fill="rgba(32,35,43,0.62)" letter-spacing="0.06em">OFFICE</text>
+  </g>
+  <!-- Crew + next-owner pip on tile -->
+  <g>
+    <rect x="300" y="56" width="100" height="72" rx="3" fill="#FFFFFF" stroke="rgba(32,35,43,0.12)" stroke-width="1.5"/>
+    <rect x="312" y="70" width="24" height="24" fill="#20232B"/>
+    <rect x="315" y="76" width="7" height="14" fill="#FAFAF8" opacity="0.9"/>
+    <rect x="326" y="76" width="7" height="14" fill="#FAFAF8" opacity="0.75"/>
+    <rect x="346" y="74" width="40" height="6" rx="1" fill="#20232B" opacity="0.85"/>
+    <rect x="346" y="86" width="28" height="5" rx="1" fill="rgba(32,35,43,0.62)"/>
+    <text x="312" y="116" font-family="IBM Plex Sans, Inter, system-ui, sans-serif" font-size="9" font-weight="600" fill="rgba(32,35,43,0.62)" letter-spacing="0.06em">CREW</text>
+    <rect x="378" y="66" width="10" height="10" fill="#7BA1AF"/>
+  </g>
+  <!-- Owner -->
+  <g>
+    <rect x="160" y="220" width="100" height="72" rx="3" fill="#FFFFFF" stroke="rgba(32,35,43,0.12)" stroke-width="1.5"/>
+    <rect x="172" y="234" width="24" height="24" fill="#20232B"/>
+    <rect x="188" y="234" width="8" height="8" fill="#7BA1AF"/>
+    <rect x="206" y="238" width="40" height="6" rx="1" fill="#20232B" opacity="0.85"/>
+    <rect x="206" y="250" width="28" height="5" rx="1" fill="rgba(32,35,43,0.62)"/>
+    <text x="172" y="280" font-family="IBM Plex Sans, Inter, system-ui, sans-serif" font-size="9" font-weight="600" fill="rgba(32,35,43,0.62)" letter-spacing="0.06em">OWNER</text>
+  </g>
+  <!-- next-owner callout near CREW -->
+  <g transform="translate(410,48)">
+    <rect x="0" y="0" width="20" height="20" fill="#7BA1AF"/>
+    <rect x="5" y="5" width="10" height="10" fill="#FAFAF8"/>
+    <rect x="7.5" y="7.5" width="5" height="5" fill="#7BA1AF"/>
+  </g>
+  <text x="40" y="348" font-family="IBM Plex Sans, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#7BA1AF" letter-spacing="0.12em">BEAT 02 · NAMED</text>
+</svg>
