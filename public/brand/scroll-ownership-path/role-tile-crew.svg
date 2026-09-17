@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 88" role="img" aria-labelledby="title">
+  <title id="title">Role tile  -  crew</title>
+  <desc>Industry-neutral primary role. Twin blocks for crew; industry-neutral.</desc>
+  <rect x="1" y="1" width="118" height="86" rx="3" fill="#FFFFFF" stroke="rgba(32,35,43,0.12)" stroke-width="1.5"/>
+  <rect x="16" y="20" width="32" height="32" fill="#20232B"/>
+  <rect x="20" y="28" width="10" height="18" fill="#FAFAF8" opacity="0.9"/>
+  <rect x="34" y="28" width="10" height="18" fill="#FAFAF8" opacity="0.75"/>
+  <rect x="58" y="24" width="46" height="8" rx="1.5" fill="#20232B" opacity="0.88"/>
+  <rect x="58" y="40" width="28" height="6" rx="1.5" fill="rgba(32,35,43,0.62)"/>
+  <text x="16" y="72" font-family="IBM Plex Sans, Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="rgba(32,35,43,0.62)" letter-spacing="0.08em">CREW</text>
+</svg>
