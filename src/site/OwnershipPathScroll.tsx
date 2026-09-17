@@ -26,12 +26,6 @@ const BEATS = [
 const BRIDGE =
   "The Fit Review is a complimentary 30-minute business operations review. You bring what is actually breaking. We build the fix around how your work really runs.";
 
-/** Equal-weight secondary rotate labels. Default viz stays Office / Crew / Owner. */
-const VIGNETTE_LABELS = [
-  "Hospitality invoices",
-  "Construction inventory",
-  "Field / service",
-] as const;
 
 type Pose = { x: number; y: number; r: number; o: number; s: number };
 
@@ -83,15 +77,6 @@ export function OwnershipPathScroll() {
   const chapterRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
   const [beatIndex, setBeatIndex] = useState(0);
-  const [vignetteIndex, setVignetteIndex] = useState(0);
-
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setVignetteIndex((i) => (i + 1) % VIGNETTE_LABELS.length);
-    }, 6000);
-    return () => window.clearInterval(id);
-  }, []);
-
   useEffect(() => {
     const chapter = chapterRef.current;
     if (!chapter) return;
@@ -264,7 +249,6 @@ export function OwnershipPathScroll() {
             </div>
           </div>
 
-          <p className="ops-vignette-label">{VIGNETTE_LABELS[vignetteIndex]}</p>
           <div className="ops-progress-rail">
             <i style={{ height: `${(progress * 100).toFixed(2)}%` }} />
           </div>
