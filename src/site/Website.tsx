@@ -15,10 +15,17 @@ import {
   FIT_REVIEW_NAME,
   FIT_REVIEW_PLAIN,
   FOOTER_BLURB,
+  ABOUT_OPS_INSERT,
   HOME_DECK,
   HOME_DESCRIPTION,
   HOME_EYEBROW,
   HOME_H1,
+  HOME_INVITATION_TITLE,
+  HOME_PAIN_CARDS,
+  HOME_PROOF_CARDS,
+  HOME_PROOF_EYEBROW,
+  HOME_PROOF_HONESTY,
+  HOME_PROOF_TITLE,
   HOME_TITLE,
   LADDER_NOTE,
   ONE_PATH_COPY,
@@ -58,7 +65,7 @@ export const pages: Record<string, [string, string]> = {
   ],
   "/about": [
     "About Wonder & Workflow",
-    "Wonder & Workflow helps owner-led field and service shops improve how work gets done through careful discovery, proportionate technology, testing, and clear ownership.",
+    "Wonder & Workflow helps owner-led field, service, retail, and hospitality shops improve how work gets done through careful discovery, proportionate technology, testing, and clear ownership.",
   ],
   "/start": ["Start With an Operations Assessment", ASSESSMENT_META],
   "/privacy": [
@@ -97,7 +104,7 @@ function NextStepNote() {
   return <p className="ww-cta-ladder">{LADDER_NOTE}</p>;
 }
 function Invitation({
-  title = "Find where jobs get stuck between intake and paid.",
+  title = HOME_INVITATION_TITLE,
   copy = `Take the 2-minute assessment, leave your details, and book a complimentary ${FIT_REVIEW_NAME}. We’ll look at your results together and pick one improvement worth doing.`,
 }: {
   title?: string;
@@ -235,20 +242,7 @@ function Home() {
           <h2>What usually slows the day down</h2>
         </div>
         <div className="ww-problem-list">
-          {[
-            [
-              "Missed intake",
-              "Calls and texts while you’re on the tools. Leads slip. Jobs get double-booked.",
-            ],
-            [
-              "Handoffs that leak",
-              "The office has one version of the job. The crew has another. Screenshots and memory fill the gap.",
-            ],
-            [
-              "Admin that chases you",
-              "Quotes waiting. Invoices after the fact. Payroll pieced together from texts and paper.",
-            ],
-          ].map(([title, problem], index) => (
+          {HOME_PAIN_CARDS.map(([title, problem], index) => (
             <article key={title}>
               <span className="ww-index">0{index + 1}</span>
               <h3>{title}</h3>
@@ -329,26 +323,29 @@ function Home() {
       </section>
       <section className="ww-section ww-proof">
         <div className="ww-section-heading">
-          <Eyebrow>Proof</Eyebrow>
-          <h2>Shops like yours</h2>
+          <Eyebrow>{HOME_PROOF_EYEBROW}</Eyebrow>
+          <h2>{HOME_PROOF_TITLE}</h2>
         </div>
         <div className="ww-proof-grid">
-          <article>
-            <h3>What we can show today</h3>
-            <p>
-              Case studies and owner quotes land here when we have real ones.
-              Until then: no invented testimonials.
-            </p>
+          {HOME_PROOF_CARDS.map((card) => (
+            <article key={card.title}>
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+              <p className="ww-outcome">{card.note}</p>
+            </article>
+          ))}
+          <div className="ww-proof-note">
+            <p>{HOME_PROOF_HONESTY}</p>
             <Link
               className="ww-text-link"
               to="/case-studies/operations-assessment"
             >
               First-party implementation study <Arrow />
             </Link>
-          </article>
+          </div>
         </div>
       </section>
-      <Invitation />
+      <Invitation title={HOME_INVITATION_TITLE} />
     </div>
   );
 }
@@ -658,7 +655,7 @@ function About() {
         label="About Wonder & Workflow"
         title="Better operations begin with respect"
         accent="for the people doing the work."
-        copy="Wonder & Workflow is a husband-and-wife-owned operations business focused on how field and service work actually gets done: intake, documents, information, approvals, follow-up, reporting, and handoffs."
+        copy="Wonder & Workflow is a husband-and-wife-owned operations business focused on how field, service, retail, and hospitality work actually gets done: invoices, inventory, intake, documents, information, approvals, follow-up, reporting, and handoffs."
       />
       <section className="ww-about-statement">
         <BrandLockup variant="ink" className="ww-brand-lockup ww-brand-lockup-panel" />
@@ -680,6 +677,7 @@ function About() {
             understand the operation, choose the simplest suitable change, test
             it, and leave the team able to own what was built.
           </p>
+          <p>{ABOUT_OPS_INSERT}</p>
         </div>
       </section>
       <section className="ww-section ww-principle-section">

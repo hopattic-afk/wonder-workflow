@@ -7,15 +7,24 @@ import { LegacyAssessment } from "../pages/Assessment";
 import { ASSESSMENT_BOOKING_URL } from "../domain/assessment";
 import Website, { pages } from "./Website";
 import {
+  ABOUT_OPS_INSERT,
   BRAND_ACCENT,
   FIT_REVIEW_NAME,
+  HOME_DECK,
   HOME_DESCRIPTION,
   HOME_H1,
+  HOME_INVITATION_TITLE,
+  HOME_PAIN_CARDS,
+  HOME_PROOF_CARDS,
+  HOME_PROOF_EYEBROW,
+  HOME_PROOF_TITLE,
   HOME_TITLE,
   LOGO_AVATAR,
   LOGO_OG,
   LOGO_STACKED_INK,
   LOGO_STACKED_PAPER,
+  WHO_FOR_BODY,
+  WHO_FOR_EXCLUDE,
 } from "./publicOffer";
 
 const root = process.cwd();
@@ -131,11 +140,14 @@ describe("Homepage verbal rewrite", () => {
       screen.getByRole("heading", { level: 1, name: HOME_H1 }),
     ).toBeVisible();
     expect(
-      screen.getByText("For owners of 1–50 person field and service shops"),
+      screen.getByText("For owners of 1–50 person field, service, retail, and hospitality shops"),
     ).toBeVisible();
-    expect(
-      document.body.textContent,
-    ).toMatch(/Missed calls while you’re on a job/);
+    expect(document.body.textContent).toContain(HOME_DECK);
+    expect(HOME_DECK).not.toMatch(/one real path of work/i);
+    expect(HOME_DECK).toMatch(/not a canned intake script/i);
+    expect(document.body.textContent).toMatch(
+      /Invoices in the wrong hands\. Inventory that walks\. Work that waits on you/,
+    );
     expect(
       document.body.textContent,
     ).toMatch(/structure and ownership problem, not a software problem/);
@@ -158,16 +170,31 @@ describe("Homepage verbal rewrite", () => {
         name: /Built for shops where the owner still holds the day together/i,
       }),
     ).toBeVisible();
-    expect(document.body.textContent).toMatch(/Cleaning, landscaping, detailing/);
+    expect(document.body.textContent).toContain(WHO_FOR_BODY);
+    expect(document.body.textContent).toMatch(
+      /hospitality \(restaurants, bars, hotels, catering\)/i,
+    );
+    expect(document.body.textContent).toMatch(/retail/i);
+    expect(document.body.textContent).toMatch(/construction and trades/i);
+    expect(document.body.textContent).toMatch(/field and home services/i);
+    expect(document.body.textContent).toMatch(/signs, print, and production/i);
+    expect(document.body.textContent).toMatch(/1–50/);
+    expect(document.body.textContent).toContain(WHO_FOR_EXCLUDE);
+    expect(document.body.textContent).toMatch(
+      /Not promoted as a fit for law, accounting, or clinical/,
+    );
     expect(document.body.textContent).toMatch(/all-in-one field app/);
     expect(document.body.textContent).toMatch(/fractional COO/);
-    expect(screen.getByRole("heading", { name: /Missed intake/i })).toBeVisible();
     expect(
-      screen.getByRole("heading", { name: /Handoffs that leak/i }),
-    ).toBeVisible();
+      screen.queryByRole("heading", { name: /Missed intake/i }),
+    ).toBeNull();
     expect(
-      screen.getByRole("heading", { name: /Admin that chases you/i }),
-    ).toBeVisible();
+      screen.queryByRole("heading", { name: /Admin that chases you/i }),
+    ).toBeNull();
+    for (const [title] of HOME_PAIN_CARDS) {
+      expect(screen.getByRole("heading", { name: title })).toBeVisible();
+    }
+    expect(document.querySelectorAll(".ww-problem-list article")).toHaveLength(3);
     expect(document.body.textContent).toMatch(
       /If nothing moves without you, the process is the product/,
     );
@@ -186,14 +213,38 @@ describe("Homepage verbal rewrite", () => {
     expect(document.body.textContent).toMatch(/Paid diagnostic/);
     expect(document.body.textContent).toMatch(/Optional support/);
     expect(document.body.textContent).not.toMatch(/\$\d/);
+    expect(screen.getByText(HOME_PROOF_EYEBROW)).toBeVisible();
     expect(
-      screen.getByRole("heading", { name: /Shops like yours/i }),
+      screen.getByRole("heading", { name: HOME_PROOF_TITLE }),
     ).toBeVisible();
-    expect(document.body.textContent).toMatch(/no invented testimonials/i);
     expect(
-      screen.getByRole("heading", {
-        name: /Find where jobs get stuck between intake and paid/i,
-      }),
+      screen.queryByRole("heading", { name: /Shops like yours/i }),
+    ).toBeNull();
+    const proofCards = document.querySelectorAll(".ww-proof-grid article");
+    expect(proofCards).toHaveLength(3);
+    expect(
+      document.querySelector(".ww-proof-grid .ww-proof-note")?.textContent,
+    ).toMatch(/no invented testimonials/i);
+    expect(
+      document.querySelector(".ww-proof-grid article .ww-proof-note"),
+    ).toBeNull();
+    for (const card of HOME_PROOF_CARDS) {
+      expect(screen.getByRole("heading", { name: card.title })).toBeVisible();
+      expect(document.body.textContent).toContain(card.body);
+      expect(document.body.textContent).toContain(card.note);
+    }
+    expect(document.body.textContent).toMatch(/kitchen folder/i);
+    expect(document.body.textContent).toMatch(/QR code/i);
+    expect(document.body.textContent).toMatch(/one email/i);
+    expect(document.body.textContent).toMatch(/inventory/i);
+    expect(document.body.textContent).toMatch(/walk off/i);
+    expect(document.body.textContent).toMatch(/one example of stuck work, not the product/i);
+    expect(document.body.textContent).toMatch(/no invented testimonials/i);
+    expect(document.body.textContent).not.toMatch(
+      /Find where jobs get stuck between intake and paid/i,
+    );
+    expect(
+      screen.getByRole("heading", { name: HOME_INVITATION_TITLE }),
     ).toBeVisible();
     expect(document.body.textContent).toMatch(
       /fix how work gets done, without defaulting to another tool/,
@@ -260,6 +311,19 @@ describe("Remy / Operations Fit Review sitewide", () => {
     }
     expect(pages["/"][0] + pages["/"][1]).not.toContain("\u2014");
     expect(pages["/start"][1]).toMatch(/Operations Fit Review/);
+  });
+
+  it("adds the About unique-ops insert and Fit Review definition", () => {
+    renderPath("/about");
+    expect(document.body.textContent).toContain(ABOUT_OPS_INSERT);
+    expect(document.body.textContent).toMatch(
+      /unique operations problem/i,
+    );
+    expect(document.body.textContent).toMatch(
+      /complimentary 30-minute business operations review/i,
+    );
+    expect(document.body.textContent).toMatch(/several issues/i);
+    expect(document.body.textContent).not.toContain("\u2014");
   });
 
   it("preserves honesty FAQs on services", () => {

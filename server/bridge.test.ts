@@ -13,6 +13,7 @@ import { readConfig } from "./config";
 import {
   buildAssessmentSubmission,
   LEGACY_ASSESSMENT_VERSION,
+  ORIGINAL_ASSESSMENT_QUESTIONS,
   QUESTIONS,
 } from "../src/domain/assessment";
 import { applyIntakePacket } from "../src/domain/intake";
@@ -749,7 +750,7 @@ describe("booking association and protected inbox", () => {
     expect(packet.assessment.scoreMax).toBe(21);
     expect(
       packet.assessment.answers.some(
-        (a: { id: string }) => a.id === "software_overlap",
+        (a: { id: string }) => a.id === "friction_home",
       ),
     ).toBe(true);
     expect(packet.contact.business).toBe("Fictional Workshop");
@@ -762,7 +763,7 @@ describe("booking association and protected inbox", () => {
     const source = testSubmission();
     const legacy = buildAssessmentSubmission(
       source.contact,
-      Object.fromEntries(QUESTIONS.map((q) => [q.key, 3])),
+      Object.fromEntries(ORIGINAL_ASSESSMENT_QUESTIONS.map((q) => [q.key, 3])),
       {
         submissionId: "legacy",
         submittedAt: source.submitted_at_utc,
