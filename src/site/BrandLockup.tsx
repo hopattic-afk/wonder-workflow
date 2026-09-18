@@ -1,4 +1,4 @@
-type Variant = "paper" | "ink";
+type Variant = "paper" | "ink" | "ghost";
 
 export function BrandLockup({
   variant = "paper",
@@ -7,7 +7,7 @@ export function BrandLockup({
   variant?: Variant;
   className?: string;
 }) {
-  const text = variant === "ink" ? "#FAFAF8" : "#20232B";
+  const text = variant === "paper" ? "#20232B" : "#FAFAF8";
   return (
     <svg
       className={className}
