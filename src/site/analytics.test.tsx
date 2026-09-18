@@ -88,6 +88,7 @@ describe("sitewide Google Analytics 4 (gtag)", () => {
     expect(connectSrc).toContain("https://widgets.leadconnectorhq.com");
     expect(connectSrc).toContain("https://www.googletagmanager.com");
     expect(connectSrc).toContain("https://www.google-analytics.com");
+    expect(connectSrc).toContain("https://analytics.google.com");
     expect(connectSrc).toContain("https://*.google-analytics.com");
     expect(connectSrc).toContain("https://*.analytics.google.com");
 
@@ -96,6 +97,20 @@ describe("sitewide Google Analytics 4 (gtag)", () => {
     expect(imgSrc).toContain("https://www.googletagmanager.com");
 
     expect(read("index.html")).not.toMatch(/http-equiv=["']Content-Security-Policy/i);
+  });
+
+  it("allows Lead Connector services host for Website Chat without loosening script-src", () => {
+    const csp = contentSecurityPolicy(read("netlify.toml"));
+    const connectSrc = directive(csp, "connect-src");
+    const frameSrc = directive(csp, "frame-src");
+    const scriptSrc = directive(csp, "script-src");
+    const defaultSrc = directive(csp, "default-src");
+
+    expect(connectSrc).toContain("https://services.leadconnectorhq.com");
+    expect(frameSrc).toContain("https://services.leadconnectorhq.com");
+    expect(scriptSrc).not.toContain("https://services.leadconnectorhq.com");
+    expect(scriptSrc).not.toMatch(/unsafe-eval/);
+    expect(defaultSrc.trim()).toBe("'self'");
   });
 
   it("discloses Google Analytics on the privacy page without em dashes", () => {
