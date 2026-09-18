@@ -944,6 +944,24 @@ export default function Website() {
           <Link to="/start">Start</Link>
           <a href="mailto:operations@wonderworkflow.com">operations@wonderworkflow.com</a>
         </nav>
+        <nav className="ww-footer-social" aria-label="Social">
+          <a
+            href="https://www.instagram.com/wonderandworkflow/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg
+              className="ww-footer-social-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.25" cy="6.75" r="0.9" fill="currentColor" />
+            </svg>
+            Instagram
+          </a>
+        </nav>
         <div className="ww-footer-bottom">
           <span>© {new Date().getFullYear()} Wonder&Workflow LLC</span>
           <Link to="/privacy">Privacy</Link>

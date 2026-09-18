@@ -9,6 +9,7 @@ export function organizationNode() {
     url: "https://wonderworkflow.com",
     email: "operations@wonderworkflow.com",
     logo: "https://wonderworkflow.com/brand/primary-stacked-paper.png",
+    sameAs: ["https://www.instagram.com/wonderandworkflow/"],
   };
 }
 

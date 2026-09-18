@@ -794,6 +794,29 @@
 .ww-footer-links a:hover {
   color: var(--ww-accent-text);
 }
+.ww-footer-social {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: -6px 0 26px;
+  font-size: 14px;
+}
+.ww-footer-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ww-muted);
+}
+.ww-footer-social a:hover {
+  color: var(--ww-accent-text);
+}
+.ww-footer-social-icon {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
 .ww-footer-bottom {
   border-top: 1px solid #dedee2;
   padding-top: 22px;
@@ -1129,6 +1152,9 @@
   }
   .ww-footer-links {
     gap: 15px 22px;
+  }
+  .ww-footer-social {
+    margin-bottom: 22px;
   }
   .ww-footer-bottom {
     font-size: 13px;
