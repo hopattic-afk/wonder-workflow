@@ -111,7 +111,7 @@ test("start, book, and contact send Fit Review traffic to the assessment", async
   await expect(page).toHaveURL(/\/assessment$/);
 });
 
-test("homepage is type-led with no intro film or workflow theater", async ({
+test("homepage ships Feel photography with no intro film or workflow theater", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
@@ -119,18 +119,17 @@ test("homepage is type-led with no intro film or workflow theater", async ({
   await expect(page.locator(".ww-launch-intro")).toHaveCount(0);
   await expect(page.locator("video")).toHaveCount(0);
   await expect(page.locator(".ww-operating-scene")).toHaveCount(0);
+  await expect(page.locator(".ops-chapter")).toHaveCount(0);
   await expect(
     page.getByRole("heading", {
       name: "Your business has outgrown the way the work gets done.",
     }),
   ).toBeVisible();
-  await expect(
-    page.locator(".ww-hero").getByRole("link", { name: "Assess your operations" }),
-  ).toBeVisible();
-  await page
-    .locator(".ww-hero")
-    .getByRole("link", { name: "Assess your operations" })
-    .click();
+  const hero = page.locator(".ship-feel-hero");
+  await expect(hero).toBeVisible();
+  await expect(hero).toHaveAttribute("src", /warehouse-pace-web\.jpg/);
+  await expect(page.locator(".ww-header-assess")).toBeVisible();
+  await page.locator(".ww-header-assess").click();
   await expect(page).toHaveURL(/assessment$/);
 });
 
@@ -169,5 +168,6 @@ test("reduced motion still shows the homepage immediately", async ({
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   await expect(page.locator("video")).toHaveCount(0);
-  await expect(page.locator(".ww-hero h1")).toBeVisible();
+  await expect(page.locator(".ww-site h1")).toBeVisible();
+  await expect(page.locator(".ship-feel-hero")).toBeVisible();
 });

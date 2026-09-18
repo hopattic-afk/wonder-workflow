@@ -8,24 +8,24 @@ import {
   useLocation,
 } from "react-router-dom";
 import { BrandLockup } from "./BrandLockup";
-import { OwnershipPathScroll } from "./OwnershipPathScroll";
+import { HomepageShip, type HomeChrome } from "./HomepageShip";
 import { captureCampaign, publicHref } from "./campaign";
 import {
   ASSESSMENT_META,
+  CHAT_WITH_US,
+  CONTACT_MAILTO,
   FIT_REVIEW_NAME,
   FIT_REVIEW_PLAIN,
   FOOTER_BLURB,
-  HOME_DECK,
+  FOOTER_FIT_REVIEW_LABEL,
+  HEADER_ASSESS_LABEL,
   HOME_DESCRIPTION,
-  HOME_EYEBROW,
   HOME_H1,
   HOME_TITLE,
   LADDER_NOTE,
   ONE_PATH_COPY,
-  TOOL_AGNOSTIC_COPY,
-  TRUST_LINE,
-  WHO_FOR_BODY,
-  WHO_FOR_EXCLUDE,
+  SEE_HOW_WE_WORK,
+  WORK_WITH_US,
 } from "./publicOffer";
 import { AssessmentCaseStudy, GuidePage, GuidesIndex, ServiceDirectory, ServicePage, applyStructuredData, guides, honestyFaqs, searchPages, services } from "./SearchContent";
 import "./website.css";
@@ -201,154 +201,10 @@ function Flow() {
     </div>
   );
 }
-function Home() {
+function Home({ onChrome }: { onChrome?: (chrome: HomeChrome) => void }) {
   return (
     <div className="ww-home">
-      <section className="ww-hero ww-home-hero">
-        <div className="ww-home-hero-heading">
-          <div>
-            <Eyebrow>{HOME_EYEBROW}</Eyebrow>
-            <h1 tabIndex={-1}>{HOME_H1}</h1>
-          </div>
-          <div className="ww-home-hero-intro">
-            <p>{HOME_DECK}</p>
-            <p className="ww-tool-line">{TOOL_AGNOSTIC_COPY}</p>
-            <Link className="ww-button" to="/assessment">
-              Assess your operations <Arrow />
-            </Link>
-            <p className="ww-trust-note">{TRUST_LINE}</p>
-          </div>
-        </div>
-      </section>
-      <OwnershipPathScroll />
-      <section className="ww-section ww-who-for">
-        <div className="ww-section-heading">
-          <Eyebrow>Who this is for</Eyebrow>
-          <h2>Built for shops where the owner still holds the day together</h2>
-        </div>
-        <p>{WHO_FOR_BODY}</p>
-        <p className="ww-exclude">{WHO_FOR_EXCLUDE}</p>
-      </section>
-      <section className="ww-section">
-        <div className="ww-section-heading">
-          <Eyebrow>Where work gets stuck</Eyebrow>
-          <h2>What usually slows the day down</h2>
-        </div>
-        <div className="ww-problem-list">
-          {[
-            [
-              "Missed intake",
-              "Calls and texts while you’re on the tools. Leads slip. Jobs get double-booked.",
-            ],
-            [
-              "Handoffs that leak",
-              "The office has one version of the job. The crew has another. Screenshots and memory fill the gap.",
-            ],
-            [
-              "Admin that chases you",
-              "Quotes waiting. Invoices after the fact. Payroll pieced together from texts and paper.",
-            ],
-          ].map(([title, problem], index) => (
-            <article key={title}>
-              <span className="ww-index">0{index + 1}</span>
-              <h3>{title}</h3>
-              <p>{problem}</p>
-            </article>
-          ))}
-        </div>
-        <p className="ww-bridge">
-          If nothing moves without you, the process is the product.
-        </p>
-      </section>
-      <section className="ww-section ww-home-process">
-        <div>
-          <Eyebrow>How we work</Eyebrow>
-          <h2>One real path of work. One practical improvement.</h2>
-          <Link className="ww-text-link" to="/how-we-work">
-            See how we work <Arrow />
-          </Link>
-        </div>
-        <ol>
-          <li>
-            <h3>Walk it</h3>
-            <p>
-              Sit with the person doing the work and follow one live example
-              (request to done to paid).
-            </p>
-          </li>
-          <li>
-            <h3>Simplify it</h3>
-            <p>
-              Pick the smallest change that removes the stuck point. Agree scope
-              before anything is built.
-            </p>
-          </li>
-          <li>
-            <h3>Hand it over</h3>
-            <p>
-              Test on real jobs. Leave clear owners, instructions, and a
-              fallback.
-            </p>
-          </li>
-        </ol>
-      </section>
-      <section className="ww-section ww-ladder">
-        <div className="ww-section-heading">
-          <Eyebrow>What happens next</Eyebrow>
-          <h2>A clear ladder. No mystery pitch.</h2>
-        </div>
-        <ol className="ww-ladder-list">
-          <li>
-            <h3>Operations assessment</h3>
-            <p>About 2 minutes, free. Spot where time leaks.</p>
-          </li>
-          <li>
-            <h3>{FIT_REVIEW_NAME}</h3>
-            <p>
-              30 minutes, complimentary. Review results. Choose one path of work
-              to improve.
-            </p>
-          </li>
-          <li>
-            <h3>Paid diagnostic</h3>
-            <p>
-              Scoped after the Fit Review. Deeper map, priorities, and a written
-              next-step plan.
-            </p>
-          </li>
-          <li>
-            <h3>Implementation</h3>
-            <p>Fixed scope when it’s worth it. Build and hand over the change.</p>
-          </li>
-          <li>
-            <h3>Optional support</h3>
-            <p>Only if you want ongoing help after the handoff.</p>
-          </li>
-        </ol>
-        <p>Software and vendor costs stay separate from our work. No public fees.</p>
-      </section>
-      <section className="ww-section ww-proof">
-        <div className="ww-section-heading">
-          <Eyebrow>Proof</Eyebrow>
-          <h2>Shops like yours</h2>
-        </div>
-        <div className="ww-proof-grid">
-          <article>
-            <h3>What we can show today</h3>
-            <p>
-              Case studies and owner quotes land here when we have real ones.
-              Until then: no invented testimonials.
-            </p>
-            <Link
-              className="ww-text-link"
-              to="/case-studies/operations-assessment"
-            >
-              First-party implementation study <Arrow />
-            </Link>
-          </article>
-        </div>
-      </section>
-      <Invitation />
+      <HomepageShip onChrome={onChrome} />
     </div>
   );
 }
@@ -924,8 +780,16 @@ function NotFound() {
 export default function Website() {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [homeChrome, setHomeChrome] = useState<HomeChrome>({
+    onMedia: false,
+    assessGlow: false,
+  });
   const main = useRef<HTMLElement>(null);
   const initial = useRef(true);
+  const isHome = (location.pathname.replace(/\/+$/, "") || "/") === "/";
+  useEffect(() => {
+    if (!isHome) setHomeChrome({ onMedia: false, assessGlow: false });
+  }, [isHome]);
   useEffect(() => {
     captureCampaign(location.search);
     setMenuOpen(false);
@@ -968,14 +832,25 @@ export default function Website() {
       <a className="ww-skip" href="#ww-main">
         Skip to content
       </a>
-      <header className="ww-header">
-        <Link
-          className="ww-wordmark"
-          to="/"
-          aria-label="Wonder & Workflow home"
-        >
-          <BrandLockup />
-        </Link>
+      <header
+        className={
+          homeChrome.onMedia ? "ww-header ww-header-on-media" : "ww-header"
+        }
+      >
+        <div className="ww-brand-block">
+          <Link
+            className="ww-wordmark"
+            to="/"
+            aria-label="Wonder & Workflow home"
+          >
+            <BrandLockup variant={homeChrome.onMedia ? "ghost" : "paper"} />
+          </Link>
+          {isHome ? (
+            <h1 className="ww-quiet-h1" tabIndex={-1}>
+              {HOME_H1}
+            </h1>
+          ) : null}
+        </div>
         <button
           className="ww-menu-toggle"
           aria-expanded={menuOpen}
@@ -984,26 +859,43 @@ export default function Website() {
         >
           {menuOpen ? "Close −" : "Menu +"}
         </button>
-        <Link className="ww-header-assess" to="/assessment">
-          Assess your operations
+        <Link
+          className={
+            !isHome || homeChrome.assessGlow
+              ? "ww-header-assess is-glow"
+              : "ww-header-assess"
+          }
+          to="/assessment"
+        >
+          {HEADER_ASSESS_LABEL} <span aria-hidden="true">↗</span>
         </Link>
         <nav
           id="ww-navigation"
           className={menuOpen ? "ww-nav ww-nav-open" : "ww-nav"}
           aria-label="Main navigation"
         >
-          <NavLink to="/services">Services</NavLink>
+          {isHome ? (
+            <NavLink to="/services">{SEE_HOW_WE_WORK}</NavLink>
+          ) : (
+            <NavLink to="/services">Services</NavLink>
+          )}
           <NavLink to="/guides">Guides</NavLink>
           <NavLink to="/how-we-work">How We Work</NavLink>
           <NavLink to="/about">About</NavLink>
-          <Link className="ww-nav-cta" to="/assessment">
-            Assess your operations <Arrow />
-          </Link>
+          {isHome ? (
+            <a className="ww-nav-chat" href={CONTACT_MAILTO}>
+              {CHAT_WITH_US}
+            </a>
+          ) : (
+            <Link className="ww-nav-cta" to="/assessment">
+              Assess your operations <Arrow />
+            </Link>
+          )}
         </nav>
       </header>
       <main id="ww-main" ref={main} tabIndex={-1}>
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<Home onChrome={setHomeChrome} />} />
           <Route path="services" element={<Services />} />
           {services.map(service => <Route key={service.slug} path={`services/${service.slug}`} element={<ServicePage service={service} />} />)}
           <Route path="guides" element={<GuidesIndex />} />
@@ -1027,9 +919,20 @@ export default function Website() {
             Wonder & Workflow
             <span>{FOOTER_BLURB}</span>
           </Link>
-          <Cta secondary />
+          {isHome ? (
+            <div className="ww-footer-home-ctas">
+              <a href={CONTACT_MAILTO}>{CHAT_WITH_US}</a>
+              <a href={CONTACT_MAILTO}>{WORK_WITH_US}</a>
+              <Link className="ww-footer-quiet" to="/assessment">
+                {FOOTER_FIT_REVIEW_LABEL}
+              </Link>
+            </div>
+          ) : (
+            <Cta secondary />
+          )}
         </div>
         <nav className="ww-footer-links" aria-label="Footer navigation">
+          {isHome ? <Link to="/services">{SEE_HOW_WE_WORK}</Link> : null}
           <Link to="/services">Services</Link>
           <Link to="/guides">Guides</Link>
           <Link to="/case-studies/operations-assessment">Implementation study</Link>

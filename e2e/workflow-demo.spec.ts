@@ -11,15 +11,13 @@ test("homepage kills animated workflow theater and keeps the assessment CTA", as
   await expect(page.getByText("One request. A connected workflow.")).toHaveCount(
     0,
   );
-  await expect(page.locator(".ww-hero h1")).toBeVisible();
-  await page
-    .locator(".ww-hero")
-    .getByRole("link", { name: "Assess your operations" })
-    .click();
+  await expect(page.locator(".ww-site h1")).toBeVisible();
+  await expect(page.locator(".ship-feel-hero")).toBeVisible();
+  await page.locator(".ww-header-assess").click();
   await expect(page).toHaveURL(/assessment$/);
 });
 
-test("type-led homepage remains readable on mobile and with reduced motion", async ({
+test("photography homepage remains readable on mobile and with reduced motion", async ({
   page,
 }) => {
   await mkdir("output/wonder-workflow/qa", { recursive: true });
@@ -27,7 +25,8 @@ test("type-led homepage remains readable on mobile and with reduced motion", asy
   for (const width of [1440, 390]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/");
-    await expect(page.locator(".ww-hero h1")).toBeVisible();
+    await expect(page.locator(".ww-site h1")).toBeVisible();
+    await expect(page.locator(".ship-feel-hero")).toBeVisible();
     await expect(page.locator("video")).toHaveCount(0);
     expect(
       await page.evaluate(
@@ -35,7 +34,7 @@ test("type-led homepage remains readable on mobile and with reduced motion", asy
       ),
     ).toBe(true);
     await page.screenshot({
-      path: `output/wonder-workflow/qa/type-led-home-${width}.png`,
+      path: `output/wonder-workflow/qa/homepage-ship-${width}.png`,
       fullPage: true,
     });
   }

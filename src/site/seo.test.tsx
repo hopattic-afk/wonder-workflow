@@ -61,7 +61,7 @@ describe("technical SEO for the brand pack PR", () => {
     const home = readFileSync(join(process.cwd(), "src/site/Website.tsx"), "utf8");
     expect(css).not.toContain("ww-workflow-hero");
     expect(home).not.toContain("ww-workflow-hero");
-    expect(home).toContain("ww-home-hero");
+    expect(home).toContain("HomepageShip");
   });
 
   it("sitemap lastmod matches trailing-slash canonicals and Search Console docs exist", () => {

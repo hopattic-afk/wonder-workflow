@@ -122,7 +122,7 @@ describe("Ian-approved brand pack", () => {
 });
 
 describe("Homepage verbal rewrite", () => {
-  it("locks meta, H1, eyebrow, deck, tool-agnostic line, and assessment CTAs", () => {
+  it("locks meta, quiet H1, Feel photography, and the three Assess placements", () => {
     expect(pages["/"][0]).toBe(HOME_TITLE);
     expect(pages["/"][1]).toBe(HOME_DESCRIPTION);
     renderPath("/");
@@ -131,27 +131,27 @@ describe("Homepage verbal rewrite", () => {
       screen.getByRole("heading", { level: 1, name: HOME_H1 }),
     ).toBeVisible();
     expect(
-      screen.getByText("For owners of 1–50 person field and service shops"),
+      screen.getByRole("heading", {
+        name: "The way work gets done can't keep up with the work.",
+      }),
     ).toBeVisible();
-    expect(
-      document.body.textContent,
-    ).toMatch(/Missed calls while you’re on a job/);
-    expect(
-      document.body.textContent,
-    ).toMatch(/structure and ownership problem, not a software problem/);
-    expect(
-      document.body.textContent,
-    ).toMatch(/You may not need another tool/);
-    expect(
-      document.body.textContent,
-    ).toMatch(/About 2 minutes\. Then book a complimentary 30-minute Operations Fit Review/);
-    const heroCta = document
-      .querySelector(".ww-hero")
-      ?.querySelector('a[href="/assessment"]');
-    expect(heroCta).toHaveTextContent(/Assess your operations/i);
+    expect(document.querySelector(".ship-feel-hero")).toHaveAttribute(
+      "src",
+      "/brand/homepage-ship/warehouse-pace-web.jpg",
+    );
+    expect(document.body.textContent).not.toMatch(
+      /Missed calls while you’re on a job/,
+    );
+    expect(document.body.textContent).toMatch(
+      /fix how work gets done, without defaulting to another tool/,
+    );
+    const assess = Array.from(
+      document.querySelectorAll('a[href="/assessment"]'),
+    ).filter((link) => /assess|fit review/i.test(link.textContent ?? ""));
+    expect(assess).toHaveLength(3);
   });
 
-  it("covers who it is for, owner-noun pain cards, how we work, ladder without prices, proof, and footer", () => {
+  it("covers who it is for, owner-scale forks, and quiet services chrome", () => {
     renderPath("/");
     expect(
       screen.getByRole("heading", {
@@ -159,48 +159,15 @@ describe("Homepage verbal rewrite", () => {
       }),
     ).toBeVisible();
     expect(document.body.textContent).toMatch(/Cleaning, landscaping, detailing/);
+    expect(document.body.textContent).toMatch(/hospitality, retail/);
     expect(document.body.textContent).toMatch(/all-in-one field app/);
     expect(document.body.textContent).toMatch(/fractional COO/);
-    expect(screen.getByRole("heading", { name: /Missed intake/i })).toBeVisible();
-    expect(
-      screen.getByRole("heading", { name: /Handoffs that leak/i }),
-    ).toBeVisible();
-    expect(
-      screen.getByRole("heading", { name: /Admin that chases you/i }),
-    ).toBeVisible();
-    expect(document.body.textContent).toMatch(
-      /If nothing moves without you, the process is the product/,
-    );
-    expect(
-      screen.getByRole("heading", {
-        name: /One real path of work\. One practical improvement/i,
-      }),
-    ).toBeVisible();
-    expect(screen.getByRole("heading", { name: /^Walk it$/i })).toBeVisible();
-    expect(screen.getByRole("heading", { name: /Simplify it/i })).toBeVisible();
-    expect(screen.getByRole("heading", { name: /Hand it over/i })).toBeVisible();
-    expect(
-      screen.getByRole("heading", { name: /A clear ladder\. No mystery pitch/i }),
-    ).toBeVisible();
-    expect(document.body.textContent).toMatch(/Operations assessment/);
-    expect(document.body.textContent).toMatch(/Paid diagnostic/);
-    expect(document.body.textContent).toMatch(/Optional support/);
+    expect(screen.getByRole("heading", { name: /First hires/i })).toBeVisible();
+    expect(screen.getByRole("heading", { name: /Volume spike/i })).toBeVisible();
     expect(document.body.textContent).not.toMatch(/\$\d/);
     expect(
-      screen.getByRole("heading", { name: /Shops like yours/i }),
-    ).toBeVisible();
-    expect(document.body.textContent).toMatch(/no invented testimonials/i);
-    expect(
-      screen.getByRole("heading", {
-        name: /Find where jobs get stuck between intake and paid/i,
-      }),
-    ).toBeVisible();
-    expect(document.body.textContent).toMatch(
-      /fix how work gets done, without defaulting to another tool/,
-    );
-    expect(
       screen.getByRole("navigation", { name: "Main navigation" }),
-    ).toHaveTextContent(/Services/);
+    ).toHaveTextContent(/See how we work/);
     expect(
       screen.getByRole("navigation", { name: "Main navigation" }),
     ).not.toHaveTextContent(/Get started/i);
