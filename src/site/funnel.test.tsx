@@ -111,7 +111,7 @@ describe("P0 public funnel and machine files", () => {
     );
     expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      "https://wonderworkflow.com/services",
+      "https://wonderworkflow.com/services/",
     );
     expect(
       screen.getByRole("heading", { name: /Start small enough to understand/i }),

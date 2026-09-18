@@ -71,7 +71,9 @@ export function HomepageShip({
   useEffect(() => {
     const chapter = chapterRef.current;
     if (!chapter) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = Boolean(
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches,
+    );
     const still = new URLSearchParams(window.location.search).get("still");
 
     const apply = (p: number) => {

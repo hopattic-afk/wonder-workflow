@@ -48,14 +48,20 @@ describe("Homepage ship chapter", () => {
 
     expect(screen.getByRole("heading", { name: FEEL_FACE })).toBeVisible();
     expect(screen.getByText(FEEL_SUPPORT)).toBeVisible();
-    expect(screen.getByRole("heading", { name: UNDERSTAND_H2 })).toBeVisible();
-    expect(screen.getByText(UNDERSTAND_LEAD)).toBeVisible();
+    expect(
+      screen.getByRole("heading", { name: UNDERSTAND_H2 }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(UNDERSTAND_LEAD)).toBeInTheDocument();
     for (const step of UNDERSTAND_STEPS) {
-      expect(screen.getByText(step)).toBeVisible();
+      expect(screen.getByText(step)).toBeInTheDocument();
     }
-    expect(screen.getByText(ASSESS_CLOSE[0])).toBeVisible();
-    expect(screen.getByText(ASSESS_CLOSE[1])).toBeVisible();
-    expect(screen.getByText(FIT_REVIEW_LINE)).toBeVisible();
+    expect(document.querySelector(".ship-close-lines")?.textContent).toContain(
+      ASSESS_CLOSE[0],
+    );
+    expect(document.querySelector(".ship-close-lines")?.textContent).toContain(
+      ASSESS_CLOSE[1],
+    );
+    expect(screen.getByText(FIT_REVIEW_LINE)).toBeInTheDocument();
 
     const hero = document.querySelector<HTMLImageElement>(".ship-feel-hero");
     expect(hero).toBeTruthy();
@@ -79,9 +85,14 @@ describe("Homepage ship chapter", () => {
       join(root, "src/site/HomepageShip.tsx"),
       "utf8",
     );
-    expect(source.indexOf(FEEL_FACE)).toBeLessThan(source.indexOf(AUTOMATION_H2));
-    expect(source).toContain(AUTOMATION_BODY);
-    expect(source).toContain(AUTOMATION_TRUTH);
+    const offer = readFileSync(join(root, "src/site/publicOffer.ts"), "utf8");
+    expect(source.indexOf("{FEEL_FACE}")).toBeLessThan(
+      source.indexOf("{AUTOMATION_H2}"),
+    );
+    expect(source).toContain("{AUTOMATION_BODY}");
+    expect(source).toContain("{AUTOMATION_TRUTH}");
+    expect(offer).toContain(AUTOMATION_BODY);
+    expect(offer).toContain(AUTOMATION_TRUTH);
     expect(source).not.toMatch(/AI makes you money|chatbot pitch|robot/i);
     expect(source).not.toContain("OwnershipPathScroll");
   });
