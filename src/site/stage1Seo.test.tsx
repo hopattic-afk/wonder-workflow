@@ -178,7 +178,7 @@ describe("Stage 1 SEO pages", () => {
   it("does not change LegacyAssessment, GHL widgets, or GA4", () => {
     const index = readFileSync(join(process.cwd(), "index.html"), "utf8");
     expect(index).toContain("G-Q5FNTC3EXW");
-    expect(index).toContain('data-widget-id="6aac4d09ce16b80588abe068"');
+    expect(index).toContain('data-widget-id="6aad8507aaad87c6c4b513a1"');
     expect(ASSESSMENT_BOOKING_URL).toContain("tFmtpPmm23VC7ygrKxvK");
     expect(
       readFileSync(join(process.cwd(), "src/main.tsx"), "utf8"),
