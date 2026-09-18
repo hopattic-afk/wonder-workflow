@@ -47,7 +47,6 @@
   font-size: 18px;
   line-height: 1.7;
   min-height: 100vh;
-  overflow-x: hidden;
 }
 .ww-site * {
   box-sizing: border-box;
@@ -1334,8 +1333,8 @@
   border-bottom: 1px solid var(--ww-accent);
   padding-bottom: 2px;
 }
-.ww-header-on-media {
-  background: color-mix(in srgb, #20232b 55%, transparent);
+.ww-site > .ww-header.ww-header-on-media {
+  background: rgba(32, 35, 43, 0.88);
   color: #fafaf8;
   border-bottom-color: transparent;
 }
