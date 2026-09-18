@@ -207,7 +207,7 @@ describe("Remy / Operations Fit Review sitewide", () => {
   it("keeps LegacyAssessment, GHL widgets, GA4, booking ID, and CRM flags", () => {
     const index = read("index.html");
     expect(index).toContain("G-Q5FNTC3EXW");
-    expect(index).toContain('data-widget-id="6aa0a1639fbeb2a2186527c7"');
+    expect(index).toContain('data-widget-id="6aac4d09ce16b80588abe068"');
     expect(read("src/domain/assessment.ts")).toContain(
       "https://api.leadconnectorhq.com/widget/booking/tFmtpPmm23VC7ygrKxvK",
     );
