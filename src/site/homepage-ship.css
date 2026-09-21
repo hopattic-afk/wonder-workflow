@@ -472,12 +472,6 @@
   margin: 0;
 }
 
-.ship-icp-not {
-  margin-top: 1.25rem;
-  font-size: 0.92rem;
-  color: var(--ww-muted);
-}
-
 body[data-still] .ship-chapter {
   height: 100vh;
 }

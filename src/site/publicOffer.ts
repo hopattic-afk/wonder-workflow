@@ -65,8 +65,6 @@ export const WHO_FOR_HEADING =
   "Built for shops where the owner still holds the day together.";
 export const WHO_FOR_BODY =
   "Cleaning, landscaping, detailing, signs and print, restoration, moving, hospitality, retail, and similar service businesses. If work lives in group texts, whiteboards, and “just ask me,” you’re in the right place.";
-export const WHO_FOR_EXCLUDE =
-  "Not for: Companies shopping for another all-in-one field app, or looking for a full-time fractional COO embed.";
 export const HOMEPAGE_MEDIA = {
   feel: "/brand/homepage-ship/warehouse-pace-web.jpg",
   desk: "/brand/homepage-ship/desk-papers-web.jpg",

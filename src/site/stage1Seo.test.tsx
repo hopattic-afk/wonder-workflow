@@ -93,7 +93,8 @@ describe("Stage 1 SEO pages", () => {
     expect(copy).toMatch(/CPA/i);
     expect(copy).toMatch(/clinical/i);
     expect(copy).toMatch(/AI agency/i);
-    expect(copy).toMatch(/fractional COO/i);
+    expect(copy).not.toMatch(/all-in-one field app/i);
+    expect(copy).not.toMatch(/fractional COO embed/i);
     expect(copy).not.toMatch(/\$\d/);
     expect(copy).not.toContain("\u2014");
     expect(

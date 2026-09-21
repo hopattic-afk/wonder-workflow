@@ -19,7 +19,6 @@ import {
   UNDERSTAND_LEAD,
   UNDERSTAND_STEPS,
   WHO_FOR_BODY,
-  WHO_FOR_EXCLUDE,
   WHO_FOR_HEADING,
   WORK_WITH_US,
 } from "./publicOffer";
@@ -299,10 +298,6 @@ export function HomepageShip({
             {WHO_FOR_HEADING}
           </h2>
           <p className="ship-section-lead">{WHO_FOR_BODY}</p>
-          <p className="ship-icp-not">
-            <strong>{WHO_FOR_EXCLUDE.split(":")[0]}:</strong>
-            {WHO_FOR_EXCLUDE.slice(WHO_FOR_EXCLUDE.indexOf(":") + 1)}
-          </p>
         </section>
       </div>
     </div>
