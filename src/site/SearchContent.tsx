@@ -71,7 +71,7 @@ export const services: Service[] = [
       {
         eyebrow: "Not a fit",
         title: "Who this is not for",
-        body: "Not law, CPA, or clinical practices. Not companies shopping for another all-in-one field app. Not an AI agency engagement. Not a full-time fractional COO embed. If you need a chief of operations living in the business, that is a different hire.",
+        body: "Not law, CPA, or clinical practices. Not an AI agency engagement.",
       },
     ],
     ideal: [

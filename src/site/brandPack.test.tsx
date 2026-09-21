@@ -160,8 +160,9 @@ describe("Homepage verbal rewrite", () => {
     ).toBeVisible();
     expect(document.body.textContent).toMatch(/Cleaning, landscaping, detailing/);
     expect(document.body.textContent).toMatch(/hospitality, retail/);
-    expect(document.body.textContent).toMatch(/all-in-one field app/);
-    expect(document.body.textContent).toMatch(/fractional COO/);
+    expect(document.body.textContent).not.toMatch(/all-in-one field app/);
+    expect(document.body.textContent).not.toMatch(/fractional COO embed/);
+    expect(document.body.textContent).not.toMatch(/Not for:/);
     expect(screen.getByRole("heading", { name: /First hires/i })).toBeVisible();
     expect(screen.getByRole("heading", { name: /Volume spike/i })).toBeVisible();
     expect(document.body.textContent).not.toMatch(/\$\d/);
@@ -216,6 +217,15 @@ describe("Remy / Operations Fit Review sitewide", () => {
     expect(read("scripts/prerender-entry.tsx")).toContain("LegacyAssessment");
     expect(read("server/config.ts")).toMatch(/Never force WW_CRM_SYNC_ENABLED/);
     expect(read(".env.example")).toContain("WW_CRM_SYNC_ENABLED=false");
+  });
+
+  it("does not publish the all-in-one field app / fractional COO embed exclusion", () => {
+    for (const path of PUBLIC_COPY_FILES) {
+      const source = read(path);
+      expect(source, path).not.toMatch(/all-in-one field app/i);
+      expect(source, path).not.toMatch(/fractional COO embed/i);
+      expect(source, path).not.toMatch(/Not for:\s*Companies shopping/);
+    }
   });
 
   it("does not invent dollar fees, testimonials, or em dashes in customer-facing offer copy", () => {

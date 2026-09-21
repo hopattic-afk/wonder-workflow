@@ -146,6 +146,10 @@ describe("Homepage ship page chrome", () => {
     expect(screen.getByRole("heading", { name: WHO_FOR_HEADING })).toBeVisible();
     expect(document.body.textContent).toContain(WHO_FOR_BODY);
     expect(document.body.textContent).toMatch(/hospitality, retail/);
+    expect(document.body.textContent).not.toMatch(/Not for:/);
+    expect(document.body.textContent).not.toMatch(/all-in-one field app/);
+    expect(document.body.textContent).not.toMatch(/fractional COO embed/);
+    expect(document.querySelector(".ship-icp-not")).toBeNull();
     expect(document.body.textContent).not.toMatch(/Missed calls while you’re on a job/);
     expect(document.body.textContent).not.toMatch(/Missed intake/);
     expect(document.querySelector(".ww-operating-scene")).toBeNull();
