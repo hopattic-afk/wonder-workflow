@@ -18,10 +18,10 @@ The web core is this folder. Google Sheets and GoHighLevel are stub interfaces i
 
 ## Modules
 
-1. **Leak Ranker (The Plug)** — takes a short log of misses (calls, quotes, handoffs, waits) and ranks which leak costs the most so you fix that one first.
-2. **Job Film / Authority Ladder** — shows one live job as a step sequence, with one accountable name per step and who can decide alone versus who must check up.
-3. **Proof Gate** — stops a handoff until the required proof is on the record, or marks Hold with a reason. No proof, no pass.
-4. **Exception Hour (Daily Sweep)** — a short fixed review that only looks at exceptions, assigns one next action each, and ends on time. Cadence is daily.
+1. **Leak Ranker (The Plug).** Takes a short log of misses (calls, quotes, handoffs, waits) and ranks which leak costs the most so you fix that one first.
+2. **Job Film / Authority Ladder.** Shows one live job as a step sequence, with one accountable name per step and who can decide alone versus who must check up.
+3. **Proof Gate.** Stops a handoff until the required proof is on the record, or marks Hold with a reason. No proof, no pass.
+4. **Exception Hour (Daily Sweep).** A short fixed review that only looks at exceptions, assigns one next action each, and ends on time. Cadence is daily.
 
 Each module is input → decision → output. The demo path `Fit Review field path` carries one job, `Oak Street kitchen`, with all four modules on.
 

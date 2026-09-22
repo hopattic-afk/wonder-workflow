@@ -34,8 +34,16 @@ describe("view model", () => {
 
     expect(leak?.kind).toBe("leak-ranker");
     if (leak?.kind === "leak-ranker") {
+      expect(leak.capture.map((row) => row.kind)).toEqual(["call", "quote", "handoff", "wait"]);
+      expect(leak.rows.map((row) => row.kind)).toEqual(["quote", "handoff", "call", "wait"]);
       expect(leak.rows[0]?.note).toBe("Quote sat six days");
       expect(leak.fixFirst).toBe("Quote sat six days ($2,400)");
+      expect(leak.fixNote).toBe("Quote sat six days");
+      expect(leak.fixCost).toBe("$2,400");
+      expect(leak.reason).toBe(
+        "Fix the quote leak first. It costs 2400, more than the other misses in this log.",
+      );
+      expect(leak.reason).not.toContain("\u2014");
     }
     expect(film?.kind).toBe("job-film");
     if (film?.kind === "job-film") {

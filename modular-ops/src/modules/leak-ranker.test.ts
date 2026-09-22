@@ -16,8 +16,9 @@ describe("Leak Ranker (The Plug)", () => {
     expect(decisions.fixFirstId).toBe("m-quote");
     expect(output.fixFirst?.kind).toBe("quote");
     expect(output.fixFirst?.cost).toBe(2400);
-    expect(decisions.reason).toMatch(/quote/i);
-    expect(decisions.reason).toMatch(/2400/);
+    expect(decisions.reason).toBe(
+      "Fix the quote leak first. It costs 2400, more than the other misses in this log.",
+    );
   });
 
   it("keeps earlier log order when costs tie", () => {

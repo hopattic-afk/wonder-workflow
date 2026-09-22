@@ -6,6 +6,12 @@ import type { JobFilmDecision, JobFilmOutput } from "./modules/job-film";
 import type { LeakRankerDecision, LeakRankerOutput } from "./modules/leak-ranker";
 import type { ProofGateDecision } from "./modules/proof-gate";
 
+export interface LeakCaptureRow {
+  kind: string;
+  note: string;
+  cost: string;
+}
+
 export interface LeakBoardRow {
   rank: string;
   kind: string;
@@ -15,8 +21,11 @@ export interface LeakBoardRow {
 
 export interface LeakBoard {
   kind: "leak-ranker";
+  capture: LeakCaptureRow[];
   rows: LeakBoardRow[];
   fixFirst: string | null;
+  fixNote: string | null;
+  fixCost: string | null;
   reason: string;
 }
 
@@ -37,7 +46,8 @@ export interface FilmBoard {
 
 export interface ProofBoardItem {
   label: string;
-  detail: string;
+  requirement: string;
+  record: string;
 }
 
 export interface ProofBoard {
@@ -130,8 +140,14 @@ function buildBoard(run: ModuleRun, inputs: ModuleInputs): OperatorBoard {
   if (run.moduleId === "leak-ranker") {
     const decision = run.decisions as LeakRankerDecision;
     const output = run.output as LeakRankerOutput;
+    const log = inputs["leak-ranker"].misses;
     return {
       kind: "leak-ranker",
+      capture: log.map((miss) => ({
+        kind: miss.kind,
+        note: miss.note,
+        cost: money.format(miss.cost),
+      })),
       rows: output.ranking.map((row) => ({
         rank: String(row.rank),
         kind: row.kind,
@@ -141,6 +157,8 @@ function buildBoard(run: ModuleRun, inputs: ModuleInputs): OperatorBoard {
       fixFirst: output.fixFirst
         ? `${output.fixFirst.note} (${money.format(output.fixFirst.cost)})`
         : null,
+      fixNote: output.fixFirst?.note ?? null,
+      fixCost: output.fixFirst ? money.format(output.fixFirst.cost) : null,
       reason: decision.reason,
     };
   }
@@ -170,7 +188,8 @@ function buildBoard(run: ModuleRun, inputs: ModuleInputs): OperatorBoard {
       handoff: `${handoff.handoffFrom} → ${handoff.handoffTo}`,
       proofs: handoff.proofs.map((proof) => ({
         label: proof.label,
-        detail: `${proof.required ? "required" : "optional"} · ${proof.onRecord ? "on record" : "missing"}`,
+        requirement: proof.required ? "required" : "optional",
+        record: proof.onRecord ? "on record" : "missing",
       })),
     };
   }
@@ -193,7 +212,7 @@ function buildBoard(run: ModuleRun, inputs: ModuleInputs): OperatorBoard {
 function formatInput(moduleId: ModuleId, inputs: ModuleInputs): string {
   if (moduleId === "leak-ranker") {
     return inputs["leak-ranker"].misses
-      .map((miss) => `${miss.kind} — ${miss.note} — ${money.format(miss.cost)}`)
+      .map((miss) => `${miss.kind} · ${miss.note} · ${money.format(miss.cost)}`)
       .join("\n");
   }
   if (moduleId === "job-film") {
@@ -202,7 +221,7 @@ function formatInput(moduleId: ModuleId, inputs: ModuleInputs): string {
       film.jobTitle,
       ...film.steps.map(
         (step) =>
-          `${step.label} — ${step.accountable} — ${authorityLabel(step.authority)} — ${step.status}`,
+          `${step.label} · ${step.accountable} · ${authorityLabel(step.authority)} · ${step.status}`,
       ),
     ].join("\n");
   }
@@ -212,7 +231,7 @@ function formatInput(moduleId: ModuleId, inputs: ModuleInputs): string {
       `${handoff.handoffFrom} → ${handoff.handoffTo}`,
       ...handoff.proofs.map(
         (proof) =>
-          `${proof.label} — ${proof.required ? "required" : "optional"} — ${proof.onRecord ? "on record" : "missing"}`,
+          `${proof.label} · ${proof.required ? "required" : "optional"} · ${proof.onRecord ? "on record" : "missing"}`,
       ),
     ].join("\n");
   }
@@ -220,7 +239,7 @@ function formatInput(moduleId: ModuleId, inputs: ModuleInputs): string {
   return [
     `Cadence: ${sweep.cadence}`,
     `Window: ${sweep.windowMinutes} minutes`,
-    ...sweep.exceptions.map((item) => `${item.summary} — ${item.nextAction}`),
+    ...sweep.exceptions.map((item) => `${item.summary}. ${item.nextAction}`),
   ].join("\n");
 }
 
@@ -257,7 +276,7 @@ function formatOutput(run: ModuleRun): string {
   if (run.moduleId === "leak-ranker") {
     const output = run.output as LeakRankerOutput;
     const lines = output.ranking.map(
-      (row) => `${row.rank}. ${row.kind} — ${row.note} — ${money.format(row.cost)}`,
+      (row) => `${row.rank}. ${row.kind} · ${row.note} · ${money.format(row.cost)}`,
     );
     if (output.fixFirst) {
       lines.push(`Fix first: ${output.fixFirst.note} (${money.format(output.fixFirst.cost)})`);
@@ -270,7 +289,7 @@ function formatOutput(run: ModuleRun): string {
       output.jobTitle,
       ...output.sequence.map(
         (step) =>
-          `${step.order}. ${step.label} — ${step.accountable} — ${authorityLabel(step.authority)} — ${step.status}`,
+          `${step.order}. ${step.label} · ${step.accountable} · ${authorityLabel(step.authority)} · ${step.status}`,
       ),
     ].join("\n");
   }

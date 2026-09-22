@@ -52,7 +52,7 @@ export const leakRanker: OpsModule<
       fixFirstId: fixFirst?.id ?? null,
       rankedIds: ranking.map((row) => row.id),
       reason: fixFirst
-        ? `Fix the ${fixFirst.kind} leak first. It costs ${fixFirst.cost} — more than the other misses in this log.`
+        ? `Fix the ${fixFirst.kind} leak first. It costs ${fixFirst.cost}, more than the other misses in this log.`
         : "No misses in the log.",
     };
     const output: LeakRankerOutput = { ranking, fixFirst };
