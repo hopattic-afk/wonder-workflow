@@ -9,6 +9,12 @@ The repository preserves the approved Wonder & Workflow source, public assets,
 assessment flow, internal workspace, and the legacy integration contracts. It
 does not contain runtime secrets, local build outputs, or review-package ZIPs.
 
+## Modular ops stub
+
+The Fit Review hierarchy stub (path → job object → modules) lives in
+[`modular-ops/`](modular-ops/README.md). It does not change this website or the
+audit console. Its eventual home is `hopattic-afk/wonder-workflow-ops`.
+
 ## Existing console and historical integration record
 
 An internal workspace for McCann Contracting LLC AI Operations, connecting the audit, calculator, recommendation and proposal. The enabled production bridge has verified live assessment capture, booking packet creation, automatic GHL reschedule/cancellation delivery, and duplicate protection. Hosted authenticated audit UI was not exercised; see the precise evidence and limits in [activation record](docs/ACTIVATION-RECORD-2026-09-05.md).
