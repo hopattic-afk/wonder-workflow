@@ -6,6 +6,69 @@ import type { JobFilmDecision, JobFilmOutput } from "./modules/job-film";
 import type { LeakRankerDecision, LeakRankerOutput } from "./modules/leak-ranker";
 import type { ProofGateDecision } from "./modules/proof-gate";
 
+export interface LeakBoardRow {
+  rank: string;
+  kind: string;
+  note: string;
+  cost: string;
+}
+
+export interface LeakBoard {
+  kind: "leak-ranker";
+  rows: LeakBoardRow[];
+  fixFirst: string | null;
+  reason: string;
+}
+
+export interface FilmBoardStep {
+  order: string;
+  label: string;
+  accountable: string;
+  authority: string;
+  status: string;
+  tone: "done" | "current" | "upcoming";
+}
+
+export interface FilmBoard {
+  kind: "job-film";
+  steps: FilmBoardStep[];
+  problems: string[];
+}
+
+export interface ProofBoardItem {
+  label: string;
+  detail: string;
+}
+
+export interface ProofBoard {
+  kind: "proof-gate";
+  verdict: "pass" | "hold";
+  reason: string;
+  handoff: string;
+  proofs: ProofBoardItem[];
+}
+
+export interface SweepBoardItem {
+  summary: string;
+  nextAction: string;
+}
+
+export interface SweepBoard {
+  kind: "exception-hour";
+  assignments: SweepBoardItem[];
+  deferred: Array<{ summary: string; reason: string }>;
+  closing: string;
+  clear: boolean;
+}
+
+export interface IdleBoard {
+  kind: "idle";
+  message: string;
+}
+
+/** Working surface for one module. Text dumps stay on ModuleView for the same run. */
+export type OperatorBoard = LeakBoard | FilmBoard | ProofBoard | SweepBoard | IdleBoard;
+
 export interface ModuleView {
   id: ModuleId;
   name: string;
@@ -17,6 +80,7 @@ export interface ModuleView {
   inputText: string;
   decisionText: string;
   outputText: string;
+  board: OperatorBoard;
 }
 
 export interface OpsViewModel {
@@ -53,8 +117,76 @@ export function buildViewModel(
         inputText: formatInput(run.moduleId, inputs),
         decisionText: formatDecision(run),
         outputText: formatOutput(run),
+        board: buildBoard(run, inputs),
       };
     }),
+  };
+}
+
+function buildBoard(run: ModuleRun, inputs: ModuleInputs): OperatorBoard {
+  if (run.status !== "ran") {
+    return { kind: "idle", message: run.note ?? "Not run." };
+  }
+  if (run.moduleId === "leak-ranker") {
+    const decision = run.decisions as LeakRankerDecision;
+    const output = run.output as LeakRankerOutput;
+    return {
+      kind: "leak-ranker",
+      rows: output.ranking.map((row) => ({
+        rank: String(row.rank),
+        kind: row.kind,
+        note: row.note,
+        cost: money.format(row.cost),
+      })),
+      fixFirst: output.fixFirst
+        ? `${output.fixFirst.note} (${money.format(output.fixFirst.cost)})`
+        : null,
+      reason: decision.reason,
+    };
+  }
+  if (run.moduleId === "job-film") {
+    const decision = run.decisions as JobFilmDecision;
+    const output = run.output as JobFilmOutput;
+    return {
+      kind: "job-film",
+      steps: output.sequence.map((step) => ({
+        order: String(step.order),
+        label: step.label,
+        accountable: step.accountable,
+        authority: authorityLabel(step.authority),
+        status: step.status,
+        tone: step.status,
+      })),
+      problems: decision.problems,
+    };
+  }
+  if (run.moduleId === "proof-gate") {
+    const decision = run.decisions as ProofGateDecision;
+    const handoff = inputs["proof-gate"];
+    return {
+      kind: "proof-gate",
+      verdict: decision.verdict,
+      reason: decision.reason,
+      handoff: `${handoff.handoffFrom} → ${handoff.handoffTo}`,
+      proofs: handoff.proofs.map((proof) => ({
+        label: proof.label,
+        detail: `${proof.required ? "required" : "optional"} · ${proof.onRecord ? "on record" : "missing"}`,
+      })),
+    };
+  }
+  const output = run.output as ExceptionHourOutput;
+  return {
+    kind: "exception-hour",
+    assignments: output.assignments.map((row) => ({
+      summary: row.summary,
+      nextAction: row.nextAction,
+    })),
+    deferred: output.deferred.map((row) => ({
+      summary: row.summary,
+      reason: row.reason,
+    })),
+    closing: output.endedOnTime ? "Ended on time." : "Overran the window.",
+    clear: output.assignments.length === 0 && output.deferred.length === 0,
   };
 }
 
