@@ -113,6 +113,23 @@ describe("sitewide Google Analytics 4 (gtag)", () => {
     expect(defaultSrc.trim()).toBe("'self'");
   });
 
+  it("allows the Website Chat avatar image host without widening script or connect", () => {
+    const csp = contentSecurityPolicy(read("netlify.toml"));
+    const imgSrc = directive(csp, "img-src");
+    const scriptSrc = directive(csp, "script-src");
+    const connectSrc = directive(csp, "connect-src");
+    const avatarHost = "https://assets.cdn.filesafe.space";
+
+    expect(imgSrc).toContain(avatarHost);
+    expect(imgSrc).toContain("https://widgets.leadconnectorhq.com");
+    expect(imgSrc).toContain("https://api.leadconnectorhq.com");
+    expect(scriptSrc).not.toContain("filesafe.space");
+    expect(connectSrc).not.toContain("filesafe.space");
+    expect(read("index.html")).toContain(
+      'data-widget-id="6aad8507aaad87c6c4b513a1"',
+    );
+  });
+
   it("discloses Google Analytics on the privacy page without em dashes", () => {
     render(
       <MemoryRouter initialEntries={["/privacy"]}>
