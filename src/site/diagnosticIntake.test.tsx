@@ -27,6 +27,34 @@ function directive(csp: string, name: string) {
   return match![1];
 }
 
+describe("main navigation", () => {
+  it("lists Home first and keeps the wordmark pointed at /", () => {
+    for (const path of ["/", "/services", "/request-diagnostic/"]) {
+      const { unmount } = renderPath(path);
+      const nav = screen.getByRole("navigation", { name: "Main navigation" });
+      const [home] = within(nav).getAllByRole("link");
+      expect(home).toHaveTextContent(/^Home$/);
+      expect(home).toHaveAttribute("href", "/");
+      expect(
+        screen.getByRole("link", { name: "Wonder & Workflow home" }),
+      ).toHaveAttribute("href", "/");
+      if (path === "/") {
+        expect(home).toHaveAttribute("aria-current", "page");
+      } else {
+        expect(home).not.toHaveAttribute("aria-current");
+      }
+      if (path.startsWith("/request-diagnostic")) {
+        expect(document.querySelector(".ww-header-assess")).toBeNull();
+        expect(
+          within(nav).queryByRole("link", { name: /Assess your operations/i }),
+        ).toBeNull();
+        expect(screen.queryByRole("link", { name: /^Assess$/ })).toBeNull();
+      }
+      unmount();
+    }
+  });
+});
+
 describe("diagnostic short intake", () => {
   it("sends Request a diagnostic to the intake and leaves Assess CTAs on the assessment", () => {
     renderPath("/services");

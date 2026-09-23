@@ -876,6 +876,9 @@ export default function Website() {
           className={menuOpen ? "ww-nav ww-nav-open" : "ww-nav"}
           aria-label="Main navigation"
         >
+          <NavLink to="/" end>
+            Home
+          </NavLink>
           {isHome ? (
             <NavLink to="/services">{SEE_HOW_WE_WORK}</NavLink>
           ) : (
