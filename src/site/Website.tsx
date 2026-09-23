@@ -159,7 +159,7 @@ function Flow() {
       </div>
       <div className="ww-flow-line">
         <div>
-          <span>01 / INPUT</span>
+          <span>INPUT</span>
           <h3>
             Information
             <br />
@@ -169,7 +169,7 @@ function Flow() {
         </div>
         <b aria-hidden="true">→</b>
         <div>
-          <span>02 / STRUCTURE</span>
+          <span>STRUCTURE</span>
           <h3>
             Context
             <br />
@@ -179,7 +179,7 @@ function Flow() {
         </div>
         <b aria-hidden="true">→</b>
         <div className="ww-flow-human">
-          <span>03 / HUMAN REVIEW</span>
+          <span>HUMAN REVIEW</span>
           <h3>
             Your team
             <br />
@@ -189,7 +189,7 @@ function Flow() {
         </div>
         <b aria-hidden="true">→</b>
         <div>
-          <span>04 / HANDOFF</span>
+          <span>HANDOFF</span>
           <h3>
             Work moves
             <br />
@@ -209,13 +209,11 @@ function Home({ onChrome }: { onChrome?: (chrome: HomeChrome) => void }) {
   );
 }
 function PageHero({
-  number,
   label,
   title,
   accent,
   copy,
 }: {
-  number: string;
   label: string;
   title: string;
   accent: string;
@@ -223,9 +221,7 @@ function PageHero({
 }) {
   return (
     <section className="ww-page-hero ww-strategy-page-hero">
-      <Eyebrow>
-        {number} / {label}
-      </Eyebrow>
+      <Eyebrow>{label}</Eyebrow>
       <h1>
         {title}
         <br />
@@ -240,7 +236,6 @@ function Services() {
   return (
     <>
       <PageHero
-        number="01"
         label="Operations help for field and service shops"
         title="Start small enough to understand."
         accent="Build well enough to depend on."
@@ -248,7 +243,6 @@ function Services() {
       />
       <section className="ww-service-details ww-offer-details">
         <article>
-          <span className="ww-eyebrow">01</span>
           <div>
             <Eyebrow>Complimentary · 30 minutes</Eyebrow>
             <h2>{FIT_REVIEW_NAME}</h2>
@@ -279,7 +273,6 @@ function Services() {
           </div>
         </article>
         <article>
-          <span className="ww-eyebrow">02</span>
           <h2>Paid diagnostic</h2>
           <div>
             <h3>
@@ -318,7 +311,6 @@ function Services() {
           </div>
         </article>
         <article>
-          <span className="ww-eyebrow">03</span>
           <div>
             <Eyebrow>Scoped implementation</Eyebrow>
             <h2>Implementation</h2>
@@ -434,16 +426,14 @@ function Process() {
   return (
     <>
       <PageHero
-        number="02"
         label="The Wonder & Workflow method"
         title="The system around the AI"
         accent="matters more than the demo."
         copy="A promising output is not an operating process. Reliable work needs defined inputs, ownership, tests, exceptions, monitoring, and a manual path when technology is unavailable."
       />
       <section className="ww-steps">
-        {steps.map(([name, heading, copy, receives], i) => (
+        {steps.map(([name, heading, copy, receives]) => (
           <article key={name}>
-            <span className="ww-step-index">0{i + 1}</span>
             <div>
               <Eyebrow>{name}</Eyebrow>
               <h2>{heading}</h2>
@@ -510,7 +500,6 @@ function About() {
   return (
     <>
       <PageHero
-        number="03"
         label="About Wonder & Workflow"
         title="Better operations begin with respect"
         accent="for the people doing the work."
@@ -541,9 +530,8 @@ function About() {
       <section className="ww-section ww-principle-section">
         <Eyebrow>Our principles</Eyebrow>
         <div className="ww-discipline-list">
-          {principles.map(([title, copy], i) => (
+          {principles.map(([title, copy]) => (
             <article key={title}>
-              <span>0{i + 1}</span>
               <h3>{title}</h3>
               <p>{copy}</p>
             </article>
@@ -567,7 +555,6 @@ function Start() {
   return (
     <>
       <PageHero
-        number="04"
         label="Get started"
         title="What would you like"
         accent="to make easier?"
@@ -620,7 +607,6 @@ function Privacy() {
   return (
     <>
       <PageHero
-        number="05"
         label="Privacy"
         title="Your information."
         accent="A considered approach."
@@ -700,7 +686,7 @@ function Privacy() {
 function Terms() {
   return (
     <>
-      <PageHero number="06" label="Terms & Conditions" title="Clear expectations." accent="From the start."
+      <PageHero label="Terms & Conditions" title="Clear expectations." accent="From the start."
         copy="These terms apply to the Wonder & Workflow website, operated by Wonder&Workflow LLC." />
       <section className="ww-prose">
         <h2>Website and assessment</h2>
@@ -728,7 +714,7 @@ function Terms() {
 function Contact() {
   return (
     <>
-      <PageHero number="07" label="Contact" title="Let's talk about" accent="your operations."
+      <PageHero label="Contact" title="Let's talk about" accent="your operations."
         copy="Contact Wonder & Workflow about an Operations Fit Review, a project, or an existing inquiry." />
       <section className="ww-contact-fit">
         <Eyebrow>{FIT_REVIEW_NAME}</Eyebrow>
