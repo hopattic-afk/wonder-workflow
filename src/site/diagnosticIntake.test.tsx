@@ -140,6 +140,7 @@ describe("diagnostic short intake", () => {
     expect(connectSrc).toContain("https://services.leadconnectorhq.com");
     expect(connectSrc).toContain("https://api.leadconnectorhq.com");
     expect(imgSrc).toContain("https://api.leadconnectorhq.com");
+    expect(imgSrc).toContain("https://assets.cdn.filesafe.space");
 
     expect(readFileSync(join(process.cwd(), "index.html"), "utf8")).toContain(
       'data-widget-id="6aad8507aaad87c6c4b513a1"',
