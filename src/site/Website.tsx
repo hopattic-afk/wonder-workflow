@@ -783,7 +783,10 @@ export default function Website() {
   });
   const main = useRef<HTMLElement>(null);
   const initial = useRef(true);
-  const isHome = (location.pathname.replace(/\/+$/, "") || "/") === "/";
+  const routePath = location.pathname.replace(/\/+$/, "") || "/";
+  const isHome = routePath === "/";
+  const isDiagnosticIntake =
+    routePath === DIAGNOSTIC_INTAKE_PATH.replace(/\/+$/, "");
   useEffect(() => {
     if (!isHome) setHomeChrome({ onMedia: false, assessGlow: false });
   }, [isHome]);
@@ -856,16 +859,18 @@ export default function Website() {
         >
           {menuOpen ? "Close −" : "Menu +"}
         </button>
-        <Link
-          className={
-            !isHome || homeChrome.assessGlow
-              ? "ww-header-assess is-glow"
-              : "ww-header-assess"
-          }
-          to="/assessment"
-        >
-          {HEADER_ASSESS_LABEL} <span aria-hidden="true">↗</span>
-        </Link>
+        {isDiagnosticIntake ? null : (
+          <Link
+            className={
+              !isHome || homeChrome.assessGlow
+                ? "ww-header-assess is-glow"
+                : "ww-header-assess"
+            }
+            to="/assessment"
+          >
+            {HEADER_ASSESS_LABEL} <span aria-hidden="true">↗</span>
+          </Link>
+        )}
         <nav
           id="ww-navigation"
           className={menuOpen ? "ww-nav ww-nav-open" : "ww-nav"}
@@ -883,7 +888,7 @@ export default function Website() {
             <a className="ww-nav-chat" href={CONTACT_MAILTO}>
               {CHAT_WITH_US}
             </a>
-          ) : (
+          ) : isDiagnosticIntake ? null : (
             <Link className="ww-nav-cta" to="/assessment">
               Assess your operations <Arrow />
             </Link>
@@ -925,7 +930,7 @@ export default function Website() {
                 {FOOTER_FIT_REVIEW_LABEL}
               </Link>
             </div>
-          ) : (
+          ) : isDiagnosticIntake ? null : (
             <Cta secondary />
           )}
         </div>
