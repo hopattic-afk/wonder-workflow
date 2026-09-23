@@ -34,6 +34,10 @@
   font-display: swap;
 }
 
+html,
+body {
+  background: #fafaf8;
+}
 .ww-site {
   --ww-ink: #20232b;
   --ww-paper: #fafaf8;
@@ -1315,10 +1319,10 @@
   flex-shrink: 0;
   margin-left: 8px;
   padding: 10px 14px;
-  background: transparent;
+  background: #7ba1af;
   color: #20232b !important;
   text-decoration: none;
-  border: 1.5px solid #20232b;
+  border: 1.5px solid #7ba1af;
   border-radius: 2px;
   font-size: 14px;
   font-weight: 600;
@@ -1327,9 +1331,14 @@
 .ww-header-assess:hover,
 .ww-header-assess.is-glow {
   background: #20232b;
+  border-color: #20232b;
   color: #fafaf8 !important;
 }
 .ww-header-assess span {
+  color: #20232b;
+}
+.ww-header-assess:hover span,
+.ww-header-assess.is-glow span {
   color: #7ba1af;
 }
 .ww-quiet-h1 {
@@ -1376,14 +1385,22 @@
   color: #fafaf8;
 }
 .ww-header-on-media .ww-header-assess {
+  background: transparent;
   border-color: #fafaf8;
   color: #fafaf8 !important;
+}
+.ww-header-on-media .ww-header-assess span {
+  color: #7ba1af;
 }
 .ww-header-on-media .ww-header-assess:hover,
 .ww-header-on-media .ww-header-assess.is-glow {
   background: #fafaf8;
   color: #20232b !important;
   border-color: #fafaf8;
+}
+.ww-header-on-media .ww-header-assess:hover span,
+.ww-header-on-media .ww-header-assess.is-glow span {
+  color: #20232b;
 }
 @media (min-width: 900px) {
   .ww-quiet-h1 {

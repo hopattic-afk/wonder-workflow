@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <Suspense
         fallback={
-          <p role="status" style={{ padding: 32 }}>
+          <p role="status" style={{ padding: 32, color: "#20232b" }}>
             Opening Wonder &amp; Workflow…
           </p>
         }
