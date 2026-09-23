@@ -158,8 +158,8 @@ describe("Homepage verbal rewrite", () => {
         name: /Built for shops where the owner still holds the day together/i,
       }),
     ).toBeVisible();
-    expect(document.body.textContent).toMatch(/Cleaning, landscaping, detailing/);
-    expect(document.body.textContent).toMatch(/hospitality, retail/);
+    expect(document.body.textContent).toMatch(/Hospitality, cleaning, landscaping, detailing/);
+    expect(document.body.textContent).toMatch(/Smaller shops still welcome/);
     expect(document.body.textContent).not.toMatch(/all-in-one field app/);
     expect(document.body.textContent).not.toMatch(/fractional COO embed/);
     expect(document.body.textContent).not.toMatch(/Not for:/);

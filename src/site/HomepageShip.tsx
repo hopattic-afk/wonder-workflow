@@ -14,7 +14,11 @@ import {
   HOMEPAGE_MEDIA,
   INFLECTION_FORKS,
   INFLECTION_INTRO,
+  DIAGNOSTIC_H1,
+  DIAGNOSTIC_PATH,
   SEASONING_CARDS,
+  SEASONING_H2,
+  SEASONING_SUPPORT,
   UNDERSTAND_H2,
   UNDERSTAND_LEAD,
   UNDERSTAND_STEPS,
@@ -150,6 +154,9 @@ export function HomepageShip({
               <Link className="ship-btn-primary" to="/assessment">
                 {ASSESS_BEAT_LABEL} <span aria-hidden="true">↗</span>
               </Link>
+              <Link className="ship-btn-ghost" to={DIAGNOSTIC_PATH}>
+                {DIAGNOSTIC_H1}
+              </Link>
               <a className="ship-btn-ghost" href={CONTACT_MAILTO}>
                 {CHAT_WITH_US}
               </a>
@@ -183,11 +190,9 @@ export function HomepageShip({
         <section className="ship-section ship-section-tight" aria-labelledby="season-heading">
           <p className="ship-kicker">Seasoning</p>
           <h2 className="ship-section-h2" id="season-heading">
-            Where the day frays.
+            {SEASONING_H2}
           </h2>
-          <p className="ship-section-lead">
-            Equal weight. Not the brand face. No Assess on these cards.
-          </p>
+          <p className="ship-section-lead">{SEASONING_SUPPORT}</p>
           <div className="ship-season-grid">
             {SEASONING_CARDS.map(([title, body]) => (
               <article className="ship-season-card" key={title}>

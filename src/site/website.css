@@ -501,6 +501,14 @@ body {
 .ww-page-hero > .ww-button {
   margin-top: 25px;
 }
+.ww-diagnostic-form {
+  display: block;
+  width: min(100%, 720px);
+  height: 720px;
+  border: 1px solid #d5d6dc;
+  border-radius: 6px;
+  background: #fff;
+}
 .ww-intro {
   display: grid;
   grid-template-columns: 230px 1fr;

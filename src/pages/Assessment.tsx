@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { BrandAvatar } from "../site/BrandLockup";
 import {
+  ASSESSMENT_INTRO_H1,
+  ASSESSMENT_INTRO_SUPPORT,
   ASSESSMENT_META,
+  ASSESSMENT_SUBMIT_CTA,
+  ASSESSMENT_THANKYOU_BODY,
+  ASSESSMENT_THANKYOU_H,
+  ASSESSMENT_TRUST_LINE,
   BOOKING_IFRAME_TITLE,
   FIT_REVIEW_NAME,
   ONE_PATH_COPY,
@@ -147,7 +153,7 @@ export function Assessment() {
             aria-label="Assessment result"
           >
             <p className="assessment-eyebrow">
-              Your indicative AI operations score
+              Your indicative operations score
             </p>
             <h1 className="assessment-score" ref={heading} tabIndex={-1}>
               {score.score} / {score.max_score}
@@ -532,6 +538,13 @@ export function LegacyAssessment() {
         <span>OPERATIONS ASSESSMENT</span>
       </header>
       <main className="assessment-main">
+        {step === 0 && !result && (
+          <section className="assessment-intro-block" aria-label="Assessment introduction">
+            <h1>{ASSESSMENT_INTRO_H1}</h1>
+            <p className="assessment-intro">{ASSESSMENT_INTRO_SUPPORT}</p>
+            <p className="assessment-small">{ASSESSMENT_TRUST_LINE}</p>
+          </section>
+        )}
         {step >= 0 && step < QUESTIONS.length && !result && (
           <section
             className="assessment-form-panel assessment-step"
@@ -547,13 +560,23 @@ export function LegacyAssessment() {
               max={QUESTIONS.length}
               aria-label="Assessment progress"
             />
-            <h1
-              className="assessment-step-heading"
-              ref={stepHeading}
-              tabIndex={-1}
-            >
-              {QUESTIONS[step].label}
-            </h1>
+            {step === 0 ? (
+              <h2
+                className="assessment-step-heading"
+                ref={stepHeading}
+                tabIndex={-1}
+              >
+                {QUESTIONS[step].label}
+              </h2>
+            ) : (
+              <h1
+                className="assessment-step-heading"
+                ref={stepHeading}
+                tabIndex={-1}
+              >
+                {QUESTIONS[step].label}
+              </h1>
+            )}
             <p className="assessment-section-copy">
               Choose the answer closest to your current situation. Selecting an
               answer continues to the next step.
@@ -696,6 +719,7 @@ export function LegacyAssessment() {
                 marketing or SMS. Please leave out passwords, client details and
                 other sensitive information.
               </p>
+              <p className="assessment-small">{ASSESSMENT_TRUST_LINE}</p>
               <p className="assessment-small">
                 Your score is indicative, based on your answers. It is not a
                 validated diagnosis or an estimate of savings. During the
@@ -714,7 +738,7 @@ export function LegacyAssessment() {
                       ? "Retry Original Request"
                       : accepting === null
                         ? "Checking availability…"
-                        : "Get My AI Operations Score"}
+                        : ASSESSMENT_SUBMIT_CTA}
               </button>
               <button
                 className="assessment-back"
@@ -742,16 +766,17 @@ export function LegacyAssessment() {
             <p className="assessment-eyebrow">
               YOUR INDICATIVE OPERATIONS SCORE
             </p>
-            <h1 className="assessment-score" ref={stepHeading} tabIndex={-1}>
-              {result.submission.score} / {result.submission.max_score}
+            <h1 className="assessment-step-heading" ref={stepHeading} tabIndex={-1}>
+              {ASSESSMENT_THANKYOU_H}
             </h1>
+            <p>{ASSESSMENT_THANKYOU_BODY}</p>
+            <h2 className="assessment-score">
+              {result.submission.score} / {result.submission.max_score}
+            </h2>
             <p>
               <strong>{result.submission.tier}</strong>
             </p>
-            <p>
-              Your assessment is saved. Choose a time below to discuss your
-              results. {ONE_PATH_COPY}
-            </p>
+            <p className="assessment-small">{ASSESSMENT_TRUST_LINE}</p>
             <p className="assessment-small">
               This score is based on your answers. We’ll explore what it means
               for your business during your review.

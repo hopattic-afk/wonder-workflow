@@ -49,7 +49,7 @@ test("unavailable submission service retains answers and never shows a false sav
   await page.route("**/api/integration-status",route=>route.fulfill({json:{acceptingSubmissions:false}}));
   await page.goto("/assessment/");
   await fillAssessment(page);
-  await page.getByRole("button",{name:"Get My AI Operations Score"}).click();
+  await page.getByRole("button",{name:"Save and continue to Fit Review"}).click();
   await expect(page.getByRole("alert")).toContainText("We can’t save your assessment right now");
   await expect(page.getByLabel("Email",{exact:true})).toHaveValue("taylor@example.test");
   await expect(page.locator(".assessment-calendar")).toHaveCount(0);
@@ -219,7 +219,7 @@ test("assessment → canonical booking → protected inbox → audit using fake 
   await page.goto("/assessment");
   await fillAssessment(page);
   await page
-    .getByRole("button", { name: "Get My AI Operations Score", exact: true })
+    .getByRole("button", { name: "Save and continue to Fit Review", exact: true })
     .click();
   await expect(
     page.getByRole("heading", { name: "21 / 21", exact: true }),

@@ -518,7 +518,7 @@ describe("retained legacy assessment save boundary (not publicly routed)", () =>
     expect(screen.getByRole("banner")).toHaveTextContent("Wonder & Workflow");
     await fillPublicAssessment();
     fireEvent.click(
-      screen.getByRole("button", { name: "Get My AI Operations Score" }),
+      screen.getByRole("button", { name: "Save and continue to Fit Review" }),
     );
     expect(await screen.findByRole("alert")).toHaveTextContent(
       "We can’t save your assessment right now.",
@@ -554,7 +554,7 @@ describe("retained legacy assessment save boundary (not publicly routed)", () =>
     await screen.findByRole("heading", { name: QUESTIONS[0].label });
     await fillPublicAssessment();
     fireEvent.click(
-      screen.getByRole("button", { name: "Get My AI Operations Score" }),
+      screen.getByRole("button", { name: "Save and continue to Fit Review" }),
     );
     await screen.findByRole("button", { name: "Retry Original Request" });
     expect(screen.getByLabelText("First name", { exact: true })).toBeDisabled();
@@ -609,7 +609,7 @@ describe("retained legacy assessment save boundary (not publicly routed)", () =>
     await screen.findByRole("heading", { name: QUESTIONS[0].label });
     await fillPublicAssessment();
     fireEvent.click(
-      screen.getByRole("button", { name: "Get My AI Operations Score" }),
+      screen.getByRole("button", { name: "Save and continue to Fit Review" }),
     );
     await screen.findByRole("button", { name: "Retry Original Request" });
     expect(

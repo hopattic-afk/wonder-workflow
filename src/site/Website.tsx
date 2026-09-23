@@ -14,6 +14,13 @@ import {
   ASSESSMENT_META,
   CHAT_WITH_US,
   CONTACT_MAILTO,
+  DIAGNOSTIC_FORM_URL,
+  DIAGNOSTIC_H1,
+  DIAGNOSTIC_NEXT_STEPS,
+  DIAGNOSTIC_SUBMIT,
+  DIAGNOSTIC_SUCCESS,
+  DIAGNOSTIC_SUPPORT,
+  DIAGNOSTIC_SUPPORT_LINE2,
   FIT_REVIEW_NAME,
   FIT_REVIEW_PLAIN,
   FOOTER_BLURB,
@@ -72,6 +79,10 @@ export const pages: Record<string, [string, string]> = {
   "/contact": [
     "Contact Wonder & Workflow",
     "Contact Wonder&Workflow LLC about an Operations Fit Review, a project, or an existing inquiry.",
+  ],
+  "/request-diagnostic": [
+    DIAGNOSTIC_H1,
+    DIAGNOSTIC_SUPPORT,
   ],
   ...searchPages,
 };
@@ -757,6 +768,27 @@ function Contact() {
     </>
   );
 }
+function RequestDiagnostic() {
+  return (
+    <>
+      <section className="ww-page-hero">
+        <h1>{DIAGNOSTIC_H1}</h1>
+        <p>{DIAGNOSTIC_SUPPORT}</p>
+        <p>{DIAGNOSTIC_SUPPORT_LINE2}</p>
+      </section>
+      <section className="ww-prose" aria-label="Diagnostic intake">
+        <iframe
+          className="ww-diagnostic-form"
+          title={DIAGNOSTIC_SUBMIT}
+          src={DIAGNOSTIC_FORM_URL}
+          referrerPolicy="no-referrer"
+        />
+        <p>{DIAGNOSTIC_NEXT_STEPS}</p>
+        <p>{DIAGNOSTIC_SUCCESS}</p>
+      </section>
+    </>
+  );
+}
 function NotFound() {
   return (
     <section className="ww-page-hero">
@@ -910,6 +942,7 @@ export default function Website() {
           <Route path="privacy" element={<Privacy />} />
           <Route path="terms" element={<Terms />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="request-diagnostic" element={<RequestDiagnostic />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

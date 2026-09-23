@@ -183,11 +183,16 @@ describe("Homepage ship page chrome", () => {
     expect(screen.getByRole("heading", { name: "Volume spike" })).toBeVisible();
     expect(screen.getByRole("heading", { name: "Buried in the day" })).toBeVisible();
     expect(screen.getByRole("heading", { name: "Things falling through" })).toBeVisible();
-    expect(screen.getByText("Who's getting left on read while you're on the tools?")).toBeVisible();
+    expect(
+      screen.getByText(
+        "Who's left on read in the inbox or CRM while you're on the tools?",
+      ),
+    ).toBeVisible();
     expect(screen.getByRole("heading", { name: AUTOMATION_H2 })).toBeVisible();
     expect(screen.getByRole("heading", { name: WHO_FOR_HEADING })).toBeVisible();
     expect(document.body.textContent).toContain(WHO_FOR_BODY);
-    expect(document.body.textContent).toMatch(/hospitality, retail/);
+    expect(document.body.textContent).toMatch(/Hospitality, cleaning/);
+    expect(document.body.textContent).toMatch(/Smaller shops still welcome/);
     expect(document.body.textContent).not.toMatch(/Not for:/);
     expect(document.body.textContent).not.toMatch(/all-in-one field app/);
     expect(document.body.textContent).not.toMatch(/fractional COO embed/);
