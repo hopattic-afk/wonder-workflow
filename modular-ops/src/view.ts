@@ -6,6 +6,79 @@ import type { JobFilmDecision, JobFilmOutput } from "./modules/job-film";
 import type { LeakRankerDecision, LeakRankerOutput } from "./modules/leak-ranker";
 import type { ProofGateDecision } from "./modules/proof-gate";
 
+export interface LeakCaptureRow {
+  kind: string;
+  note: string;
+  cost: string;
+}
+
+export interface LeakBoardRow {
+  rank: string;
+  kind: string;
+  note: string;
+  cost: string;
+}
+
+export interface LeakBoard {
+  kind: "leak-ranker";
+  capture: LeakCaptureRow[];
+  rows: LeakBoardRow[];
+  fixFirst: string | null;
+  fixNote: string | null;
+  fixCost: string | null;
+  reason: string;
+}
+
+export interface FilmBoardStep {
+  order: string;
+  label: string;
+  accountable: string;
+  authority: string;
+  status: string;
+  tone: "done" | "current" | "upcoming";
+}
+
+export interface FilmBoard {
+  kind: "job-film";
+  steps: FilmBoardStep[];
+  problems: string[];
+}
+
+export interface ProofBoardItem {
+  label: string;
+  requirement: string;
+  record: string;
+}
+
+export interface ProofBoard {
+  kind: "proof-gate";
+  verdict: "pass" | "hold";
+  reason: string;
+  handoff: string;
+  proofs: ProofBoardItem[];
+}
+
+export interface SweepBoardItem {
+  summary: string;
+  nextAction: string;
+}
+
+export interface SweepBoard {
+  kind: "exception-hour";
+  assignments: SweepBoardItem[];
+  deferred: Array<{ summary: string; reason: string }>;
+  closing: string;
+  clear: boolean;
+}
+
+export interface IdleBoard {
+  kind: "idle";
+  message: string;
+}
+
+/** Working surface for one module. Text dumps stay on ModuleView for the same run. */
+export type OperatorBoard = LeakBoard | FilmBoard | ProofBoard | SweepBoard | IdleBoard;
+
 export interface ModuleView {
   id: ModuleId;
   name: string;
@@ -17,6 +90,7 @@ export interface ModuleView {
   inputText: string;
   decisionText: string;
   outputText: string;
+  board: OperatorBoard;
 }
 
 export interface OpsViewModel {
@@ -53,15 +127,92 @@ export function buildViewModel(
         inputText: formatInput(run.moduleId, inputs),
         decisionText: formatDecision(run),
         outputText: formatOutput(run),
+        board: buildBoard(run, inputs),
       };
     }),
+  };
+}
+
+function buildBoard(run: ModuleRun, inputs: ModuleInputs): OperatorBoard {
+  if (run.status !== "ran") {
+    return { kind: "idle", message: run.note ?? "Not run." };
+  }
+  if (run.moduleId === "leak-ranker") {
+    const decision = run.decisions as LeakRankerDecision;
+    const output = run.output as LeakRankerOutput;
+    const log = inputs["leak-ranker"].misses;
+    return {
+      kind: "leak-ranker",
+      capture: log.map((miss) => ({
+        kind: miss.kind,
+        note: miss.note,
+        cost: money.format(miss.cost),
+      })),
+      rows: output.ranking.map((row) => ({
+        rank: String(row.rank),
+        kind: row.kind,
+        note: row.note,
+        cost: money.format(row.cost),
+      })),
+      fixFirst: output.fixFirst
+        ? `${output.fixFirst.note} (${money.format(output.fixFirst.cost)})`
+        : null,
+      fixNote: output.fixFirst?.note ?? null,
+      fixCost: output.fixFirst ? money.format(output.fixFirst.cost) : null,
+      reason: decision.reason,
+    };
+  }
+  if (run.moduleId === "job-film") {
+    const decision = run.decisions as JobFilmDecision;
+    const output = run.output as JobFilmOutput;
+    return {
+      kind: "job-film",
+      steps: output.sequence.map((step) => ({
+        order: String(step.order),
+        label: step.label,
+        accountable: step.accountable,
+        authority: authorityLabel(step.authority),
+        status: step.status,
+        tone: step.status,
+      })),
+      problems: decision.problems,
+    };
+  }
+  if (run.moduleId === "proof-gate") {
+    const decision = run.decisions as ProofGateDecision;
+    const handoff = inputs["proof-gate"];
+    return {
+      kind: "proof-gate",
+      verdict: decision.verdict,
+      reason: decision.reason,
+      handoff: `${handoff.handoffFrom} → ${handoff.handoffTo}`,
+      proofs: handoff.proofs.map((proof) => ({
+        label: proof.label,
+        requirement: proof.required ? "required" : "optional",
+        record: proof.onRecord ? "on record" : "missing",
+      })),
+    };
+  }
+  const output = run.output as ExceptionHourOutput;
+  return {
+    kind: "exception-hour",
+    assignments: output.assignments.map((row) => ({
+      summary: row.summary,
+      nextAction: row.nextAction,
+    })),
+    deferred: output.deferred.map((row) => ({
+      summary: row.summary,
+      reason: row.reason,
+    })),
+    closing: output.endedOnTime ? "Ended on time." : "Overran the window.",
+    clear: output.assignments.length === 0 && output.deferred.length === 0,
   };
 }
 
 function formatInput(moduleId: ModuleId, inputs: ModuleInputs): string {
   if (moduleId === "leak-ranker") {
     return inputs["leak-ranker"].misses
-      .map((miss) => `${miss.kind} — ${miss.note} — ${money.format(miss.cost)}`)
+      .map((miss) => `${miss.kind} · ${miss.note} · ${money.format(miss.cost)}`)
       .join("\n");
   }
   if (moduleId === "job-film") {
@@ -70,7 +221,7 @@ function formatInput(moduleId: ModuleId, inputs: ModuleInputs): string {
       film.jobTitle,
       ...film.steps.map(
         (step) =>
-          `${step.label} — ${step.accountable} — ${authorityLabel(step.authority)} — ${step.status}`,
+          `${step.label} · ${step.accountable} · ${authorityLabel(step.authority)} · ${step.status}`,
       ),
     ].join("\n");
   }
@@ -80,7 +231,7 @@ function formatInput(moduleId: ModuleId, inputs: ModuleInputs): string {
       `${handoff.handoffFrom} → ${handoff.handoffTo}`,
       ...handoff.proofs.map(
         (proof) =>
-          `${proof.label} — ${proof.required ? "required" : "optional"} — ${proof.onRecord ? "on record" : "missing"}`,
+          `${proof.label} · ${proof.required ? "required" : "optional"} · ${proof.onRecord ? "on record" : "missing"}`,
       ),
     ].join("\n");
   }
@@ -88,7 +239,7 @@ function formatInput(moduleId: ModuleId, inputs: ModuleInputs): string {
   return [
     `Cadence: ${sweep.cadence}`,
     `Window: ${sweep.windowMinutes} minutes`,
-    ...sweep.exceptions.map((item) => `${item.summary} — ${item.nextAction}`),
+    ...sweep.exceptions.map((item) => `${item.summary}. ${item.nextAction}`),
   ].join("\n");
 }
 
@@ -125,7 +276,7 @@ function formatOutput(run: ModuleRun): string {
   if (run.moduleId === "leak-ranker") {
     const output = run.output as LeakRankerOutput;
     const lines = output.ranking.map(
-      (row) => `${row.rank}. ${row.kind} — ${row.note} — ${money.format(row.cost)}`,
+      (row) => `${row.rank}. ${row.kind} · ${row.note} · ${money.format(row.cost)}`,
     );
     if (output.fixFirst) {
       lines.push(`Fix first: ${output.fixFirst.note} (${money.format(output.fixFirst.cost)})`);
@@ -138,7 +289,7 @@ function formatOutput(run: ModuleRun): string {
       output.jobTitle,
       ...output.sequence.map(
         (step) =>
-          `${step.order}. ${step.label} — ${step.accountable} — ${authorityLabel(step.authority)} — ${step.status}`,
+          `${step.order}. ${step.label} · ${step.accountable} · ${authorityLabel(step.authority)} · ${step.status}`,
       ),
     ].join("\n");
   }
