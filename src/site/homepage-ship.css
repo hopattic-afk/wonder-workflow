@@ -18,21 +18,25 @@
 }
 
 .ship-beat-feel {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   min-height: 100vh;
+  min-height: min(100vh, 100dvh);
   overflow: hidden;
 }
 
 .ship-feel-media {
-  position: absolute;
-  inset: 0;
+  grid-area: 1 / 1;
+  position: relative;
+  min-height: 100vh;
+  min-height: min(100vh, 100dvh);
   overflow: hidden;
 }
 
 .ship-feel-hero {
+  display: block;
   width: 100%;
-  height: 100%;
+  height: min(100vh, 100dvh);
+  min-height: min(100vh, 100dvh);
   object-fit: cover;
   object-position: center center;
 }
@@ -47,9 +51,9 @@
 }
 
 .ship-feel-content {
+  grid-area: 1 / 1;
   position: relative;
   z-index: 2;
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

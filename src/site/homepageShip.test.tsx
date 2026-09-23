@@ -4,6 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import { HomepageShip } from "./HomepageShip";
+import { guides, services } from "./SearchContent";
 import Website from "./Website";
 import {
   ASSESS_BEAT_LABEL,
@@ -108,6 +109,17 @@ describe("Homepage ship chapter", () => {
     expect(source).not.toContain("OwnershipPathScroll");
   });
 
+  it("keeps the Feel photo in normal flow with a viewport min-height", () => {
+    const css = readFileSync(join(root, "src/site/homepage-ship.css"), "utf8");
+    const media = css.match(/\.ship-feel-media\s*\{[^}]*\}/)?.[0] ?? "";
+    const hero = css.match(/\.ship-feel-hero\s*\{[^}]*\}/)?.[0] ?? "";
+    expect(media).not.toMatch(/position:\s*absolute/);
+    expect(hero).toMatch(/min-height:\s*min\(\s*100vh\s*,/);
+    expect(hero).toMatch(/object-fit:\s*cover/);
+    expect(css).not.toMatch(/position:\s*sticky/);
+    expect(css).not.toMatch(/340vh/);
+  });
+
   it("flows Feel, Understand, and Assess without a sticky scrub chapter", () => {
     const source = readFileSync(
       join(root, "src/site/HomepageShip.tsx"),
@@ -139,6 +151,29 @@ describe("Homepage ship chapter", () => {
     expect(rest).not.toMatch(/:hover/);
   });
 });
+
+const MARKETING_PATHS = [
+  "/",
+  "/services",
+  "/how-we-work",
+  "/about",
+  "/guides",
+  "/start",
+  "/privacy",
+  "/terms",
+  "/contact",
+  "/case-studies/operations-assessment",
+  ...services.map((service) => `/services/${service.slug}`),
+  ...guides.map((guide) => `/guides/${guide.slug}`),
+];
+
+function decorativeStepNumerals() {
+  return Array.from(document.querySelectorAll("p, span, li")).flatMap((el) => {
+    if (el.children.length > 0) return [];
+    const text = (el.textContent ?? "").replace(/\s+/g, " ").trim();
+    return /^0\d$/.test(text) || /^0\d\s*\//.test(text) ? [text] : [];
+  });
+}
 
 describe("Homepage ship page chrome", () => {
   it("caps Assess / Fit Review book CTAs at three and keeps Chat / Work secondary", () => {
@@ -201,6 +236,20 @@ describe("Homepage ship page chrome", () => {
       ".ship-fork-card a[href='/assessment'], .ship-season-card a[href='/assessment']",
     );
     expect(cardAssess).toHaveLength(0);
+  });
+
+  it("drops decorative 01/02/03 eyebrows and step numerals on marketing pages", () => {
+    for (const path of MARKETING_PATHS) {
+      const { unmount } = render(
+        <MemoryRouter initialEntries={[path]}>
+          <Website />
+        </MemoryRouter>,
+      );
+      expect(decorativeStepNumerals(), path).toEqual([]);
+      expect(document.querySelector(".ship-step-num"), path).toBeNull();
+      expect(document.querySelector(".ww-step-index"), path).toBeNull();
+      unmount();
+    }
   });
 
   it("commits optimized homepage media and attribution, not original rasters", () => {
