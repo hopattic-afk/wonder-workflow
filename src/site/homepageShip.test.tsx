@@ -78,6 +78,17 @@ describe("Homepage ship chapter", () => {
     expect(srcs.some((src) => src.includes("role-tile-office.svg"))).toBe(false);
     expect(document.body.textContent).not.toContain("\u2014");
     expect(document.body.innerHTML).not.toContain("#56438a");
+
+    expect(document.querySelector(".ship-step-num")).toBeNull();
+    expect(document.querySelector(".ship-steps")?.textContent ?? "").not.toMatch(
+      /\b0[123]\b/,
+    );
+    expect(
+      document.querySelectorAll("[data-beat]").length,
+    ).toBe(3);
+    for (const beat of ["feel", "understand", "assess"]) {
+      expect(document.querySelector(`[data-beat="${beat}"]`)).toBeTruthy();
+    }
   });
 
   it("keeps automation after the chapter and never leads with AI", () => {
@@ -95,6 +106,37 @@ describe("Homepage ship chapter", () => {
     expect(offer).toContain(AUTOMATION_TRUTH);
     expect(source).not.toMatch(/AI makes you money|chatbot pitch|robot/i);
     expect(source).not.toContain("OwnershipPathScroll");
+  });
+
+  it("flows Feel, Understand, and Assess without a sticky scrub chapter", () => {
+    const source = readFileSync(
+      join(root, "src/site/HomepageShip.tsx"),
+      "utf8",
+    );
+    const css = readFileSync(join(root, "src/site/homepage-ship.css"), "utf8");
+    expect(css).not.toMatch(/position:\s*sticky/);
+    expect(css).not.toMatch(/340vh/);
+    expect(css).not.toMatch(/\.ship-beat\s*\{[^}]*position:\s*absolute/);
+    expect(css).not.toMatch(/\.ship-beat\s*\{[^}]*opacity:\s*0/);
+    expect(source).not.toContain("translate3d");
+    expect(source).not.toContain("progressFromScroll");
+    expect(source).not.toContain("ship-step-num");
+  });
+
+  it("uses an accent fill and ink label for the paper-header Assess control at rest", () => {
+    const css = readFileSync(join(root, "src/site/website.css"), "utf8");
+    const rest = css.match(/\.ww-header-assess\s*\{[^}]*\}/)?.[0] ?? "";
+    expect(rest).toMatch(/background:\s*#7ba1af/i);
+    expect(rest).toMatch(/color:\s*#20232b\s*!important/i);
+    expect(rest).not.toMatch(/:hover/);
+  });
+
+  it("paints the Assess button label in accent on the ink fill at rest", () => {
+    const css = readFileSync(join(root, "src/site/homepage-ship.css"), "utf8");
+    const rest = css.match(/\.ship a\.ship-btn-primary\s*\{[^}]*\}/)?.[0] ?? "";
+    expect(rest).toMatch(/background:\s*(var\(--ww-ink\)|#20232b)/i);
+    expect(rest).toMatch(/color:\s*(var\(--ww-accent\)|#7ba1af)/i);
+    expect(rest).not.toMatch(/:hover/);
   });
 });
 
@@ -178,5 +220,19 @@ describe("Homepage ship page chrome", () => {
     expect(attribution).toContain("Unsplash");
     expect(attribution).toContain("Ruchindra Gunasekara");
     expect(existsSync(join(root, "public/fonts/InstrumentSerif-Regular.woff2"))).toBe(true);
+  });
+
+  it("sets a paper html and body background before the dark app shell can flash", () => {
+    const html = readFileSync(join(root, "index.html"), "utf8");
+    expect(html).toMatch(
+      /<style>html,body\{background-color:#FAFAF8\}<\/style>/,
+    );
+    expect(html.indexOf("<style>html,body{background-color:#FAFAF8}</style>")).toBeLessThan(
+      html.indexOf("</head>"),
+    );
+    const appCss = readFileSync(join(root, "src/styles/app.css"), "utf8");
+    const rootBlock = appCss.match(/:root\s*\{[^}]*\}/)?.[0] ?? "";
+    expect(rootBlock).not.toMatch(/background:\s*#0b0b0b/i);
+    expect(appCss).toMatch(/\.app\s*\{[^}]*background:\s*#0b0b0b/i);
   });
 });

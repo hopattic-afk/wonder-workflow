@@ -5,32 +5,23 @@
 
 .ship-chapter {
   position: relative;
-  height: 340vh;
 }
 
 .ship-stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  position: relative;
   width: 100%;
-  overflow: hidden;
   background: var(--ww-paper);
 }
 
 .ship-beat {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  will-change: opacity, transform;
+  position: relative;
 }
 
 .ship-beat-feel {
-  opacity: 1;
-}
-
-.ship-beat.is-active {
-  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 .ship-feel-media {
@@ -44,9 +35,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  transform: scale(1.06);
-  transform-origin: center center;
-  will-change: transform;
 }
 
 .ship-feel-scrim {
@@ -61,7 +49,7 @@
 .ship-feel-content {
   position: relative;
   z-index: 2;
-  height: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -212,10 +200,6 @@
 }
 
 .ship-steps li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.85rem;
-  align-items: start;
   padding-bottom: 1.1rem;
   border-bottom: 1px solid var(--ww-line);
 }
@@ -223,14 +207,6 @@
 .ship-steps li:last-child {
   border-bottom: none;
   padding-bottom: 0;
-}
-
-.ship-step-num {
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: 1.35rem;
-  color: var(--ww-accent);
-  line-height: 1.2;
-  min-width: 1.6rem;
 }
 
 .ship-step-body {
@@ -300,20 +276,20 @@
   gap: 0.85rem 1.25rem;
 }
 
-.ship-btn-primary {
+.ship a.ship-btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.9rem 1.35rem;
   background: var(--ww-ink);
-  color: var(--ww-paper);
+  color: var(--ww-accent);
   font-size: 0.95rem;
   font-weight: 600;
   border-radius: 2px;
   border: 1.5px solid var(--ww-ink);
 }
 
-.ship-btn-primary:hover {
+.ship a.ship-btn-primary:hover {
   background: transparent;
   color: var(--ww-ink);
 }
@@ -472,21 +448,3 @@
   margin: 0;
 }
 
-body[data-still] .ship-chapter {
-  height: 100vh;
-}
-
-body[data-still] .ship-below {
-  display: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ship-feel-hero {
-    transform: none !important;
-    filter: none !important;
-  }
-
-  .ship-beat {
-    transition: none !important;
-  }
-}
