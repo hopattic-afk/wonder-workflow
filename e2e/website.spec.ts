@@ -16,6 +16,7 @@ test("public pages remain readable and accessible on desktop and mobile", async 
       "/how-we-work",
       "/about",
       "/start",
+      "/request-diagnostic/",
       "/privacy",
       "/terms",
       "/contact",
@@ -77,6 +78,32 @@ test("mobile navigation and campaign context reach the assessment", async ({
     page.getByRole("link", { name: "Privacy (opens in a new tab)" }),
   ).toHaveAttribute("target", "_blank");
   await expect(page.getByText(/No contact details required/i)).toHaveCount(0);
+});
+
+test("request a diagnostic opens the short intake and leaves Fit Review CTAs on the assessment", async ({
+  page,
+}) => {
+  await page.goto("/services/");
+  await expect(
+    page.getByRole("link", { name: "Request a diagnostic" }),
+  ).toHaveAttribute("href", "/request-diagnostic/");
+  await expect(
+    page.getByRole("link", { name: "Assess your operations" }).first(),
+  ).toHaveAttribute("href", /\/assessment$/);
+  await page.getByRole("link", { name: "Request a diagnostic" }).click();
+  await expect(page).toHaveURL(/\/request-diagnostic\/?$/);
+  await expect(page.getByRole("heading", { level: 1, name: /Request a/i })).toBeVisible();
+  await expect(page.locator("#inline-fYq3Zvb80SesdYASeP96")).toHaveAttribute(
+    "src",
+    "https://api.wonderworkflow.com/widget/form/fYq3Zvb80SesdYASeP96",
+  );
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "https://wonderworkflow.com/request-diagnostic/",
+  );
+  await expect(
+    page.getByRole("link", { name: "Assess your operations" }).first(),
+  ).toHaveAttribute("href", /\/assessment$/);
 });
 
 test("start, book, and contact send Fit Review traffic to the assessment", async ({

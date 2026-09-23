@@ -8,6 +8,8 @@ import {
   useLocation,
 } from "react-router-dom";
 import { BrandLockup } from "./BrandLockup";
+import { DiagnosticIntakeForm } from "./DiagnosticIntake";
+import { DIAGNOSTIC_INTAKE_PATH } from "./diagnosticForm";
 import { HomepageShip, type HomeChrome } from "./HomepageShip";
 import { captureCampaign, publicHref } from "./campaign";
 import {
@@ -61,6 +63,7 @@ export const pages: Record<string, [string, string]> = {
     "Wonder & Workflow helps owner-led field and service shops improve how work gets done through careful discovery, proportionate technology, testing, and clear ownership.",
   ],
   "/start": ["Start With an Operations Assessment", ASSESSMENT_META],
+  "/request-diagnostic": ["Request a diagnostic", "Request a diagnostic"],
   "/privacy": [
     "Privacy",
     "How Wonder & Workflow handles website, assessment, consultation, and project information.",
@@ -300,7 +303,7 @@ function Services() {
               <strong>Good result:</strong> You can make a grounded proceed,
               revise, or stop decision without buying an unnecessary build.
             </p>
-            <Link className="ww-text-link" to="/start">
+            <Link className="ww-text-link" to={DIAGNOSTIC_INTAKE_PATH}>
               Request a diagnostic <Arrow />
             </Link>
             <p className="ww-small">
@@ -549,6 +552,14 @@ function About() {
       </CopySection>
       <Invitation title="Discuss a path of work you want to improve." />
     </>
+  );
+}
+function RequestDiagnostic() {
+  return (
+    <section className="ww-diagnostic">
+      <h1>Request a diagnostic</h1>
+      <DiagnosticIntakeForm />
+    </section>
   );
 }
 function Start() {
@@ -891,6 +902,7 @@ export default function Website() {
           <Route path="how-we-work" element={<Process />} />
           <Route path="about" element={<About />} />
           <Route path="start" element={<Start />} />
+          <Route path="request-diagnostic" element={<RequestDiagnostic />} />
           <Route path="book" element={<Start />} />
           <Route path="pricing" element={<Navigate to="/services" replace />} />
           <Route path="privacy" element={<Privacy />} />
