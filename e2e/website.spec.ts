@@ -102,8 +102,18 @@ test("request a diagnostic opens the short intake and leaves Fit Review CTAs on 
     "https://wonderworkflow.com/request-diagnostic/",
   );
   await expect(
-    page.getByRole("link", { name: "Assess your operations" }).first(),
-  ).toHaveAttribute("href", /\/assessment$/);
+    page.getByRole("link", { name: "Assess your operations" }),
+  ).toHaveCount(0);
+  await expect(page.locator(".ww-header-assess")).toHaveCount(0);
+  await expect(
+    page.getByRole("link", { name: "Book a Fit Review" }),
+  ).toHaveCount(0);
+  await page.goto("/");
+  await expect(page.locator(".ww-header-assess")).toBeVisible();
+  await page.goto("/assessment");
+  await expect(
+    page.getByRole("heading", { name: QUESTIONS[0].label, exact: true }),
+  ).toBeVisible();
 });
 
 test("start, book, and contact send Fit Review traffic to the assessment", async ({

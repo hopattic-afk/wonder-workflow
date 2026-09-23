@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import Website, { pages } from "./Website";
@@ -45,6 +45,53 @@ describe("diagnostic short intake", () => {
     ).toHaveAttribute("href", "/start");
     expect(
       screen.getByRole("link", { name: /^Assess$/ }),
+    ).toHaveAttribute("href", "/assessment");
+  });
+
+  it("keeps the diagnostic form as the only primary action", () => {
+    for (const path of ["/request-diagnostic", "/request-diagnostic/"]) {
+      const { unmount } = renderPath(path);
+      expect(document.querySelector(".ww-header-assess")).toBeNull();
+      expect(screen.queryByRole("link", { name: /^Assess$/ })).toBeNull();
+      expect(
+        screen.queryByRole("link", { name: /Assess your operations/i }),
+      ).toBeNull();
+      expect(
+        screen.queryByRole("link", { name: /Book a Fit Review/i }),
+      ).toBeNull();
+      expect(document.getElementById(DIAGNOSTIC_IFRAME_ID)).toHaveAttribute(
+        "src",
+        DIAGNOSTIC_FORM_SRC,
+      );
+      expect(document.getElementById(DIAGNOSTIC_IFRAME_ID)).toHaveAttribute(
+        "data-form-id",
+        DIAGNOSTIC_FORM_ID,
+      );
+      unmount();
+    }
+
+    const home = renderPath("/");
+    expect(document.querySelector(".ww-header-assess")).toBeTruthy();
+    expect(screen.getByRole("link", { name: /^Assess$/ })).toHaveAttribute(
+      "href",
+      "/assessment",
+    );
+    expect(
+      screen.getByRole("link", { name: /Book a Fit Review/i }),
+    ).toHaveAttribute("href", "/assessment");
+    home.unmount();
+
+    renderPath("/services");
+    expect(document.querySelector(".ww-header-assess")).toHaveClass("is-glow");
+    expect(
+      within(
+        screen.getByRole("navigation", { name: "Main navigation" }),
+      ).getByRole("link", { name: /Assess your operations/i }),
+    ).toHaveAttribute("href", "/assessment");
+    expect(
+      within(screen.getByRole("contentinfo")).getByRole("link", {
+        name: /Assess your operations/i,
+      }),
     ).toHaveAttribute("href", "/assessment");
   });
 
